@@ -3,202 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <title>Haber Sitem</title>
-  
-  <style>
-    .site-header {
-  background-color: #c00;
-  width: 100%;
-  padding: 30px 25px;
-  box-sizing: border-box;
-}
-
-.site-title {
-  color: white;
-  font-weight: bold;
-  font-family: 'Arial Black', Arial, sans-serif;
-  font-size: 26px;
-}
-    </style>
-</head>
-
-  <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  margin: 20px;
-}
-
-.news-item{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  background:white;
-  padding:12px;
-  margin:15px 0;
-  border-radius:8px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.news-item img{
-  width:95%;
-  max-width:640px;
-  height:auto;
-  display:block;
-  margin:0 auto 11px auto;
-  border-radius:7px;
-}
-    
-.news-item h2{
-  font-size:35px;
-  margin:0;
-}
-
-.news-item p {
-  color: #555;
-  font-size: 0.95em;
-  margin: 0 0 5px 0;
-}
-
-a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-</style>
-
-<style>
-body{
-  font-family: Arial;
-  background:#f5f5f5;
-  margin:20px;
-}
-
-.news-item{
-  background:white;
-  padding:15px;
-  margin:15px 0;
-  border-radius:8px;
-}
-
-a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-  .news-container{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:15px;
-}
-
-.news-item{
-  background:white;
-  padding:15px;
-  border-radius:8px;
-}
-
-.news-item img{
-  width:100%;
-  border-radius:7px;
-}
-
-.big{
-  grid-column: span 2;
-}
-
-  
-.main-layout {
-  display: grid;
-  grid-template-columns: 3fr 1fr; 
-  gap: 25px; 
-}
-
-
-.news-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 15px;
-}
-
-
-.news-item.big {
-  grid-column: span 2; 
-}
-
-.sidebar {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  height: fit-content;
-}
-
-.side-news {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.side-news a {
-  color: #222;
-  font-weight: bold;
-}
-
-</style>
-
-</head>
+  <link rel="stylesheet" href="style.css">
+  </head>
 <body>
 
-  <div class="site-header">
-  <span class="site-title">𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</span>
-</div>
 
-   <div class="main-layout">
-<h1>Son Haberler</h1>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 20px;
+    }
 
-  <div class="news-container">
-  </div>
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
 
-<div class="news-item">
-  <h2><a href="gs-son-16.html">Galatasaray'in son 16 turu rakibi belli oldu!</a></h2>
-  <p>Kimin geldiğine inanamayacaksınız!</p>
-</div>
+    a:hover {
+      text-decoration: underline;
+    }
 
-<div class="news-item">
-  <h2><a href="gs-bjk.html">Galatasaray besiktas maci yüzünden zora giriyor!</a></h2>
-</div>
+    
+    .site-header {
+      background-color: #c00;
+      width: 100%;
+      padding: 30px 25px;
+      box-sizing: border-box;
+    }
 
-  <div class="news-item">
-    <h2><a href="Genç-Yıldızlar.html">Futbol Dünyasında Yeni Dönem: Genç Yıldızlar Sahneye Çıkıyor!</a></h2>
-  </div>
+    .site-title {
+      color: white;
+      font-weight: bold;
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 26px;
+    }
 
-   <div class="news-item">
-  <a href="ronaldo.html">
-    <img src="ronaldoo.jpg" alt="Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama">
-    <h2>Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama</h2>
-  </a>
-</div>
-
-  <div class="news-item">
-  <a href="messi.html">
-    <img src="messi.jpg" alt="Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor">
-    <h2>Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor</h2>
-  </a>
-</div>
-
-    <div class="sidebar">
-
-<h3>🔥 En Çok Okunanlar</h3>
-
-<div class="side-news">
-<a href="ronaldo.html">Ronaldo yeni rekor kırdı</a>
-</div>
-    </div>
   
-  </body>
+    .main-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    
+    .news-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .news-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .news-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 7px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .news-item h2 {
+      font-size: 20px;
+      margin: 0 0 5px 0;
+    }
+
+    .news-item p {
+      color: #555;
+      font-size: 0.95em;
+      margin: 0;
+    }
+
+    .news-item.big {
+      grid-column: span 2;
+    }
+
+    
+    .sidebar {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      height: fit-content;
+    }
+
+    .side-news {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .side-news a {
+      color: #222;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="site-header">
+    <span class="site-title">𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</span>
+  </div>
+
+  <div class="main-layout">
+    
+    <div>
+      <h1>Son Haberler</h1>
+      <div class="news-container">
+        <div class="news-item">
+          <h2><a href="gs-son-16.html">Galatasaray'in son 16 turu rakibi belli oldu!</a></h2>
+          <p>Kimin geldiğine inanamayacaksınız!</p>
+        </div>
+        <div class="news-item">
+          <h2><a href="gs-bjk.html">Galatasaray Beşiktaş maçı yüzünden zora giriyor!</a></h2>
+        </div>
+        <div class="news-item">
+          <h2><a href="Genç-Yıldızlar.html">Futbol Dünyasında Yeni Dönem: Genç Yıldızlar Sahneye Çıkıyor!</a></h2>
+        </div>
+        <div class="news-item big">
+          <a href="ronaldo.html">
+            <img src="ronaldoo.jpg" alt="Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama">
+            <h2>Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama</h2>
+          </a>
+        </div>
+        <div class="news-item big">
+          <a href="messi.html">
+            <img src="messi.jpg" alt="Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor">
+            <h2>Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor</h2>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar">
+      <h3>🔥 En Çok Okunanlar</h3>
+      <div class="side-news">
+        <a href="ronaldo.html">Ronaldo yeni rekor kırdı</a>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
+
