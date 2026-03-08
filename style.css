@@ -19,7 +19,7 @@ h2, h2 a {
 
 
 p, p a {
-  font-size: 22px;
+  font-size: 28px;
   color: #333;
 }
 
@@ -37,5 +37,5 @@ a:hover {
   font-size: 35px;
 }
 .news-item p, .news-item p a {
-  font-size: 22px;
+  font-size: 28px;
 }
