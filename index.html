@@ -113,6 +113,42 @@ a:hover {
   grid-column: span 2;
 }
 
+  
+.main-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr; 
+  gap: 25px; 
+}
+
+
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 15px;
+}
+
+
+.news-item.big {
+  grid-column: span 2; 
+}
+
+.sidebar {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.side-news {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.side-news a {
+  color: #222;
+  font-weight: bold;
+}
+
 </style>
 
 </head>
