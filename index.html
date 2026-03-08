@@ -42,7 +42,7 @@ body {
 .news-item img{
   width:95%;
   max-width:640px;
-  height:rectangle;
+  height:auto;
   display:block;
   margin:0 auto 11px auto;
   border-radius:7px;
@@ -92,6 +92,27 @@ a:hover {
   text-decoration: underline;
 }
 
+  .news-container{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px;
+}
+
+.news-item{
+  background:white;
+  padding:15px;
+  border-radius:8px;
+}
+
+.news-item img{
+  width:100%;
+  border-radius:7px;
+}
+
+.big{
+  grid-column: span 2;
+}
+
 </style>
 
 </head>
@@ -102,6 +123,8 @@ a:hover {
 </div>
 
 <h1>Son Haberler</h1>
+
+  <div class="news-container">
 
 <div class="news-item">
   <h2><a href="gs-son-16.html">Galatasaray'in son 16 turu rakibi belli oldu!</a></h2>
