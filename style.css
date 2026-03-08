@@ -12,14 +12,14 @@ h1, h2, h3 {
 }
 
 h2, h2 a {
-  font-size: 28px; 
+  font-size: 29px; 
   color: #222;
   text-decoration: none;
 }
 
 
 p, p a {
-  font-size: 16px;
+  font-size: 22px;
   color: #333;
 }
 
@@ -37,5 +37,5 @@ a:hover {
   font-size: 35px;
 }
 .news-item p, .news-item p a {
-  font-size: 16px;
+  font-size: 22px;
 }
