@@ -1,4 +1,4 @@
-name: Futbol Haberleri
+name: Otomatik Futbol Haberleri
 
 on:
   schedule:
