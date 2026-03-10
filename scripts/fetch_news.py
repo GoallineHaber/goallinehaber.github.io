@@ -7,7 +7,7 @@ feed = feedparser.parse(rss_url)
 
 news = []
 
-for entry in feed.entries[:20]:
+for entry in feed.entries: 
     news.append({
         "title": entry.title,
         "link": entry.link,
