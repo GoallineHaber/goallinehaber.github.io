@@ -1,29 +1,33 @@
-name: Otomatik Futbol Haberleri
+name: Futbol Haber Botu
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # Her 3 saatte bir çalışır
-  push:
-    branches:
-      - main
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
 
 jobs:
-  update_news:
+  run-bot:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Python Kurulumu
+      - name: Repo indir
+        uses: actions/checkout@v3
+
+      - name: Python kur
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
-      - name: feedparser yükle
-        run: pip install feedparser
-      - name: Haber Botu Çalıştır
+          python-version: '3.11'
+
+      - name: Gereken paketleri yükle
+        run: pip install -r requirements.txt
+
+      - name: Botu çalıştır
         run: python haber_bot.py
-      - name: Commit ve Push
+
+      - name: Değişiklikleri gönder
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "bot"
+          git config --global user.email "bot@github.com"
           git add .
-          git commit -m "Yeni futbol haberleri eklendi"
+          git commit -m "Yeni haberler eklendi" || echo "Değişiklik yok"
           git push
