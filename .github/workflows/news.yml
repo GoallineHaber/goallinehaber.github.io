@@ -2,7 +2,7 @@ name: Otomatik Futbol Haberleri
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  
+    - cron: '0 */3 * * *'  # Her 3 saatte bir çalışır
   push:
     branches:
       - main
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Kur Python
+      - name: Python Kurulumu
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
