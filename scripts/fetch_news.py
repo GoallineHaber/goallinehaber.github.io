@@ -2,7 +2,7 @@ import feedparser
 import json
 from datetime import datetime, timedelta
 
-rss_url = "https://www.fanatik.com.tr/rss"
+rss_url = "https://www.goal.com/tr/rss" 
 
 feed = feedparser.parse(rss_url)
 
