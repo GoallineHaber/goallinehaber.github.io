@@ -5,14 +5,29 @@ rss_url = "https://www.fanatik.com.tr/rss"
 
 feed = feedparser.parse(rss_url)
 
-news = []
+news = {
+    "futbol": [],
+    "basketbol": [],
+    "voleybol": [],
+    "diger": []
+}
 
 for entry in feed.entries:
-    news.append({
-        "title": entry.get("title",""),
-        "link": entry.get("link",""),
-        "date": entry.get("published","")
-    })
+    title = entry.get("title", "")
+    link = entry.get("link", "")
+    date = entry.get("published", "")
+
+    item = {"title": title, "link": link, "date": date}
+    text = (title + " " + entry.get("summary","")).lower()
+
+    if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
+        news["futbol"].append(item)
+    elif any(x in text for x in ["basketbol","nba","euroleague"]):
+        news["basketbol"].append(item)
+    elif "voleybol" in text:
+        news["voleybol"].append(item)
+    else:
+        news["diger"].append(item)
 
 with open("data/news.json","w",encoding="utf-8") as f:
     json.dump(news,f,ensure_ascii=False,indent=2)
