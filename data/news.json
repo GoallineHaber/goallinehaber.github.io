@@ -1,12 +1,6 @@
 {
-  "futbol":[
-    {"title":"Galatasaray kazanıyor","link":"gs.html","date":"2026-03-11T12:00:00"},
-    {"title":"Fenerbahçe zirvede","link":"fb.html","date":"2026-03-11T13:00:00"}
-  ],
-  "basketbol":[
-    {"title":"Anadolu Efes kazanıyor","link":"ae.html","date":"2026-03-11T12:30:00"}
-  ],
-  "uefa":[],
-  "voleybol":[],
-  "diger":[]
+  "futbol": [],
+  "basketbol": [],
+  "voleybol": [],
+  "diger": []
 }
