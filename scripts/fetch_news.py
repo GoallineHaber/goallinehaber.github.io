@@ -1,11 +1,25 @@
 import feedparser
 import json
+from datetime import datetime, timedelta
 
 rss_url = "https://www.fanatik.com.tr/rss"
 
 feed = feedparser.parse(rss_url)
 
-news = {
+# 1️⃣ Mevcut JSON'u oku
+try:
+    with open("data/news.json", "r", encoding="utf-8") as f:
+        news = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    news = {
+        "futbol": [],
+        "basketbol": [],
+        "voleybol": [],
+        "diger": []
+    }
+
+# 2️⃣ Yeni haberleri RSS'ten al
+new_items = {
     "futbol": [],
     "basketbol": [],
     "voleybol": [],
@@ -15,19 +29,41 @@ news = {
 for entry in feed.entries:
     title = entry.get("title", "")
     link = entry.get("link", "")
-    date = entry.get("published", "")
+    date_str = entry.get("published", "")
+    
+    try:
+        date = datetime(*entry.published_parsed[:6]).isoformat()
+    except:
+        date = datetime.now().isoformat()  # Tarih yoksa şimdi ekle
 
     item = {"title": title, "link": link, "date": date}
     text = (title + " " + entry.get("summary","")).lower()
 
     if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
-        news["futbol"].append(item)
+        new_items["futbol"].append(item)
     elif any(x in text for x in ["basketbol","nba","euroleague"]):
-        news["basketbol"].append(item)
+        new_items["basketbol"].append(item)
     elif "voleybol" in text:
-        news["voleybol"].append(item)
+        new_items["voleybol"].append(item)
     else:
-        news["diger"].append(item)
+        new_items["diger"].append(item)
 
+# 3️⃣ Yeni haberleri mevcut JSON'a ekle
+for cat in new_items:
+    for h in new_items[cat]:
+        if h not in news[cat]:  # Aynı haber tekrar eklenmesin
+            news[cat].append(h)
+
+# 4️⃣ 48 saatten eski haberleri temizle
+now = datetime.now()
+for cat in news:
+    news[cat] = [
+        h for h in news[cat]
+        if (now - datetime.fromisoformat(h['date'])) < timedelta(hours=48)
+    ]
+
+# 5️⃣ JSON'u tekrar yaz
 with open("data/news.json","w",encoding="utf-8") as f:
     json.dump(news,f,ensure_ascii=False,indent=2)
+
+print("Haberler güncellendi!")
