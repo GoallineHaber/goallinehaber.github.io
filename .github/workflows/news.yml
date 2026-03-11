@@ -1,32 +1,41 @@
-name: Fetch News
+import feedparser
+import json
 
-on:
-  schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
+rss_url = "https://www.fanatik.com.tr/rss"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+feed = feedparser.parse(rss_url)
 
-    steps:
-      - uses: actions/checkout@v4
+news = {
+    "futbol": [],
+    "basketbol": [],
+    "voleybol": [],
+    "diger": []
+}
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+for entry in feed.entries:
+    title = entry.get("title", "")
+    link = entry.get("link", "")
+    date = entry.get("published", "")
 
-      - name: Install library
-        run: pip install feedparser
+    item = {
+        "title": title,
+        "link": link,
+        "date": date
+    }
 
-      - name: Run script
-        run: python scripts/fetch_news.py
+    text = (title + " " + entry.get("summary","")).lower()
 
-      - name: Commit news
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add data/news.json
-          git diff --cached --quiet || git commit -m "update news"
-          git push
+    if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
+        news["futbol"].append(item)
+
+    elif any(x in text for x in ["basketbol","nba","euroleague"]):
+        news["basketbol"].append(item)
+
+    elif "voleybol" in text:
+        news["voleybol"].append(item)
+
+    else:
+        news["diger"].append(item)
+
+with open("data/news.json","w",encoding="utf-8") as f:
+    json.dump(news,f,ensure_ascii=False,indent=2)
