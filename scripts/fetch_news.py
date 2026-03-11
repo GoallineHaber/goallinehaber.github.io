@@ -1,7 +1,7 @@
 import feedparser
 import json
 
-rss_url = "https://www.fanatik.com.tr/rss/spor"
+rss_url = "https://www.fanatik.com.tr/rss"
 
 feed = feedparser.parse(rss_url)
 
