@@ -1,9 +1,6 @@
 {
-  "futbol":[
-    {"title":"Galatasaray kazanıyor","link":"gs.html","date":"2026-03-11T12:00:00"}
-  ],
-  "basketbol":[],
-  "uefa":[],
-  "voleybol":[],
-  "diger":[]
+  "futbol": [],
+  "basketbol": [],
+  "voleybol": [],
+  "diger": []
 }
