@@ -48,6 +48,7 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
+    cursor: pointer;
   }
 
   .navbar a:hover {
@@ -121,86 +122,19 @@
   <span class="site-title">𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</span>
 </div>
 
-
 <div class="navbar">
-  <a href="futbol.html" target="_blank">Futbol</a>
-  <a href="basketbol.html" target="_blank">Basketbol</a>
-  <a href="uefa.html" target="_blank">UEFA</a>
-  <a href="voleybol.html" target="_blank">Voleybol</a>
-  <a href="diger.html" target="_blank">Diğer</a>
+  <a onclick="filterCategory('futbol')">Futbol</a>
+  <a onclick="filterCategory('basketbol')">Basketbol</a>
+  <a onclick="filterCategory('uefa')">UEFA</a>
+  <a onclick="filterCategory('voleybol')">Voleybol</a>
+  <a onclick="filterCategory('diger')">Diğer</a>
+  <a onclick="filterCategory('all')">Tümü</a>
 </div>
 
 <div class="main-layout">
   <div>
     <h1>Son Haberler</h1>
-    <div class="news-container">
-      <div class="news-item">
-        <h2><a href="gs-son-16.html">Galatasaray'in son 16 turu rakibi belli oldu!</a></h2>
-        <p>Kimin geldiğine inanamayacaksınız!</p>
-      </div>
-      <div class="news-item">
-        <h2><a href="gs-bjk.html">Galatasaray Beşiktaş maçı yüzünden zora giriyor!</a></h2>
-      </div>
-      <div class="news-item">
-        <h2><a href="Genç-Yıldızlar.html">Futbol Dünyasında Yeni Dönem: Genç Yıldızlar Sahneye Çıkıyor!</a></h2>
-      </div>
-      <div class="news-item big">
-        <a href="ronaldo.html">
-          <img src="ronaldoo.jpg" alt="Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama">
-          <h2>Cristiano Ronaldo’dan Yeni Rekor ve Gelecek Planları Hakkında Açıklama</h2>
-        </a>
-      </div>
-      <div class="news-item big">
-        <a href="messi.html">
-          <img src="messi.jpg" alt="Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor">
-          <h2>Lionel Messi Fırtınası Devam Ediyor: Rekora Koşuyor ve MLS’te Tarih Yazıyor</h2>
-        </a>
-      </div>
-      <div class="news-item">
-        <a href="vanspor.html">
-          <img src="vanspor.jpg" alt="Vanspor Kazandı, Karşıyaka Kritik Maça Hazırlanıyor">
-          <h2>Vanspor Kazandı, Karşıyaka Kritik Maça Hazırlanıyor</h2>
-        </a>
-      </div>
-    </div>
-
-    <h2>Haberler</h2>
-
-    <h2>Futbol Haberleri</h2>
-    <div id="futbol-news" class="news-container"></div>
-
-    <h2>Basketbol Haberleri</h2>
-    <div id="basketbol-news" class="news-container"></div>
-
-    <h2>UEFA Haberleri</h2>
-    <div id="uefa-news" class="news-container"></div>
-
-    <h2>Voleybol Haberleri</h2>
-    <div id="voleybol-news" class="news-container"></div>
-
-    <h2>Diğer Spor Haberleri</h2>
-    <div id="diger-news" class="news-container"></div>
-
-    <script>
-      fetch("/data/news.json")
-        .then(res => res.json())
-        .then(data => {
-          ["futbol","basketbol","uefa","voleybol","diger"].forEach(cat => {
-            const container = document.getElementById(cat + "-news");
-            if(!container) return;
-            data[cat].forEach(n => {
-              const div = document.createElement("div");
-              div.className = "news-item";
-              div.innerHTML = `
-                <h2><a href="${n.link}" target="_blank">${n.title}</a></h2>
-                <p>${n.date}</p>
-              `;
-              container.appendChild(div);
-            });
-          });
-        });
-    </script>
-
+    <div id="all-news" class="news-container"></div>
   </div>
 
   <div class="sidebar">
@@ -213,6 +147,57 @@
     </div>
   </div>
 </div>
+
+<script>
+fetch("/data/news.json")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("all-news");
+    const allNews = [];
+
+    ["futbol","basketbol","uefa","voleybol","diger"].forEach(cat => {
+      data[cat].forEach(n => {
+        n.category = cat;
+        allNews.push(n);
+      });
+    });
+
+    
+    allNews.sort(() => Math.random() - 0.5);
+
+    
+    const now = new Date();
+    const recentNews = allNews.filter(n => {
+      const newsDate = new Date(n.date);
+      return (now - newsDate) < 48*60*60*1000;
+    });
+
+    
+    recentNews.forEach(n => {
+      const div = document.createElement("div");
+      div.className = "news-item";
+      div.innerHTML = `
+        <h2>[${n.category.toUpperCase()}] <a href="${n.link}" target="_blank">${n.title}</a></h2>
+        <p>${n.date}</p>
+      `;
+      container.appendChild(div);
+    });
+  });
+
+
+function filterCategory(cat) {
+  const allNewsDivs = document.querySelectorAll("#all-news .news-item");
+  allNewsDivs.forEach(div => {
+    if(cat === 'all') {
+      div.style.display = "block";
+    } else if(div.innerHTML.includes(`[${cat.toUpperCase()}]`)) {
+      div.style.display = "block";
+    } else {
+      div.style.display = "none";
+    }
+  });
+}
+</script>
 
 </body>
 </html>
