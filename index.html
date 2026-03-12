@@ -78,19 +78,22 @@ fetch("/data/news.json")
       return (now - newsDate) < 48*60*60*1000;
     });
 
-    recentNews.forEach(n => {
-      const div = document.createElement("div");
-      div.className = "news-item";
-      div.innerHTML = `
-        <h2>[${n.category.toUpperCase()}] 
-          <a href="#" onclick="openHaber('${encodeURIComponent(n.link)}')">${n.title}</a>
-        </h2>
-        <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
-      `;
-      container.appendChild(div);
-    });
-  })
-  .catch(err => console.error("Haberler yüklenemedi:", err));
+  recentNews.forEach(n => {
+  const div = document.createElement("div");
+  div.className = "news-item";
+  div.innerHTML = `
+    <h2>[${n.category.toUpperCase()}] 
+      <a href="#" onclick="openHaber('${encodeURIComponent(n.link)}')">${n.title}</a>
+    </h2>
+    <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
+  `;
+  container.appendChild(div);
+});
+
+// Haberleri kendi sayfanda açacak fonksiyon
+function openHaber(url) {
+  window.location.href = `haber.html?url=${url}`;
+}
 
 function filterCategory(cat) {
   const allNewsDivs = document.querySelectorAll("#all-news .news-item");
