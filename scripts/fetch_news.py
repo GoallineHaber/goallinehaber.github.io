@@ -42,23 +42,23 @@ for entry in feed.entries:
     elif "media_thumbnail" in entry:
         image = entry.media_thumbnail[0].get("url", "")
 
- item = {
+item = {
     "title": title,
     "link": f"haber.html?url={link}",
     "date": date,
     "image": image
-     
-    text = (title + " " + entry.get("summary", "")).lower()
+}
 
-    if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
-        new_items["futbol"].append(item)
-    elif any(x in text for x in ["basketbol","nba","euroleague"]):
-        new_items["basketbol"].append(item)
-    elif "voleybol" in text:
-        new_items["voleybol"].append(item)
-    else:
-        new_items["diger"].append(item)
+text = (title + " " + entry.get("summary", "")).lower()
 
+if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
+    new_items["futbol"].append(item)
+elif any(x in text for x in ["basketbol","nba","euroleague"]):
+    new_items["basketbol"].append(item)
+elif "voleybol" in text:
+    new_items["voleybol"].append(item)
+else:
+    new_items["diger"].append(item)
 # Yeni haberleri mevcut JSON'a ekle
 for cat in new_items:
     for h in new_items[cat]:
