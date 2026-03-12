@@ -5,34 +5,50 @@ from datetime import datetime, timedelta
 rss_url = "https://www.ahaber.com.tr/rss/spor.xml"
 feed = feedparser.parse(rss_url)
 
-# 1️⃣ Mevcut JSON'u oku
+# Mevcut JSON'u oku
 try:
     with open("data/news.json", "r", encoding="utf-8") as f:
         news = json.load(f)
 except (FileNotFoundError, json.JSONDecodeError):
     news = {
-        "futbol": [], "basketbol": [], "voleybol": [], "diger": []
+        "futbol": [],
+        "basketbol": [],
+        "voleybol": [],
+        "diger": []
     }
 
-# 2️⃣ Yeni haberleri RSS'ten al
-new_items = {"futbol": [], "basketbol": [], "voleybol": [], "diger": []}
+new_items = {
+    "futbol": [],
+    "basketbol": [],
+    "voleybol": [],
+    "diger": []
+}
 
 for entry in feed.entries:
     title = entry.get("title", "")
     link = entry.get("link", "")
+    date_str = entry.get("published", "")
+    
     try:
         date = datetime(*entry.published_parsed[:6]).isoformat()
     except:
         date = datetime.now().isoformat()
+    
+    # RSS içinde görsel varsa
+    image = ""
+    if "media_content" in entry:
+        image = entry.media_content[0].get("url", "")
+    elif "media_thumbnail" in entry:
+        image = entry.media_thumbnail[0].get("url", "")
 
-    # kendi sayfamıza yönlendirecek link
     item = {
         "title": title,
         "link": f"haber.html?url={link}",
-        "date": date
+        "date": date,
+        "image": image
     }
 
-    text = (title + " " + entry.get("summary","")).lower()
+    text = (title + " " + entry.get("summary", "")).lower()
 
     if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
         new_items["futbol"].append(item)
@@ -43,21 +59,19 @@ for entry in feed.entries:
     else:
         new_items["diger"].append(item)
 
-# 3️⃣ Yeni haberleri mevcut JSON'a ekle
+# Yeni haberleri mevcut JSON'a ekle
 for cat in new_items:
     for h in new_items[cat]:
         if h not in news[cat]:
             news[cat].append(h)
 
-# 4️⃣ 48 saatten eski haberleri temizle
+# 48 saatten eski haberleri temizle
 now = datetime.now()
 for cat in news:
-    news[cat] = [
-        h for h in news[cat] if (now - datetime.fromisoformat(h['date'])) < timedelta(hours=48)
-    ]
+    news[cat] = [h for h in news[cat] if (now - datetime.fromisoformat(h['date'])) < timedelta(hours=48)]
 
-# 5️⃣ JSON'u tekrar yaz
-with open("data/news.json","w",encoding="utf-8") as f:
-    json.dump(news,f,ensure_ascii=False,indent=2)
+# JSON'u yaz
+with open("data/news.json", "w", encoding="utf-8") as f:
+    json.dump(news, f, ensure_ascii=False, indent=2)
 
 print("Haberler güncellendi!")
