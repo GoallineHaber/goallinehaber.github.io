@@ -29,20 +29,18 @@ new_items = {
 for entry in feed.entries:
     title = entry.get("title", "")
     link = entry.get("link", "")
-    date_str = entry.get("published", "")
-    
+
     try:
         date = datetime(*entry.published_parsed[:6]).isoformat()
     except:
-        date = datetime.now().isoformat()  # Tarih yoksa şimdi ekle
+        date = datetime.now().isoformat()
 
-  slug = title.lower().replace(" ", "-")[:50]
+    item = {
+        "title": title,
+        "link": f"haber.html?url={link}",
+        "date": date
+    }
 
-item = {
-    "title": title,
-    "link": f"haber.html?url={link}",
-    "date": date
-}
     text = (title + " " + entry.get("summary","")).lower()
 
     if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
@@ -57,7 +55,7 @@ item = {
 # 3️⃣ Yeni haberleri mevcut JSON'a ekle
 for cat in new_items:
     for h in new_items[cat]:
-        if h not in news[cat]:  # Aynı haber tekrar eklenmesin
+        if h not in news[cat]:
             news[cat].append(h)
 
 # 4️⃣ 48 saatten eski haberleri temizle
@@ -71,7 +69,5 @@ for cat in news:
 # 5️⃣ JSON'u tekrar yaz
 with open("data/news.json","w",encoding="utf-8") as f:
     json.dump(news,f,ensure_ascii=False,indent=2)
-
-print(len(feed.entries))
 
 print("Haberler güncellendi!")
