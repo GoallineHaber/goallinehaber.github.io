@@ -29,15 +29,17 @@ new_items = {
 for entry in feed.entries:
     title = entry.get("title", "")
     link = entry.get("link", "")
+    date_str = entry.get("published", "")
 
     try:
         date = datetime(*entry.published_parsed[:6]).isoformat()
     except:
         date = datetime.now().isoformat()
 
+    # 🔹 Burayı değiştiriyoruz: kendi sayfanıza yönlendirecek
     item = {
         "title": title,
-        "link": f"haber.html?url={link}",
+        "link": f"haber.html?url={link}",  # artık kendi haber.html sayfasına yönlendiriyor
         "date": date
     }
 
