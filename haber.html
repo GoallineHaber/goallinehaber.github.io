@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Haber</title>
+</head>
+
+<body>
+
+<h1>Haber Kaynağı</h1>
+
+<p>Haber detayını görmek için aşağıdaki butona basın.</p>
+
+<a id="kaynak" target="_blank">Kaynağa Git</a>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const url = params.get("url");
+
+document.getElementById("kaynak").href = url;
+</script>
+
+</body>
+</html>
