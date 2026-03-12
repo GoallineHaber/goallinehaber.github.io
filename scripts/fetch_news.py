@@ -66,4 +66,6 @@ for cat in news:
 with open("data/news.json","w",encoding="utf-8") as f:
     json.dump(news,f,ensure_ascii=False,indent=2)
 
+print(len(feed.entries))
+
 print("Haberler güncellendi!")
