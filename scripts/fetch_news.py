@@ -42,13 +42,12 @@ for entry in feed.entries:
     elif "media_thumbnail" in entry:
         image = entry.media_thumbnail[0].get("url", "")
 
-    item = {
-        "title": title,
-        "link": f"haber.html?url={link}",
-        "date": date,
-        "image": image
-    }
-
+ item = {
+    "title": title,
+    "link": f"haber.html?url={link}",
+    "date": date,
+    "image": image
+     
     text = (title + " " + entry.get("summary", "")).lower()
 
     if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
