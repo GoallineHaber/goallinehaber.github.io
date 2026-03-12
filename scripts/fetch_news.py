@@ -36,7 +36,13 @@ for entry in feed.entries:
     except:
         date = datetime.now().isoformat()  # Tarih yoksa şimdi ekle
 
-    item = {"title": title, "link": link, "date": date}
+  slug = title.lower().replace(" ", "-")[:50]
+
+item = {
+    "title": title,
+    "link": f"haber.html?url={link}",
+    "date": date
+}
     text = (title + " " + entry.get("summary","")).lower()
 
     if any(x in text for x in ["galatasaray","fenerbahçe","beşiktaş","trabzonspor","futbol","süper lig","uefa"]):
