@@ -81,18 +81,19 @@ fetch("/data/news.json")
     recentNews.forEach(n => {
       const div = document.createElement("div");
       div.className = "news-item";
+
       div.innerHTML = `
         <h2>[${n.category.toUpperCase()}] 
           <a href="#" onclick="openHaber('${n.link}')">${n.title}</a>
         </h2>
         <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
+        ${n.image ? `<img src="${n.image}" alt="Haber görseli">` : ""}
       `;
       container.appendChild(div);
     });
   })
   .catch(err => console.error("Haberler yüklenemedi:", err));
 
-// Tek fonksiyon tanımı, kendi sayfanda açacak
 function openHaber(url) {
   window.location.href = url;
 }
