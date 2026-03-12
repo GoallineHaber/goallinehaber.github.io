@@ -1,6 +1,28 @@
 {
-  "futbol": [],
+  "futbol": [
+    {
+      "title": "Süper Lig’den Süper Amatör'e! Denizlispor’a bir şok daha",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/12/super-ligden-super-amatore-denizlispora-bir-sok-daha",
+      "date": "2026-03-12T08:39:03"
+    },
+    {
+      "title": "Ziraat Türkiye Kupası'nda çeyrek ve yarı final eşleşmeleri belli oldu",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/11/ziraat-turkiye-kupasinda-ceyrek-ve-yari-final-kura-heyecani",
+      "date": "2026-03-11T07:58:18"
+    },
+    {
+      "title": "Trabzonspor yardımcı antrenörü Orhan Kaynak'tan acı haber!",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/10/trabzonspor-yardimci-antrenoru-orhan-kaynaktan-aci-haber",
+      "date": "2026-03-10T17:00:30"
+    }
+  ],
   "basketbol": [],
   "voleybol": [],
-  "diger": []
+  "diger": [
+    {
+      "title": "Çeyrek final kapısını açtılar",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/11/ceyrek-final-kapisini-actilar",
+      "date": "2026-03-11T04:04:59"
+    }
+  ]
 }
