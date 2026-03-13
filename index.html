@@ -5,24 +5,24 @@
 <title>𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 20px; }
-  a { color: #0066cc; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .site-header { background-color: #c00; width: 100%; padding: 30px 25px; box-sizing: border-box; }
-  .site-title { color: white; font-weight: bold; font-family: 'Arial Black', Arial, sans-serif; font-size: 26px; }
-  .navbar { background: #222; padding: 10px 20px; text-align: center; border-radius: 5px; margin-bottom: 20px; }
-  .navbar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 16px; cursor: pointer; }
-  .navbar a:hover { text-decoration: underline; }
-  .main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 25px; margin-top: 20px; }
-  .news-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-  .news-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-  .news-item img { width: 90%; height: auto; border-radius: 7px; display: block; margin-bottom: 10px; }
-  .news-item h2 { font-size: 20px; margin: 0 0 5px 0; }
-  .news-item p { color: #555; font-size: 0.95em; margin: 0; }
-  .news-item.big { grid-column: span 2; }
-  .sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; }
-  .side-news { padding: 8px 0; border-bottom: 1px solid #eee; }
-  .side-news a { color: #222; font-weight: bold; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 20px; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.site-header { background-color: #c00; width: 100%; padding: 30px 25px; box-sizing: border-box; }
+.site-title { color: white; font-weight: bold; font-family: 'Arial Black', Arial, sans-serif; font-size: 26px; }
+.navbar { background: #222; padding: 10px 20px; text-align: center; border-radius: 5px; margin-bottom: 20px; }
+.navbar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 16px; cursor: pointer; }
+.navbar a:hover { text-decoration: underline; }
+.main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 25px; margin-top: 20px; }
+.news-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.news-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.news-item img { width: 90%; height: auto; border-radius: 7px; display: block; margin-bottom: 10px; }
+.news-item h2 { font-size: 20px; margin: 0 0 5px 0; }
+.news-item p { color: #555; font-size: 0.95em; margin: 0; }
+.news-item.big { grid-column: span 2; }
+.sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; }
+.side-news { padding: 8px 0; border-bottom: 1px solid #eee; }
+.side-news a { color: #222; font-weight: bold; }
 </style>
 </head>
 <body>
@@ -57,52 +57,53 @@
 </div>
 
 <script>
-fetch("/data/news.json")
-  .then(res => res.json())
-  .then(data => {
+const NEWS_URL = "data/news.json";
+
+async function loadNews() {
+  try {
+    const res = await fetch(NEWS_URL);
+    const data = await res.json();
     const container = document.getElementById("all-news");
+    container.innerHTML = "";
+
     const allNews = [];
 
-    ["futbol","basketbol","uefa","voleybol","diger"].forEach(cat => {
+    ["futbol","basketbol","voleybol","diger"].forEach(cat => {
       (data[cat] || []).forEach(n => {
         n.category = cat;
         allNews.push(n);
       });
     });
 
-    allNews.sort(() => Math.random() - 0.5);
-
     const now = new Date();
-    const recentNews = allNews.filter(n => {
-      const newsDate = new Date(n.date);
-      return (now - newsDate) < 48*60*60*1000;
-    });
+    const recentNews = allNews.filter(n => (now - new Date(n.date)) < 48*60*60*1000);
+    recentNews.sort(() => Math.random() - 0.5);
 
     recentNews.forEach(n => {
       const div = document.createElement("div");
       div.className = "news-item";
+      div.dataset.category = n.category;
       div.innerHTML = `
         <h2>[${n.category.toUpperCase()}] 
-          <a href="#" onclick="openHaber('${n.link}')">${n.title}</a>
+          <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
         </h2>
         <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
       `;
       container.appendChild(div);
     });
-  })
-  .catch(err => console.error("Haberler yüklenemedi:", err));
 
-// Tek fonksiyon tanımı, kendi sayfanda açacak
-function openHaber(url) {
-  window.location.href = url;
+  } catch(err) {
+    console.error("Haberler yüklenemedi:", err);
+  }
 }
+
+loadNews();
+setInterval(loadNews, 60*60*1000);
 
 function filterCategory(cat) {
   const allNewsDivs = document.querySelectorAll("#all-news .news-item");
   allNewsDivs.forEach(div => {
-    if(cat === 'all') {
-      div.style.display = "block";
-    } else if(div.innerHTML.includes([${cat.toUpperCase()}])) {
+    if(cat === 'all' || div.dataset.category === cat) {
       div.style.display = "block";
     } else {
       div.style.display = "none";
