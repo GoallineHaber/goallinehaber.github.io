@@ -1,4 +1,4 @@
-name: Spor Haberleri
+name: fetch-news
 
 on:
   schedule:
