@@ -1,27 +1,27 @@
-name: Günlük Haber Güncelleme
+name: Haber Güncelleme
 
 on:
   schedule:
     - cron: '0 * * * *' # her saat başı
-  workflow_dispatch: # manuel tetikleme
+  workflow_dispatch:
 
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repoyu klonla
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Node.js yükle
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Haberleri çek ve JSON oluştur
+      - name: Node.js bağımlılıkları
         run: |
-          npm install node-fetch@2
-          node scripts/fetch-news.js
+          npm install rss-parser node-fetch@2
+
+      - name: Haberleri çek
+        run: node scripts/fetch-news.js
 
       - name: Değişiklikleri commit et
         run: |
