@@ -13,7 +13,7 @@ rss_urls = [
  "https://www.trtspor.com.tr/rss"
 ]
 
-# JSON dosyasını oku
+# JSON dosyasını oku veya oluştur
 try:
     with open("data/news.json", "r", encoding="utf-8") as f:
         news = json.load(f)
@@ -30,7 +30,6 @@ for rss_url in rss_urls:
     for entry in feed.entries:
         title = entry.get("title", "")
         link = entry.get("link", "")
-        date_str = entry.get("published", "")
         
         try:
             date = datetime(*entry.published_parsed[:6]).isoformat()
@@ -57,7 +56,7 @@ for rss_url in rss_urls:
         else:
             new_items["diger"].append(item)
 
-# Yeni haberleri ekle (linke göre)
+# Yeni haberleri ekle
 for cat in new_items:
     for h in new_items[cat]:
         if not any(existing["link"] == h["link"] for existing in news[cat]):
