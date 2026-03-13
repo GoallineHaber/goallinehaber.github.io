@@ -57,19 +57,19 @@
 </div>
 
 <script>
-// Haberleri çek
 fetch("/data/news.json")
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("all-news");
     const allNews = [];
 
-   ["futbol","basketbol","voleybol","diger"].forEach(cat => {
-  (data[cat] || []).forEach(n => {
-    n.category = cat;
-    allNews.push(n);
-  });
-});
+    ["futbol","basketbol","uefa","voleybol","diger"].forEach(cat => {
+      (data[cat] || []).forEach(n => {
+        n.category = cat;
+        allNews.push(n);
+      });
+    });
+
     allNews.sort(() => Math.random() - 0.5);
 
     const now = new Date();
@@ -83,7 +83,7 @@ fetch("/data/news.json")
       div.className = "news-item";
       div.innerHTML = `
         <h2>[${n.category.toUpperCase()}] 
-          <a href="#" onclick="openHaber('${encodeURIComponent(n.link)}')">${n.title}</a>
+          <a href="#" onclick="openHaber('${n.link}')">${n.title}</a>
         </h2>
         <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
       `;
@@ -92,18 +92,17 @@ fetch("/data/news.json")
   })
   .catch(err => console.error("Haberler yüklenemedi:", err));
 
-// Haber açma fonksiyonu
+// Tek fonksiyon tanımı, kendi sayfanda açacak
 function openHaber(url) {
-  window.location.href = `haber.html?url=${url}`;
+  window.location.href = url;
 }
 
-// Kategori filtreleme
 function filterCategory(cat) {
   const allNewsDivs = document.querySelectorAll("#all-news .news-item");
   allNewsDivs.forEach(div => {
     if(cat === 'all') {
       div.style.display = "block";
-    } else if(div.innerHTML.includes(cat.toUpperCase())) {
+    } else if(div.innerHTML.includes([${cat.toUpperCase()}])) {
       div.style.display = "block";
     } else {
       div.style.display = "none";
