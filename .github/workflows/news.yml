@@ -2,7 +2,7 @@ name: fetch-news
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # her 30 dakikada bir
+    - cron: "0 * * * *"  # her saat başı
   workflow_dispatch:
 
 jobs:
@@ -10,21 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
       - name: Install feedparser
         run: pip install feedparser
-
-      - name: Ensure data folder exists
-        run: mkdir -p data
-
       - name: Run news fetcher
         run: python fetch_news.py
-
       - name: Commit news.json
         run: |
           git config user.name "github-actions[bot]"
