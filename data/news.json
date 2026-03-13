@@ -2,5 +2,106 @@
   "futbol": [],
   "basketbol": [],
   "voleybol": [],
-  "diger": []
+  "diger": [
+    {
+      "title": "CANLI | Fatih Karagümrük - Fenerbahçe",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/03/13/canli-fatih-karagumruk-fenerbahce",
+      "date": "2026-03-13T14:24:38.000Z"
+    },
+    {
+      "title": "UEFA Konferans Ligi'nde son 16 turu heyecanı",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/13/uefa-konferans-liginde-son-16-turu-heyecani",
+      "date": "2026-03-12T22:12:40.000Z"
+    },
+    {
+      "title": "Galatasaray'da Başakşehir mesaisi",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/12/galatasarayda-basaksehir-mesaisi",
+      "date": "2026-03-12T17:21:42.000Z"
+    },
+    {
+      "title": "Tur ümitleri rövanşa kaldı! Samsunspor evinde Rayo Vallecano’ya mağlup oldu",
+      "link": "https://www.ahaber.com.tr/spor/samsunspor/2026/03/12/tur-umitleri-rovansa-kaldi-samsunspor-evinde-rayo-vallecanoya-maglup-oldu",
+      "date": "2026-03-12T14:35:55.000Z"
+    },
+    {
+      "title": "Süper Lig’den Süper Amatör'e! Denizlispor’a bir şok daha",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/12/super-ligden-super-amatore-denizlispora-bir-sok-daha",
+      "date": "2026-03-12T08:39:03.000Z"
+    },
+    {
+      "title": "Ziraat Türkiye Kupası'nda çeyrek ve yarı final eşleşmeleri belli oldu",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/11/ziraat-turkiye-kupasinda-ceyrek-ve-yari-final-kura-heyecani",
+      "date": "2026-03-11T07:58:18.000Z"
+    },
+    {
+      "title": "Çeyrek final kapısını açtılar",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/11/ceyrek-final-kapisini-actilar",
+      "date": "2026-03-11T04:04:59.000Z"
+    },
+    {
+      "title": "Trabzonspor yardımcı antrenörü Orhan Kaynak'tan acı haber!",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/10/trabzonspor-yardimci-antrenoru-orhan-kaynaktan-aci-haber",
+      "date": "2026-03-10T17:00:30.000Z"
+    },
+    {
+      "title": "Aslan İngiliz devine diz çöktürdü! Galatasaray Liverpool'u tek golle devirdi",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/10/galatasaray-liverpoolu-tek-golle-devirdi",
+      "date": "2026-03-10T06:46:29.000Z"
+    },
+    {
+      "title": "Savunma rezalet",
+      "link": "https://www.ahaber.com.tr/yazarlar/iskender-gunen/2026/03/10/savunma-rezalet",
+      "date": "2026-03-10T04:05:22.000Z"
+    },
+    {
+      "title": "Devler Ligi'nde nefesler tutuldu! Aslan İngiliz devini gözüne kesti! İşte tüm notlar...",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/09/devler-liginde-nefesler-tutuldu-aslan-ingiliz-devini-gozune-kesti-iste-tum-notlar",
+      "date": "2026-03-09T16:37:43.000Z"
+    },
+    {
+      "title": "Galatasaray’dan örnek hareket! Liverpool taraftarları teşekkür etti",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/09/galatasaraydan-ornek-hareket-liverpool-taraftarlari-tesekkur-etti",
+      "date": "2026-03-09T15:58:24.000Z"
+    },
+    {
+      "title": "Fırtına deplasmanda doludizgin! Trabzonspor 3 puanı 3 golle aldı",
+      "link": "https://www.ahaber.com.tr/spor/trabzonspor/2026/03/09/firtina-deplasmanda-doludizgin-trabzonspor-3-puani-3-golle-aldi",
+      "date": "2026-03-09T14:32:46.000Z"
+    },
+    {
+      "title": "Son golde ofsayt yoktu",
+      "link": "https://www.ahaber.com.tr/yazarlar/ahmet-cakar/2026/03/09/son-golde-ofsayt-yoktu",
+      "date": "2026-03-09T04:04:25.000Z"
+    },
+    {
+      "title": "Sadece Samsun’u değil çaresizliği de yendi!",
+      "link": "https://www.ahaber.com.tr/yazarlar/gurcan-bilgic/2026/03/09/sadece-samsunu-degil-caresizligi-de-yendi",
+      "date": "2026-03-09T04:04:11.000Z"
+    },
+    {
+      "title": "Samsunspor teknik direktörü Fink: \"Hayal kırıklığı yaşıyoruz\"",
+      "link": "https://www.ahaber.com.tr/spor/samsunspor/2026/03/08/samsunspor-teknik-direktoru-fink-hayal-kirikligi-yasiyoruz",
+      "date": "2026-03-08T20:24:58.000Z"
+    },
+    {
+      "title": "Abdullah Kavukcu: UEFA kriterlerini karşıladık",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/08/abdullah-kavukcu-uefa-kriterlerini-karsiladik",
+      "date": "2026-03-08T18:42:50.000Z"
+    },
+    {
+      "title": "Fenerbahçe'den nefes kesen geri dönüş! Kanarya uzatmalarda hayat buldu",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/03/08/canli-fenerbahce-samsunspor",
+      "date": "2026-03-08T14:53:03.000Z"
+    },
+    {
+      "title": "Aydın filede ateşe düştü",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/08/aydin-filede-atese-dustu",
+      "date": "2026-03-08T09:42:55.000Z"
+    },
+    {
+      "title": "Bir kaleciden çok daha fazlası",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/08/bir-kaleciden-cok-daha-fazlasi",
+      "date": "2026-03-08T04:15:05.000Z"
+    }
+  ]
 }
