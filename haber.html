@@ -4,19 +4,22 @@
 <meta charset="UTF-8">
 <title>Haber</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 20px; }
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  iframe { width: 100%; height: 90vh; border: none; }
 </style>
 </head>
 <body>
 <div id="content">Haber yükleniyor...</div>
 
 <script>
-// URL'den parametreyi al
+// URL parametresini al
 const params = new URLSearchParams(window.location.search);
 const url = params.get('url');
 
 if(url) {
-    document.getElementById('content').innerHTML = `<iframe src="${url}" style="width:100%; height:90vh; border:none;"></iframe>`;
+    // encode edilmiş URL'yi decode et
+    const decodedUrl = decodeURIComponent(url);
+    document.getElementById('content').innerHTML = `<iframe src="${decodedUrl}"></iframe>`;
 } else {
     document.getElementById('content').innerText = "Haber bulunamadı!";
 }
