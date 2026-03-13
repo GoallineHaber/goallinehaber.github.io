@@ -2,9 +2,13 @@ import feedparser
 import json
 from datetime import datetime, timedelta
 
-rss_url = "https://www.ahaber.com.tr/rss/spor.xml"
-feed = feedparser.parse(rss_url)
-
+rss_urls = [
+ "https://www.ahaber.com.tr/rss/spor.xml",
+ "https://www.ntvspor.net/rss",
+ "https://www.fanatik.com.tr/rss",
+ "https://www.fotomac.com.tr/rss",
+ "https://www.aspor.com.tr/rss"
+]
 # Mevcut JSON'u oku
 try:
     with open("data/news.json", "r", encoding="utf-8") as f:
@@ -24,7 +28,10 @@ new_items = {
     "diger": []
 }
 
-for entry in feed.entries:
+for rss_url in rss_urls:
+    feed = feedparser.parse(rss_url)
+
+    for entry in feed.entries:
     title = entry.get("title", "")
     link = entry.get("link", "")
     date_str = entry.get("published", "")
