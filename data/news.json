@@ -60,17 +60,5 @@
   ],
   "basketbol": [],
   "voleybol": [],
-  "diger": [
-    {
-      "title": "Çeyrek final kapısını açtılar",
-      "link": "haber.html?url=https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/11/ceyrek-final-kapisini-actilar",
-      "date": "2026-03-11T04:04:59"
-    },
-    {
-      "title": "Çeyrek final kapısını açtılar",
-      "link": "haber.html?url=https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/11/ceyrek-final-kapisini-actilar",
-      "date": "2026-03-11T04:04:59",
-      "image": ""
-    }
-  ]
+  "diger": []
 }
