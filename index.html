@@ -64,13 +64,12 @@ fetch("/data/news.json")
     const container = document.getElementById("all-news");
     const allNews = [];
 
-    ["futbol","basketbol","uefa","voleybol","diger"].forEach(cat => {
-      (data[cat] || []).forEach(n => {
-        n.category = cat;
-        allNews.push(n);
-      });
-    });
-
+   ["futbol","basketbol","voleybol","diger"].forEach(cat => {
+  (data[cat] || []).forEach(n => {
+    n.category = cat;
+    allNews.push(n);
+  });
+});
     allNews.sort(() => Math.random() - 0.5);
 
     const now = new Date();
