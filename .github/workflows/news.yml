@@ -2,7 +2,7 @@ name: Spor Haberleri
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # her 30 dakikada bir çalışacak
+    - cron: "*/30 * * * *"  # her 30 dakikada bir
   workflow_dispatch:
 
 jobs:
@@ -19,8 +19,11 @@ jobs:
       - name: Install feedparser
         run: pip install feedparser
 
+      - name: Ensure data folder exists
+        run: mkdir -p data
+
       - name: Run news fetcher
-        run: python fetch_news.py   # dosya adı fetch_news.py olmalı
+        run: python fetch_news.py
 
       - name: Commit news.json
         run: |
