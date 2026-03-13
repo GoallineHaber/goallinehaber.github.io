@@ -1,7 +1,9 @@
 import feedparser
 import json
 from datetime import datetime, timedelta
+import os
 
+# RSS kaynakları
 rss_urls = [
  "https://www.ahaber.com.tr/rss/spor.xml",
  "https://www.ntvspor.net/rss",
@@ -12,6 +14,10 @@ rss_urls = [
  "https://www.goal.com/tr/feeds/news",
  "https://www.trtspor.com.tr/rss"
 ]
+
+# data klasörü yoksa oluştur
+if not os.path.exists("data"):
+    os.makedirs("data")
 
 # JSON dosyasını oku veya oluştur
 try:
