@@ -17,7 +17,7 @@ const params = new URLSearchParams(window.location.search);
 const url = params.get('url');
 
 if(url) {
-    // encode edilmiş URL'yi decode et
+    // decode edilmiş URL'yi kullan
     const decodedUrl = decodeURIComponent(url);
     document.getElementById('content').innerHTML = `<iframe src="${decodedUrl}"></iframe>`;
 } else {
