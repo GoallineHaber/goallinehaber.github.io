@@ -1,0 +1,32 @@
+name: Günlük Haber Güncelleme
+
+on:
+  schedule:
+    - cron: '0 * * * *' # her saat başı
+  workflow_dispatch: # manuel tetikleme
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repoyu klonla
+        uses: actions/checkout@v3
+
+      - name: Node.js yükle
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Haberleri çek ve JSON oluştur
+        run: |
+          npm install node-fetch@2
+          node scripts/fetch-news.js
+
+      - name: Değişiklikleri commit et
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data/news.json
+          git commit -m "Haberler güncellendi $(date +'%Y-%m-%d %H:%M')" || echo "Değişiklik yok"
+          git push
