@@ -7,30 +7,25 @@ rss_urls = [
  "https://www.ntvspor.net/rss",
  "https://www.fanatik.com.tr/rss",
  "https://www.fotomac.com.tr/rss",
- "https://www.aspor.com.tr/rss"
+ "https://www.aspor.com.tr/rss",
+ "https://www.sporx.com.tr/rss",
+ "https://www.goal.com/tr/feeds/news",
+ "https://www.trtspor.com.tr/rss"
 ]
 
-# Mevcut JSON'u oku
+# JSON dosyasını oku
 try:
     with open("data/news.json", "r", encoding="utf-8") as f:
         news = json.load(f)
 except (FileNotFoundError, json.JSONDecodeError):
-    news = {
-        "futbol": [],
-        "basketbol": [],
-        "voleybol": [],
-        "diger": []
-    }
+    news = {"futbol": [], "basketbol": [], "voleybol": [], "diger": []}
 
-new_items = {
-    "futbol": [],
-    "basketbol": [],
-    "voleybol": [],
-    "diger": []
-}
+new_items = {"futbol": [], "basketbol": [], "voleybol": [], "diger": []}
 
+# RSS’leri çek
 for rss_url in rss_urls:
     feed = feedparser.parse(rss_url)
+    print("RSS çekiliyor:", rss_url, "Haber sayısı:", len(feed.entries))
 
     for entry in feed.entries:
         title = entry.get("title", "")
@@ -42,19 +37,14 @@ for rss_url in rss_urls:
         except:
             date = datetime.now().isoformat()
         
-        # RSS içinde görsel varsa
+        # Görsel varsa al
         image = ""
         if "media_content" in entry:
             image = entry.media_content[0].get("url", "")
         elif "media_thumbnail" in entry:
             image = entry.media_thumbnail[0].get("url", "")
 
-        item = {
-            "title": title,
-            "link": f"haber.html?url={link}",
-            "date": date,
-            "image": image
-        }
+        item = {"title": title, "link": f"haber.html?url={link}", "date": date, "image": image}
 
         text = (title + " " + entry.get("summary", "")).lower()
 
@@ -67,10 +57,10 @@ for rss_url in rss_urls:
         else:
             new_items["diger"].append(item)
 
-# Yeni haberleri mevcut JSON'a ekle
+# Yeni haberleri ekle (linke göre)
 for cat in new_items:
     for h in new_items[cat]:
-        if h not in news[cat]:
+        if not any(existing["link"] == h["link"] for existing in news[cat]):
             news[cat].append(h)
 
 # 48 saatten eski haberleri temizle
@@ -78,7 +68,7 @@ now = datetime.now()
 for cat in news:
     news[cat] = [h for h in news[cat] if (now - datetime.fromisoformat(h['date'])) < timedelta(hours=48)]
 
-# JSON'u yaz
+# JSON’a yaz
 with open("data/news.json", "w", encoding="utf-8") as f:
     json.dump(news, f, ensure_ascii=False, indent=2)
 
