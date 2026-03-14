@@ -1,62 +1,80 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
 
-const parser = new Parser();
+const parser = new Parser({
+customFields: {
+item: [
+["media:content","media"],
+["enclosure","enclosure"]
+]
+}
+});
 
-async function fetchNews() {
+async function fetchNews(){
 
-  const url = "https://www.ahaber.com.tr/rss/spor.xml";
+const url="https://www.ahaber.com.tr/rss/spor.xml";
 
-  const news = {
-    futbol: [],
-    basketbol: [],
-    voleybol: [],
-    diger: []
-  };
+let news={
+futbol:[],
+basketbol:[],
+voleybol:[],
+diger:[]
+};
 
-  try {
+try{
 
-    const feed = await parser.parseURL(url);
+const feed=await parser.parseURL(url);
+const now=new Date();
 
-   feed.items.forEach(item => {
+feed.items.forEach(item=>{
 
-      const link = item.link.toLowerCase();
+const date=new Date(item.pubDate);
 
-      const newsItem = {
-        title: item.title,
-        link: item.link,
-        date: new Date(item.pubDate).toISOString()
-      };
+if((now-date) > 48*60*60*1000) return;
 
-      if (link.includes("futbol")) {
+let image=null;
 
-        news.futbol.push(newsItem);
+if(item.enclosure && item.enclosure.url){
+image=item.enclosure.url;
+}
 
-      } else if (link.includes("basketbol")) {
+if(item.media && item.media.$ && item.media.$.url){
+image=item.media.$.url;
+}
 
-        news.basketbol.push(newsItem);
+const link=item.link.toLowerCase();
 
-      } else if (link.includes("voleybol")) {
+const obj={
+title:item.title,
+link:item.link,
+date:date.toISOString(),
+image:image
+};
 
-        news.voleybol.push(newsItem);
+if(link.includes("futbol")){
+news.futbol.push(obj);
+}
+else if(link.includes("basketbol")){
+news.basketbol.push(obj);
+}
+else if(link.includes("voleybol")){
+news.voleybol.push(obj);
+}
+else{
+news.diger.push(obj);
+}
 
-      } else {
+});
 
-        news.diger.push(newsItem);
+fs.writeFileSync("data/news.json",JSON.stringify(news,null,2));
 
-      }
+console.log("Haberler güncellendi");
 
-    });
+}catch(err){
 
-    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+console.log(err);
 
-    console.log("Haberler güncellendi");
-
-  } catch (err) {
-
-    console.log("RSS hatası:", err);
-
-  }
+}
 
 }
 
