@@ -30,8 +30,6 @@ feed.items.forEach(item=>{
 
 const date=new Date(item.pubDate);
 
-if((now-date) > 48*60*60*1000) return;
-
 let image=null;
 
 if(item.enclosure && item.enclosure.url){
