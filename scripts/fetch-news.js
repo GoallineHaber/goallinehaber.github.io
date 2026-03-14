@@ -20,7 +20,6 @@ async function fetchNews() {
 
     feed.items.slice(0, 30).forEach(item => {
 
-      const title = item.title.toLowerCase();
       const link = item.link.toLowerCase();
 
       const newsItem = {
@@ -29,16 +28,15 @@ async function fetchNews() {
         date: new Date(item.pubDate).toISOString()
       };
 
-      // kategori belirleme
-      if(title.includes("futbol") || link.includes("futbol")) {
+      if (link.includes("futbol")) {
 
         news.futbol.push(newsItem);
 
-      } else if(title.includes("basket") || link.includes("basket")) {
+      } else if (link.includes("basketbol")) {
 
         news.basketbol.push(newsItem);
 
-      } else if(title.includes("voleybol") || link.includes("voley")) {
+      } else if (link.includes("voleybol")) {
 
         news.voleybol.push(newsItem);
 
