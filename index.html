@@ -57,59 +57,53 @@ a:hover { text-decoration: underline; }
 </div>
 
 <script>
-const NEWS_URL = "data/news.json";
 
-async function loadNews() {
-  try {
-    const res = await fetch(NEWS_URL);
-    const data = await res.json();
-    const container = document.getElementById("all-news");
-    container.innerHTML = "";
+async function loadNews(){
 
-    const allNews = [];
+const res = await fetch("./data/news.json");
+const data = await res.json();
 
-    ["futbol","basketbol","voleybol","diger"].forEach(cat => {
-      (data[cat] || []).forEach(n => {
-        n.category = cat;
-        allNews.push(n);
-      });
-    });
+const container = document.getElementById("all-news");
+container.innerHTML = "";
 
-    const now = new Date();
-    const recentNews = allNews.filter(n => (now - new Date(n.date)) < 48*60*60*1000);
-    recentNews.sort(() => Math.random() - 0.5);
+const allNews = [];
 
-    recentNews.forEach(n => {
-      const div = document.createElement("div");
-      div.className = "news-item";
-      div.dataset.category = n.category;
-      div.innerHTML = `
-        <h2>[${n.category.toUpperCase()}] 
-          <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
-        </h2>
-        <p>${new Date(n.date).toLocaleString('tr-TR')}</p>
-      `;
-      container.appendChild(div);
-    });
+// JSON içindeki bütün kategorileri oku
+Object.keys(data).forEach(cat => {
 
-  } catch(err) {
-    console.error("Haberler yüklenemedi:", err);
-  }
+(data[cat] || []).forEach(n => {
+
+n.category = cat;
+allNews.push(n);
+
+});
+
+});
+
+// en yeni haber üstte
+allNews.sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+// bütün haberleri göster
+allNews.forEach(n=>{
+
+const div=document.createElement("div");
+
+div.className="news-item";
+div.dataset.category=n.category;
+
+div.innerHTML=`
+<h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
+<p>${new Date(n.date).toLocaleString()}</p>
+`;
+
+container.appendChild(div);
+
+});
+
 }
 
 loadNews();
-setInterval(loadNews, 60*60*1000);
 
-function filterCategory(cat) {
-  const allNewsDivs = document.querySelectorAll("#all-news .news-item");
-  allNewsDivs.forEach(div => {
-    if(cat === 'all' || div.dataset.category === cat) {
-      div.style.display = "block";
-    } else {
-      div.style.display = "none";
-    }
-  });
-}
 </script>
 
 </body>
