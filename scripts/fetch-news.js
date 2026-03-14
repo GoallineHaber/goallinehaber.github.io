@@ -18,7 +18,7 @@ async function fetchNews() {
 
     const feed = await parser.parseURL(url);
 
-    feed.items.slice(0, 30).forEach(item => {
+   feed.items.forEach(item => {
 
       const link = item.link.toLowerCase();
 
