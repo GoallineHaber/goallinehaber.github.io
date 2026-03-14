@@ -18,23 +18,45 @@ async function fetchNews() {
 
     const feed = await parser.parseURL(url);
 
-    feed.items.slice(0, 20).forEach(item => {
+    feed.items.slice(0, 30).forEach(item => {
 
-      news.diger.push({
+      const title = item.title.toLowerCase();
+      const link = item.link.toLowerCase();
+
+      const newsItem = {
         title: item.title,
         link: item.link,
         date: new Date(item.pubDate).toISOString()
-      });
+      };
+
+      // kategori belirleme
+      if(title.includes("futbol") || link.includes("futbol")) {
+
+        news.futbol.push(newsItem);
+
+      } else if(title.includes("basket") || link.includes("basket")) {
+
+        news.basketbol.push(newsItem);
+
+      } else if(title.includes("voleybol") || link.includes("voley")) {
+
+        news.voleybol.push(newsItem);
+
+      } else {
+
+        news.diger.push(newsItem);
+
+      }
 
     });
 
     fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
-    console.log("Haberler yazıldı");
+    console.log("Haberler güncellendi");
 
   } catch (err) {
 
-    console.log("RSS çekme hatası:", err);
+    console.log("RSS hatası:", err);
 
   }
 
