@@ -78,24 +78,33 @@ iframe { width: 100%; border: none; border-radius: 6px; }
 <script>
 let allNews = [];
 
-async function loadNews(){
-  const res = await fetch("./data/news.json");
-  const data = await res.json();
 
-  allNews = [];
-  Object.keys(data).forEach(cat => {
-    (data[cat] || []).forEach(n => {
-      n.category = cat;
-      allNews.push(n);
-    });
+function renderNews(category){
+  const container = document.getElementById("all-news");
+  container.innerHTML = "";
+
+  let count = 0;
+  allNews.forEach(n => {
+    
+    if(category !== "all" && n.category !== category) return;
+
+    const div = document.createElement("div");
+    div.className = "news-item";
+
+    
+    if(count % 5 === 0) div.classList.add("big");
+
+    div.innerHTML = `
+      ${n.image ? `<img src="${n.image}">` : ""}
+      <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
+      <p>${new Date(n.date).toLocaleString()}</p>
+    `;
+    container.appendChild(div);
+    count++;
   });
-
-  // en yeni haber üstte
-  allNews.sort((a,b) => new Date(b.date) - new Date(a.date));
-
-  renderNews("all");
-  loadManset();
 }
+
+
 
 function loadManset(){
   const manset = document.getElementById("manset");
@@ -110,33 +119,31 @@ function loadManset(){
   `;
 }
 
-function renderNews(category){
-  const container = document.getElementById("all-news");
-  container.innerHTML = "";
-
-  let count = 0;
-  allNews.forEach(n => {
-    if(category !== "all" && n.category !== category) return;
-
-    const div = document.createElement("div");
-    div.className = "news-item";
-
-    // her 5 haberde bir büyük
-    if(count % 5 === 0) div.classList.add("big");
-
-    div.innerHTML = `
-      ${n.image ? `<img src="${n.image}">` : ""}
-      <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${new Date(n.date).toLocaleString()}</p>
-    `;
-    container.appendChild(div);
-    count++;
-  });
-}
 
 function filterCategory(cat){
   renderNews(cat);
 }
+
+
+async function loadNews(){
+  const res = await fetch("./data/news.json");
+  const data = await res.json();
+
+  allNews = [];
+  Object.keys(data).forEach(cat => {
+    (data[cat] || []).forEach(n => {
+      n.category = cat;  
+      allNews.push(n);
+    });
+  });
+
+  
+  allNews.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  renderNews("all");   
+  loadManset();        
+}
+
 
 loadNews();
 </script>
