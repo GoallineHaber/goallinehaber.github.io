@@ -5,7 +5,8 @@ const parser = new Parser({
 customFields: {
 item: [
 ["media:content","media"],
-["enclosure","enclosure"]
+["enclosure","enclosure"],
+["category","category"]
 ]
 }
 });
@@ -31,7 +32,7 @@ const date = new Date(item.pubDate);
 
 let image = null;
 
-// foto kontrol
+// foto
 if(item.enclosure && item.enclosure.url){
 image = item.enclosure.url;
 }
@@ -40,7 +41,7 @@ if(item.media && item.media.$ && item.media.$.url){
 image = item.media.$.url;
 }
 
-const link = item.link.toLowerCase();
+const category = (item.category || "").toLowerCase();
 const title = item.title.toLowerCase();
 
 const obj = {
@@ -48,16 +49,16 @@ title: item.title,
 link: item.link,
 date: date.toISOString(),
 image: image
-}; 
+};
 
 // kategori belirleme
-if(link.includes("futbol") || title.includes("futbol")){
+if(category.includes("futbol") || title.includes("futbol")){
 news.futbol.push(obj);
 }
-else if(link.includes("basketbol") || title.includes("basketbol")){
+else if(category.includes("basketbol") || title.includes("basketbol")){
 news.basketbol.push(obj);
 }
-else if(link.includes("voleybol") || title.includes("voleybol")){
+else if(category.includes("voleybol") || title.includes("voleybol")){
 news.voleybol.push(obj);
 }
 else{
@@ -66,14 +67,13 @@ news.diger.push(obj);
 
 });
 
-// JSON kaydet
-fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+fs.writeFileSync("data/news.json", JSON.stringify(news,null,2));
 
-console.log("✔ Haberler güncellendi");
+console.log("✔ Haberler kategorilere ayrıldı");
 
 }catch(err){
 
-console.log("Hata:", err);
+console.log("Hata:",err);
 
 }
 
