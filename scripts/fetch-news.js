@@ -38,7 +38,7 @@ image=item.enclosure.url;
 
 if(item.media && item.media.$ && item.media.$.url){
 image=item.media.$.url;
-}
+} 
 
 const link=item.link.toLowerCase();
 
