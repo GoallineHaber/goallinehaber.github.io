@@ -19,9 +19,9 @@ a:hover { text-decoration: underline; }
 .news-item img { width: 100%; height: auto; border-radius: 7px; display: block; margin-bottom: 10px; }
 .news-item h2 { font-size: 20px; margin: 0 0 5px 0; }
 .news-item p { color: #555; font-size: 0.95em; margin: 0; }
-.news-item.big{
-  grid-column: span 3;  /* container genişliğinde */
-  height: auto;          /* yükseklik artık sınırlı */
+.news-item.big {
+  grid-column: 1 / -1; /* tüm grid genişliğini kaplar */
+  height: auto;         /* yükseklik içeriğe göre */
 }
 .sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; }
 .side-news { padding: 8px 0; border-bottom: 1px solid #eee; }
