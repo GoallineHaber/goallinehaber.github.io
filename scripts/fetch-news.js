@@ -48,7 +48,7 @@ title: item.title,
 link: item.link,
 date: date.toISOString(),
 image: image
-};
+}; 
 
 // kategori belirleme
 if(link.includes("futbol") || title.includes("futbol")){
