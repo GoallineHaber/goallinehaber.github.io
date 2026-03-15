@@ -44,24 +44,46 @@ image = item.media.$.url;
 const category = (item.category || "").toLowerCase();
 const title = item.title.toLowerCase();
 
-const obj = {
-title: item.title,
+let obj;
+
+// kategori belirleme + başlığa kategori ekleme
+if(category.includes("futbol") || title.includes("futbol")){
+obj = {
+title: "Futbol: " + item.title,
 link: item.link,
 date: date.toISOString(),
 image: image
 };
-
-// kategori belirleme
-if(category.includes("futbol") || title.includes("futbol")){
 news.futbol.push(obj);
 }
+
 else if(category.includes("basketbol") || title.includes("basketbol")){
+obj = {
+title: "Basketbol: " + item.title,
+link: item.link,
+date: date.toISOString(),
+image: image
+};
 news.basketbol.push(obj);
 }
+
 else if(category.includes("voleybol") || title.includes("voleybol")){
+obj = {
+title: "Voleybol: " + item.title,
+link: item.link,
+date: date.toISOString(),
+image: image
+};
 news.voleybol.push(obj);
 }
+
 else{
+obj = {
+title: "Diğer: " + item.title,
+link: item.link,
+date: date.toISOString(),
+image: image
+};
 news.diger.push(obj);
 }
 
