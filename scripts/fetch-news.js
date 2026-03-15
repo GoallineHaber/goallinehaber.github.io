@@ -12,50 +12,52 @@ item: [
 
 async function fetchNews(){
 
-const url="https://www.ahaber.com.tr/rss/spor.xml";
+const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
-let news={
-futbol:[],
-basketbol:[],
-voleybol:[],
-diger:[]
+let news = {
+futbol: [],
+basketbol: [],
+voleybol: [],
+diger: []
 };
 
 try{
 
-const feed=await parser.parseURL(url);
-const now=new Date();
+const feed = await parser.parseURL(url);
 
-feed.items.forEach(item=>{
+feed.items.forEach(item => {
 
-const date=new Date(item.pubDate);
+const date = new Date(item.pubDate);
 
-let image=null;
+let image = null;
 
+// foto kontrol
 if(item.enclosure && item.enclosure.url){
-image=item.enclosure.url;
+image = item.enclosure.url;
 }
 
 if(item.media && item.media.$ && item.media.$.url){
-image=item.media.$.url;
-} 
+image = item.media.$.url;
+}
 
-const link=item.link.toLowerCase();
+const link = item.link.toLowerCase();
+const title = item.title.toLowerCase();
 
-const obj={
-title:item.title,
-link:item.link,
-date:date.toISOString(),
-image:image
+const obj = {
+title: item.title,
+link: item.link,
+date: date.toISOString(),
+image: image
 };
 
-if(link.includes("futbol")){
+// kategori belirleme
+if(link.includes("futbol") || title.includes("futbol")){
 news.futbol.push(obj);
 }
-else if(link.includes("basketbol")){
+else if(link.includes("basketbol") || title.includes("basketbol")){
 news.basketbol.push(obj);
 }
-else if(link.includes("voleybol")){
+else if(link.includes("voleybol") || title.includes("voleybol")){
 news.voleybol.push(obj);
 }
 else{
@@ -64,13 +66,14 @@ news.diger.push(obj);
 
 });
 
-fs.writeFileSync("data/news.json",JSON.stringify(news,null,2));
+// JSON kaydet
+fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
-console.log("Haberler güncellendi");
+console.log("✔ Haberler güncellendi");
 
 }catch(err){
 
-console.log(err);
+console.log("Hata:", err);
 
 }
 
