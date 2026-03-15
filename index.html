@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr"> 
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</title>
@@ -14,66 +14,24 @@ a:hover { text-decoration: underline; }
 .navbar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 16px; cursor: pointer; }
 .navbar a:hover { text-decoration: underline; }
 .main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 25px; margin-top: 20px; }
-.news-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.manset-slider { margin-bottom: 25px; }
+.manset-slider img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; }
+.manset-title { font-size: 28px; font-weight: bold; margin-top: 10px; }
+#all-news { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
 .news-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.news-item img { width: 100%; height: auto; border-radius: 7px; display: block; margin-bottom: 10px; }
+.news-item img { width: 100%; height: 170px; object-fit: cover; border-radius: 6px; }
 .news-item h2 { font-size: 20px; margin: 0 0 5px 0; }
 .news-item p { color: #555; font-size: 0.95em; margin: 0; }
-.news-item.big {
-  grid-column: 1 / -1; /* tüm grid genişliğini kaplar */
-  height: auto;         /* yükseklik içeriğe göre */
-}
+.news-item.big { grid-column: 1 / -1; height: auto; }
 .sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; }
 .side-news { padding: 8px 0; border-bottom: 1px solid #eee; }
 .side-news a { color: #222; font-weight: bold; }
+iframe { width: 100%; border: none; border-radius: 6px; }
 
-.manset-slider{
-  margin-bottom:25px;
+@media (max-width: 768px) {
+  .main-layout { grid-template-columns: 1fr; }
+  #all-news { grid-template-columns: 1fr; }
 }
-
-.manset-slider img{
-  width:81%;
-  max-height:365px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.manset-title{
-  font-size:28px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.news-grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:20px;
-}
-
-.news-grid-2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  margin-top:20px;
-}
-
-.news-grid-4{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-top:20px;
-}
-
-.news-grid-3 img,
-.news-grid-2 img,
-.news-grid-4 img{
-  width:100%;
-  height:170px;
-  object-fit:cover;
-  border-radius:6px;
-}
-
 </style>
 </head>
 <body>
@@ -99,19 +57,14 @@ a:hover { text-decoration: underline; }
   <!-- Haberler -->
   <div>
     <h1>Son Haberler</h1>
-    <div id="all-news" class="news-container"></div>
+    <div id="all-news"></div>
   </div>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <h3>⚽ Süper Lig</h3>
-    <iframe
-      src="https://www.tff.org/default.aspx?pageID=198"
-      width="100%"
-      height="350"
-      style="border:none;">
-    </iframe>
-    
+    <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
+
     <h3>🔥 En Çok Okunanlar</h3>
     <div class="side-news">
       <a href="ronaldo.html">Ronaldo yeni rekor kırdı</a>
@@ -129,12 +82,7 @@ async function loadNews(){
   const res = await fetch("./data/news.json");
   const data = await res.json();
 
-  const container = document.getElementById("all-news");
-  container.innerHTML = "";
-
   allNews = [];
-
-  // tüm kategorileri oku
   Object.keys(data).forEach(cat => {
     (data[cat] || []).forEach(n => {
       n.category = cat;
@@ -143,18 +91,18 @@ async function loadNews(){
   });
 
   // en yeni haber üstte
-  allNews.sort((a,b)=> new Date(b.date) - new Date(a.date));
+  allNews.sort((a,b) => new Date(b.date) - new Date(a.date));
 
   renderNews("all");
   loadManset();
 }
 
 function loadManset(){
-  const manset=document.getElementById("manset");
-  if(allNews.length===0) return;
+  const manset = document.getElementById("manset");
+  if(allNews.length === 0) return;
 
-  const n=allNews[0];
-  manset.innerHTML=`
+  const n = allNews[0];
+  manset.innerHTML = `
     ${n.image ? `<img src="${n.image}">` : ""}
     <div class="manset-title">
       <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
@@ -162,36 +110,30 @@ function loadManset(){
   `;
 }
 
-// Haberleri ekrana bas
 function renderNews(category){
   const container = document.getElementById("all-news");
   container.innerHTML = "";
 
-  let count=0;
-
-  allNews.forEach(n=>{
+  let count = 0;
+  allNews.forEach(n => {
     if(category !== "all" && n.category !== category) return;
 
-    const div=document.createElement("div");
-    div.className="news-item";
+    const div = document.createElement("div");
+    div.className = "news-item";
 
-    // her 5 haberde bir büyük haber
-    if(count % 5 === 0){
-      div.classList.add("big");
-    }
+    // her 5 haberde bir büyük
+    if(count % 5 === 0) div.classList.add("big");
 
-    div.innerHTML=`
-      ${n.image ? `<img src="${n.image}" style="width:100%;border-radius:6px;margin-bottom:8px;">` : ""}
+    div.innerHTML = `
+      ${n.image ? `<img src="${n.image}">` : ""}
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
       <p>${new Date(n.date).toLocaleString()}</p>
     `;
-    
     container.appendChild(div);
     count++;
   });
 }
 
-// Navbar filtre
 function filterCategory(cat){
   renderNews(cat);
 }
