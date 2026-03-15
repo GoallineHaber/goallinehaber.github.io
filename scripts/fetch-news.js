@@ -32,7 +32,7 @@ const date = new Date(item.pubDate);
 
 let image = null;
 
-// foto
+// foto çekme
 if(item.enclosure && item.enclosure.url){
 image = item.enclosure.url;
 }
@@ -46,43 +46,50 @@ const title = item.title.toLowerCase();
 
 let obj;
 
-// kategori belirleme + başlığa kategori ekleme
+// FUTBOL
 if(category.includes("futbol") || title.includes("futbol")){
 obj = {
 title: "Futbol: " + item.title,
 link: item.link,
 date: date.toISOString(),
-image: image
+image: image,
+category: "futbol"
 };
 news.futbol.push(obj);
 }
 
+// BASKETBOL
 else if(category.includes("basketbol") || title.includes("basketbol")){
 obj = {
 title: "Basketbol: " + item.title,
 link: item.link,
 date: date.toISOString(),
-image: image
+image: image,
+category: "basketbol"
 };
 news.basketbol.push(obj);
 }
 
+// VOLEYBOL
 else if(category.includes("voleybol") || title.includes("voleybol")){
 obj = {
 title: "Voleybol: " + item.title,
 link: item.link,
 date: date.toISOString(),
-image: image
+image: image,
+category: "voleybol"
 };
 news.voleybol.push(obj);
 }
 
+// DİĞER
 else{
 obj = {
 title: "Diğer: " + item.title,
 link: item.link,
 date: date.toISOString(),
-image: image
+image: image,
+category: "diger"
 };
 news.diger.push(obj);
 }
