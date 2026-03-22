@@ -2,42 +2,140 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</title>
-<link rel="stylesheet" href="style.css">
+<title>GoallineHaber</title>
+
 <style>
-body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 20px; }
-a { color: #0066cc; text-decoration: none; }
-a:hover { text-decoration: underline; }
-.site-header { background-color: #c00; width: 100%; padding: 30px 25px; box-sizing: border-box; }
-.site-title { color: white; font-weight: bold; font-family: 'Arial Black', Arial, sans-serif; font-size: 26px; }
-.navbar { background: #222; padding: 10px 20px; text-align: center; border-radius: 5px; margin-bottom: 20px; }
-.navbar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 16px; cursor: pointer; }
-.navbar a:hover { text-decoration: underline; }
-.main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 25px; margin-top: 20px; }
-.manset-slider { margin-bottom: 25px; }
-.manset-slider img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; }
-.manset-title { font-size: 28px; font-weight: bold; margin-top: 10px; }
-#all-news { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-.news-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.news-item img { width: 100%; height: 399px; object-fit: cover; border-radius: 6px; }
-.news-item h2 { font-size: 20px; margin: 0 0 5px 0; }
-.news-item p { color: #555; font-size: 0.95em; margin: 0; }
-.news-item.big { grid-column: 1 / -1; height: auto; }
-.sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; }
-.side-news { padding: 8px 0; border-bottom: 1px solid #eee; }
-.side-news a { color: #222; font-weight: bold; }
-iframe { width: 100%; border: none; border-radius: 6px; }
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #f5f5f5, #eaeaea);
+  margin: 20px;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-header {
+  background-color: #c00;
+  width: 100%;
+  padding: 30px 25px;
+  box-sizing: border-box;
+}
+
+.site-title {
+  color: white;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.navbar {
+  background: #222;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 25px;
+}
+
+.manset-slider img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.manset-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#all-news {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.news-item {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.news-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.news-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.news-item h2 {
+  font-size: 18px;
+}
+
+.news-item.big {
+  grid-column: span 2;
+}
+
+.sidebar {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.side-news {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+iframe {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+}
 
 @media (max-width: 768px) {
-  .main-layout { grid-template-columns: 1fr; }
-  #all-news { grid-template-columns: 1fr; }
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  .news-item.big {
+    grid-column: span 1;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div class="site-header">
-  <span class="site-title">𝐺𝑜𝑎𝑙𝑙𝑖𝑛𝑒𝐻𝑎𝑏𝑒𝑟</span>
+  <span class="site-title">GoallineHaber</span>
 </div>
 
 <div class="navbar">
@@ -48,12 +146,13 @@ iframe { width: 100%; border: none; border-radius: 6px; }
   <a onclick="filterCategory('all')">Tümü</a>
 </div>
 
-<!-- Manşet Slider -->
+<!-- Manşet -->
 <div class="manset-slider">
   <div id="manset"></div>
 </div>
 
 <div class="main-layout">
+
   <!-- Haberler -->
   <div>
     <h1>Son Haberler</h1>
@@ -70,28 +169,30 @@ iframe { width: 100%; border: none; border-radius: 6px; }
       <a href="ronaldo.html">Ronaldo yeni rekor kırdı</a>
     </div>
     <div class="side-news">
-      <a href="world-cup.html">Iran'ın Dünya kupası Tehlike'de!</a>
+      <a href="world-cup.html">Dünya kupası haberleri</a>
     </div>
   </div>
+
 </div>
 
 <script>
 let allNews = [];
+let currentIndex = 0;
 
-
+/* HABERLERİ ÇİZ */
 function renderNews(category){
   const container = document.getElementById("all-news");
   container.innerHTML = "";
 
   let count = 0;
+
   allNews.forEach(n => {
-    
+
     if(category !== "all" && n.category !== category) return;
 
     const div = document.createElement("div");
     div.className = "news-item";
 
-    
     if(count % 5 === 0) div.classList.add("big");
 
     div.innerHTML = `
@@ -99,51 +200,56 @@ function renderNews(category){
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
       <p>${new Date(n.date).toLocaleString()}</p>
     `;
+
     container.appendChild(div);
     count++;
   });
 }
 
-
-
+/* MANŞET SLIDER */
 function loadManset(){
-  const manset = document.getElementById("manset");
   if(allNews.length === 0) return;
 
-  const n = allNews[0];
-  manset.innerHTML = `
-    ${n.image ? `<img src="${n.image}">` : ""}
-    <div class="manset-title">
-      <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
-    </div>
-  `;
+  setInterval(() => {
+    const n = allNews[currentIndex];
+
+    document.getElementById("manset").innerHTML = `
+      ${n.image ? `<img src="${n.image}">` : ""}
+      <div class="manset-title">
+        <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
+      </div>
+    `;
+
+    currentIndex++;
+    if(currentIndex >= allNews.length) currentIndex = 0;
+
+  }, 4000);
 }
 
-
+/* KATEGORİ */
 function filterCategory(cat){
   renderNews(cat);
 }
 
-
+/* HABER YÜKLE */
 async function loadNews(){
   const res = await fetch("./data/news.json");
   const data = await res.json();
 
   allNews = [];
+
   Object.keys(data).forEach(cat => {
     (data[cat] || []).forEach(n => {
-      n.category = cat;  
+      n.category = cat;
       allNews.push(n);
     });
   });
 
-  
   allNews.sort((a,b) => new Date(b.date) - new Date(a.date));
 
-  renderNews("all");   
-  loadManset();        
+  renderNews("all");
+  loadManset();
 }
-
 
 loadNews();
 </script>
