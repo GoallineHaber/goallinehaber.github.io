@@ -2,81 +2,77 @@ const Parser = require("rss-parser");
 const fs = require("fs");
 
 const parser = new Parser({
-customFields: {
-item: [
-["media:content","media"],
-["enclosure","enclosure"],
-["category","category"]
-]
-}
+  customFields: {
+    item: [
+      ["media:content", "media"],
+      ["enclosure", "enclosure"],
+      ["category", "category"]
+    ]
+  }
 });
 
-async function fetchNews(){
+function detectCategory(item) {
+  const title = (item.title || "").toLowerCase();
+  const rawCategory = (item.category || "").toLowerCase();
 
-const url = "https://www.ahaber.com.tr/rss/spor.xml";
+  // Önce RSS category kontrolü
+  if (rawCategory.includes("futbol")) return "futbol";
+  if (rawCategory.includes("basketbol")) return "basketbol";
+  if (rawCategory.includes("voleybol")) return "voleybol";
 
-let news = {
-futbol: [],
-basketbol: [],
-voleybol: [],
-diger: []
-};
+  // fallback: başlık kontrolü
+  if (title.includes("futbol")) return "futbol";
+  if (title.includes("basketbol")) return "basketbol";
+  if (title.includes("voleybol")) return "voleybol";
 
-try{
-
-const feed = await parser.parseURL(url);
-
-feed.items.forEach(item => {
-
-const date = new Date(item.pubDate);
-
-let image = null;
-
-// foto
-if(item.enclosure && item.enclosure.url){
-image = item.enclosure.url;
+  // default
+  return "diger";
 }
 
-if(item.media && item.media.$ && item.media.$.url){
-image = item.media.$.url;
-}
+async function fetchNews() {
+  const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
-const category = (item.category || "").toLowerCase();
-const title = item.title.toLowerCase();
+  let news = {
+    futbol: [],
+    basketbol: [],
+    voleybol: [],
+    diger: []
+  };
 
-const obj = {
-title: item.title,
-link: item.link,
-date: date.toISOString(),
-image: image
-};
+  try {
+    const feed = await parser.parseURL(url);
 
-// kategori belirleme
-if(category.includes("futbol") || title.includes("futbol")){
-news.futbol.push(obj);
-}
-else if(category.includes("basketbol") || title.includes("basketbol")){
-news.basketbol.push(obj);
-}
-else if(category.includes("voleybol") || title.includes("voleybol")){
-news.voleybol.push(obj);
-}
-else{
-news.diger.push(obj);
-}
+    feed.items.forEach(item => {
+      const date = new Date(item.pubDate);
 
-});
+      let image = null;
 
-fs.writeFileSync("data/news.json", JSON.stringify(news,null,2));
+      if (item.enclosure && item.enclosure.url) {
+        image = item.enclosure.url;
+      }
 
-console.log("✔ Haberler kategorilere ayrıldı");
+      if (item.media && item.media.$ && item.media.$.url) {
+        image = item.media.$.url;
+      }
 
-}catch(err){
+      const obj = {
+        title: item.title,
+        link: item.link,
+        date: date.toISOString(),
+        image: image
+      };
 
-console.log("Hata:",err);
+      const cat = detectCategory(item);
+      news[cat].push(obj);
+    });
 
-}
+    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
+    console.log("✔ Haberler düzgün kategorilendi");
+
+  } catch (err) {
+    console.log("Hata:", err);
+  }
 }
 
 fetchNews();
