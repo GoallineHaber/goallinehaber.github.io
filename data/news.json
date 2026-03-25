@@ -1,6 +1,12 @@
 {
   "futbol": [
     {
+      "title": "Ay-yıldızlılar Romanya karşısında!",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/25/ay-yildizlilar-romanya-ile-karsisinda",
+      "date": "2026-03-25T06:24:25.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/09786c/0/0/0/0/2048/1143?u=https://iahbr.tmgrup.com.tr/2026/03/25/ay-yildizlilar-romanya-ile-karsisinda-1774419835328.jpeg"
+    },
+    {
       "title": "TFF'den Türkiye Kupası açıklaması!",
       "link": "https://www.ahaber.com.tr/spor/2026/03/24/tffden-turkiye-kupasi-aciklamasi",
       "date": "2026-03-24T13:40:57.000Z",
@@ -113,17 +119,17 @@
       "link": "https://www.ahaber.com.tr/spor/2026/03/03/ziraat-turkiye-kupasi-son-haftasinda-duduk-calacak-hakemler-belli-oldu",
       "date": "2026-03-03T09:34:58.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/85f89e/1200/1200/183/0/668/486?u=https://iahbr.tmgrup.com.tr/2026/03/03/ziraat-turkiye-kupasi-son-haftasinda-duduk-calacak-hakemler-belli-oldu-1772530492948.jpeg"
-    },
-    {
-      "title": "🦁 Aslan kapıyı 100 milyon eurodan açıyor: Galatasaray'da tarihi ihracat operasyonu",
-      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/03/03/-aslan-kapiyi-100-milyon-eurodan-aciyor-galatasarayda-tarihi-ihracat-operasyonu",
-      "date": "2026-03-03T06:41:17.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/541f54/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/03/03/-aslan-kapiyi-100-milyon-eurodan-aciyor-floryada-tarihi-ihracat-operasyonu-1772519769517.jpg"
     }
   ],
   "basketbol": [],
   "voleybol": [],
   "diger": [
+    {
+      "title": "Bayram günü kabusu yaşadı: Milyonda bir olan olay bana denk geldi",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/25/bayram-gunu-kabusu-yasadi-milyonda-bir-olan-olay-bana-denk-geldi",
+      "date": "2026-03-25T06:52:54.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/5ea6b5/1200/675/0/8/999/570?u=https://iahbr.tmgrup.com.tr/2026/03/25/bayram-gunu-kabusu-yasadi-milyonda-bir-olan-olay-bana-denk-geldi-1774421561562.jpeg"
+    },
     {
       "title": "Fenerbahçe’den asılsız iddialara hukuki adım",
       "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/03/24/fenerbahceden-asilsiz-iddialara-hukuki-adim",
@@ -597,12 +603,6 @@
       "link": "https://www.ahaber.com.tr/spor/fatih-karagumruk/2026/03/03/fethiyespor-misirlicomtr-fatih-karagumruk-mac-sonucu-0-2",
       "date": "2026-03-03T11:58:12.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/10acae/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/03/03/fethiyespor-misirlicomtr-fatih-karagumruk-mac-sonucu-0-2-1772539061893.jpg"
-    },
-    {
-      "title": "Galatasaray deplasmanda Alanyaspor'u mağlup etti! Aslan kupada çeyrek finalde",
-      "link": "https://www.ahaber.com.tr/spor/2026/03/03/galatasaray-deplasmanda-alanyasporu-maglup-etti-aslan-kupada-ceyrek-finalde",
-      "date": "2026-03-03T07:46:05.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/09eb19/1200/675/0/0/800/450?u=https://iahbr.tmgrup.com.tr/2026/03/03/canli-galatasaray-alanyaspor-1772563753324.jpeg"
     }
   ]
 }
