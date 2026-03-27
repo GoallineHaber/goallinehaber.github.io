@@ -1,6 +1,12 @@
 {
   "futbol": [
     {
+      "title": "Hoca haklı çıktı",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/27/hoca-hakli-cikti",
+      "date": "2026-03-27T04:07:15.000Z",
+      "image": null
+    },
+    {
       "title": "Vincenzo Montella’dan net mesaj: “Rakip kim olursa olsun fark etmez”",
       "link": "https://www.ahaber.com.tr/spor/2026/03/26/vincenzo-montelladan-net-mesaj-rakip-kim-olursa-olsun-fark-etmez",
       "date": "2026-03-26T20:12:58.000Z",
@@ -142,6 +148,12 @@
   "basketbol": [],
   "voleybol": [],
   "diger": [
+    {
+      "title": "Bırakalım onlar düşünsünler!",
+      "link": "https://www.ahaber.com.tr/yazarlar/gurcan-bilgic/2026/03/27/birakalim-onlar-dusunsunler",
+      "date": "2026-03-27T04:07:29.000Z",
+      "image": null
+    },
     {
       "title": "Romanya’yı geçen Millilerimiz finalde! Başkan Erdoğan’dan tebrik telefonu",
       "link": "https://www.ahaber.com.tr/spor/2026/03/27/romanyayi-gecen-millilerimiz-finalde-baskan-erdogandan-tebrik-telefonu",
@@ -591,18 +603,6 @@
       "link": "https://www.ahaber.com.tr/spor/2026/03/04/besiktas-evinde-doludizgin-kartal-ceyrek-finale-uctu",
       "date": "2026-03-04T06:18:33.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/2561ab/1200/675/0/0/800/449?u=https://iahbr.tmgrup.com.tr/2026/03/04/besiktas-evinde-doludizgin-kartal-ceyrek-finale-uctu-1772652380913.jpeg"
-    },
-    {
-      "title": "Hamle turu getirdi",
-      "link": "https://www.ahaber.com.tr/yazarlar/iskender-gunen/2026/03/04/hamle-turu-getirdi",
-      "date": "2026-03-04T03:57:23.000Z",
-      "image": null
-    },
-    {
-      "title": "Barış Alper damga vurdu!",
-      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/03/04/baris-alper-damga-vurdu",
-      "date": "2026-03-04T03:57:05.000Z",
-      "image": null
     }
   ]
 }
