@@ -1,6 +1,12 @@
 {
   "futbol": [
     {
+      "title": "Ümit Milli Futbol Takımı'nın aday kadrosunda değişiklik!",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/29/umit-milli-futbol-takiminin-aday-kadrosunda-degisiklik",
+      "date": "2026-03-29T11:03:55.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ed6bcf/1200/675/0/0/800/449?u=https://iahbr.tmgrup.com.tr/2026/03/29/1774782202325.jpeg"
+    },
+    {
       "title": "Dünya Kupası yolunda son adım! Kosova maçının hakemi açıklandı",
       "link": "https://www.ahaber.com.tr/spor/2026/03/28/dunya-kupasi-yolunda-son-adim-kosova-macinin-hakemi-aciklandi",
       "date": "2026-03-28T18:35:27.000Z",
@@ -154,6 +160,18 @@
   "basketbol": [],
   "voleybol": [],
   "diger": [
+    {
+      "title": "Beşiktaş'ta Fenerbahçe maçının hazırlıkları sürüyor!",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/29/besiktasta-fenerbahce-macinin-hazirliklari-suruyor",
+      "date": "2026-03-29T11:07:53.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3e7cbd/1200/675/0/0/800/450?u=https://iahbr.tmgrup.com.tr/2026/03/29/1774782433330.jpeg"
+    },
+    {
+      "title": "Trabzon'da Fatih Tekke etkisi: İstanbul takımlarına karşı 23 puan",
+      "link": "https://www.ahaber.com.tr/spor/2026/03/29/trabzonda-fatih-tekke-etkisi-istanbul-takimlarina-karsi-23-puan",
+      "date": "2026-03-29T10:49:44.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/a167f5/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/03/29/1774781330430.jpeg"
+    },
     {
       "title": "Rumen teknik direktör Mircea Lucescu hastaneye kaldırıldı!",
       "link": "https://www.ahaber.com.tr/spor/2026/03/29/rumen-teknik-direktor-mircea-lucescu-hastaneye-kaldirildi",
@@ -585,24 +603,6 @@
       "link": "https://www.ahaber.com.tr/spor/2026/03/05/ziraat-turkiye-kupasinda-grup-asamasi-tamamlandi",
       "date": "2026-03-05T20:12:06.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/e9cdc1/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/03/05/ziraat-turkiye-kupasinda-grup-asamasi-tamamlandi-1772741510549.jpg"
-    },
-    {
-      "title": "Samsunspor deplasmanda turladı | Kırmızı-beyazlıların golcüleri sahnede",
-      "link": "https://www.ahaber.com.tr/spor/2026/03/05/canli-antalyaspor-samsunspor",
-      "date": "2026-03-05T09:57:49.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/0a2d15/0/0/0/0/1200/800?u=https://iahbr.tmgrup.com.tr/2026/03/05/canli-antalyaspor-samsunspor-1772737137312.jpg"
-    },
-    {
-      "title": "Racon kestiler",
-      "link": "https://www.ahaber.com.tr/yazarlar/gurcan-bilgic/2026/03/05/racon-kestiler",
-      "date": "2026-03-05T04:11:54.000Z",
-      "image": null
-    },
-    {
-      "title": "Kupada gol düellosu! MAÇ SONUCU | Erzurumspor 4-2 Keçiörengücü",
-      "link": "https://www.ahaber.com.tr/spor/2026/03/04/kupada-gol-duellosu-mac-sonucu-erzurumspor-4-2-keciorengucu",
-      "date": "2026-03-04T11:41:18.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/55520c/1200/675/0/0/896/503?u=https://iahbr.tmgrup.com.tr/2026/03/04/canli-erzurumspor-ankara-keciorengucu-ztk-maci-1772632775017.jpeg"
     }
   ]
 }
