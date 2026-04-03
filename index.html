@@ -72,7 +72,7 @@ function renderNews(category){
     div.innerHTML=`
       <img src="${n.image}">
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${(n.summary||"İçerik yüklenemedi").replace(/\n/g,"<br>")}</p>
+     <p>${(n.summary ? n.summary.split("\n").slice(0,3).join(" ") + "..." : "İçerik yüklenemedi")}</p>
       <small>${new Date(n.date).toLocaleString()}</small>
     `;
     container.appendChild(div);
