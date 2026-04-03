@@ -1,5 +1,7 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
 
 const parser = new Parser({
   customFields: {
@@ -11,35 +13,35 @@ const parser = new Parser({
   }
 });
 
-/* 🔥 GELİŞMİŞ KATEGORİ ALGILAMA */
 function detectCategory(item) {
-  const title = (item.title || "").toLowerCase();
-  const rawCategory = (item.category || "").toLowerCase();
-  const link = (item.link || "").toLowerCase();
-  const description = (item.contentSnippet || "").toLowerCase();
+  const text = (item.title + item.link + item.contentSnippet).toLowerCase();
 
-  // 1. RSS kategori
-  if (rawCategory.includes("futbol")) return "futbol";
-  if (rawCategory.includes("basketbol")) return "basketbol";
-  if (rawCategory.includes("voleybol")) return "voleybol";
+  if (text.includes("futbol")) return "futbol";
+  if (text.includes("basketbol")) return "basketbol";
+  if (text.includes("voleybol")) return "voleybol";
 
-  // 2. Link üzerinden (EN GÜVENİLİR)
-  if (link.includes("futbol")) return "futbol";
-  if (link.includes("basketbol")) return "basketbol";
-  if (link.includes("voleybol")) return "voleybol";
-
-  // 3. Açıklama kontrolü
-  if (description.includes("futbol")) return "futbol";
-  if (description.includes("basketbol")) return "basketbol";
-  if (description.includes("voleybol")) return "voleybol";
-
-  // 4. Başlık fallback
-  if (title.includes("futbol")) return "futbol";
-  if (title.includes("basketbol")) return "basketbol";
-  if (title.includes("voleybol")) return "voleybol";
-
-  // 5. default
   return "diger";
+}
+
+/* 🔥 HABER İÇERİĞİNİ ÇEK + ÖZETLE */
+async function getContent(url) {
+  try {
+    const res = await fetch(url);
+    const html = await res.text();
+    const $ = cheerio.load(html);
+
+    let text = "";
+
+    $("p").each((i, el) => {
+      text += $(el).text() + " ";
+    });
+
+    // 🔥 KISA ÖZET (ilk 300 karakter)
+    return text.trim().substring(0, 300) + "...";
+
+  } catch {
+    return "";
+  }
 }
 
 async function fetchNews() {
@@ -53,52 +55,35 @@ async function fetchNews() {
     diger: []
   };
 
-  try {
+  const feed = await parser.parseURL(url);
 
-    const feed = await parser.parseURL(url);
+  for (const item of feed.items.slice(0, 20)) {
 
-    feed.items.forEach(item => {
+    const date = new Date(item.pubDate);
 
-      const date = new Date(item.pubDate);
+    let image = item.enclosure?.url || item.media?.$?.url || null;
 
-      let image = null;
+    const summary = await getContent(item.link);
 
-      // 🔥 RESİM ALMA
-      if (item.enclosure && item.enclosure.url) {
-        image = item.enclosure.url;
-      }
+    const obj = {
+      title: item.title,
+      link: item.link,
+      date: date.toISOString(),
+      image: image,
+      summary: summary
+    };
 
-      if (item.media && item.media.$ && item.media.$.url) {
-        image = item.media.$.url;
-      }
-
-      const obj = {
-        title: item.title,
-        link: item.link,
-        date: date.toISOString(),
-        image: image
-      };
-
-      // 🔥 KATEGORİ BELİRLE
-      const category = detectCategory(item);
-
-      news[category].push(obj);
-
-    });
-
-    // 🔥 SIRALA (EN YENİ ÜSTTE)
-    Object.keys(news).forEach(cat => {
-      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
-    });
-
-    // 🔥 DOSYAYA YAZ
-    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-
-    console.log("✔ Haberler başarıyla kategorilere ayrıldı");
-
-  } catch (err) {
-    console.log("Hata:", err);
+    const category = detectCategory(item);
+    news[category].push(obj);
   }
+
+  Object.keys(news).forEach(cat => {
+    news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
+  fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+
+  console.log("✔ Haberler + içerik çekildi");
 }
 
 fetchNews();
