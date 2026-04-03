@@ -23,29 +23,32 @@ function detectCategory(item) {
   return "diger";
 }
 
-/* 🔥 HABER İÇERİĞİNİ ÇEK + ÖZETLE */
+/* 🔥 HABER İÇERİĞİNİ ÇEK + FULL PARAGRAF */
 async function getContent(url) {
   try {
     const res = await fetch(url);
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    let text = "";
-
+    let paragraphs = [];
     $("p").each((i, el) => {
-      text += $(el).text() + " ";
+      const text = $(el).text().trim();
+      if(text) paragraphs.push(text);
     });
 
-    // 🔥 KISA ÖZET (ilk 300 karakter)
-    return text.trim().substring(0, 300) + "...";
+    let fullText = paragraphs.join("\n\n");
 
-  } catch {
-    return "";
+    if(!fullText) fullText = "İçerik yüklenemedi";
+
+    return fullText;
+
+  } catch(err) {
+    console.log("Hata içerik çekme:", err);
+    return "İçerik yüklenemedi";
   }
 }
 
 async function fetchNews() {
-
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
   let news = {
@@ -58,9 +61,7 @@ async function fetchNews() {
   const feed = await parser.parseURL(url);
 
   for (const item of feed.items.slice(0, 20)) {
-
     const date = new Date(item.pubDate);
-
     let image = item.enclosure?.url || item.media?.$?.url || null;
 
     const summary = await getContent(item.link);
@@ -83,7 +84,7 @@ async function fetchNews() {
 
   fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
-  console.log("✔ Haberler + içerik çekildi");
+  console.log("✔ Haberler ve içerik başarıyla çekildi");
 }
 
 fetchNews();
