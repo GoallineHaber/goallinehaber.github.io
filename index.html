@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>GoallineHaber</title>
 
+<!-- 🔥 ADSENSE (onay alınca pub-id ekle) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -24,7 +27,6 @@ a:hover {
   background-color: #c00;
   width: 100%;
   padding: 30px 25px;
-  box-sizing: border-box;
 }
 
 .site-title {
@@ -46,10 +48,6 @@ a:hover {
   margin: 0 15px;
   font-weight: bold;
   cursor: pointer;
-}
-
-.navbar a:hover {
-  text-decoration: underline;
 }
 
 .main-layout {
@@ -86,22 +84,21 @@ a:hover {
 
 .news-item:hover {
   transform: scale(1.03);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .news-item img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 6px;
 }
 
 .news-item h2 {
   font-size: 18px;
 }
 
-.news-item.big {
-  grid-column: span 2;
+.news-item p {
+  font-size: 14px;
+  color: #444;
 }
 
 .sidebar {
@@ -110,24 +107,9 @@ a:hover {
   border-radius: 8px;
 }
 
-.side-news {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
 iframe {
   width: 100%;
   border: none;
-  border-radius: 6px;
-}
-
-@media (max-width: 768px) {
-  .main-layout {
-    grid-template-columns: 1fr;
-  }
-  .news-item.big {
-    grid-column: span 1;
-  }
 }
 </style>
 </head>
@@ -144,6 +126,15 @@ iframe {
   <a onclick="filterCategory('voleybol')">Voleybol</a>
   <a onclick="filterCategory('diger')">Diğer</a>
   <a onclick="filterCategory('all')">Tümü</a>
+</div>
+
+<!-- 🔥 ÜST REKLAM -->
+<div style="margin:20px 0; text-align:center;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXX"
+       data-ad-slot="XXXX"
+       data-ad-format="auto"></ins>
 </div>
 
 <!-- Manşet -->
@@ -164,13 +155,8 @@ iframe {
     <h3>⚽ Süper Lig</h3>
     <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
 
-    <h3>🔥 En Çok Okunanlar</h3>
-    <div class="side-news">
-      <a href="ronaldo.html">Ronaldo yeni rekor kırdı</a>
-    </div>
-    <div class="side-news">
-      <a href="world-cup.html">Dünya kupası haberleri</a>
-    </div>
+    <h3>🔥 Önerilen</h3>
+    <p>En güncel spor haberleri burada.</p>
   </div>
 
 </div>
@@ -179,12 +165,10 @@ iframe {
 let allNews = [];
 let currentIndex = 0;
 
-/* HABERLERİ ÇİZ */
+/* HABERLER */
 function renderNews(category){
   const container = document.getElementById("all-news");
   container.innerHTML = "";
-
-  let count = 0;
 
   allNews.forEach(n => {
 
@@ -193,20 +177,21 @@ function renderNews(category){
     const div = document.createElement("div");
     div.className = "news-item";
 
-    if(count % 5 === 0) div.classList.add("big");
-
     div.innerHTML = `
       ${n.image ? `<img src="${n.image}">` : ""}
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${new Date(n.date).toLocaleString()}</p>
+      <p>${n.summary || ""}</p>
+      <small>${new Date(n.date).toLocaleString()}</small>
     `;
 
     container.appendChild(div);
-    count++;
   });
+
+  // reklam yükle
+  (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
-/* MANŞET SLIDER */
+/* MANŞET */
 function loadManset(){
   if(allNews.length === 0) return;
 
@@ -231,7 +216,7 @@ function filterCategory(cat){
   renderNews(cat);
 }
 
-/* HABER YÜKLE */
+/* LOAD */
 async function loadNews(){
   const res = await fetch("./data/news.json");
   const data = await res.json();
