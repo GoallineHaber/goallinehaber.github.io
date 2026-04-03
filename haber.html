@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <title>Haber Detay</title>
 <style>
-body { font-family: Arial; max-width: 800px; margin: auto; line-height:1.6; }
+body { font-family:Arial; max-width:800px; margin:auto; line-height:1.6; }
 img { width:100%; border-radius:8px; margin:10px 0; }
 a { color:#0066cc; text-decoration:none; }
 a:hover { text-decoration:underline; }
 </style>
 </head>
-
 <body>
 
 <h1 id="title"></h1>
@@ -21,14 +20,13 @@ a:hover { text-decoration:underline; }
 <a id="source" target="_blank">Haberi Kaynağında Görüntüle</a>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const url = params.get("url");
+const params=new URLSearchParams(window.location.search);
+const url=params.get("url");
 
 async function loadNews(){
-  const res = await fetch("./data/news.json");
-  const data = await res.json();
-  let found = null;
-
+  const res=await fetch("./data/news.json");
+  const data=await res.json();
+  let found=null;
   Object.keys(data).forEach(cat=>{
     data[cat].forEach(n=>{
       if(n.link===url) found=n;
@@ -36,16 +34,16 @@ async function loadNews(){
   });
 
   if(found){
-    document.getElementById("title").innerText = found.title;
-    document.getElementById("date").innerText = new Date(found.date).toLocaleString();
-    document.getElementById("summary").innerHTML = found.summary.replace(/\n/g,"<br>");
-    if(found.image) document.getElementById("image").src = found.image;
-    document.getElementById("source").href = found.link;
+    document.getElementById("title").innerText=found.title||"Başlıksız Haber";
+    document.getElementById("date").innerText=new Date(found.date).toLocaleString()||"";
+    document.getElementById("summary").innerHTML=(found.summary||"İçerik yok").replace(/\n/g,"<br>");
+    document.getElementById("image").src=found.image||"fallback.jpg";
+    document.getElementById("source").href=found.link||"#";
+    document.getElementById("source").innerText=found.link?"Haberi Kaynağında Görüntüle":"";
   } else {
     document.body.innerHTML="Haber bulunamadı";
   }
 }
-
 loadNews();
 </script>
 
