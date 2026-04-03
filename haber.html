@@ -2,23 +2,58 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Haber</title>
+<title>Haber Detay</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 20px; }
+body { font-family: Arial; max-width: 800px; margin: auto; }
+img { width: 100%; border-radius: 8px; }
 </style>
 </head>
+
 <body>
-<div id="content">Haber yükleniyor...</div>
+
+<h1 id="title"></h1>
+<img id="image">
+<p id="date"></p>
+<p id="summary"></p>
+
+<br>
+<a id="source" target="_blank">Kaynağa git</a>
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const url = params.get('url');
+const url = params.get("url");
 
-if(url) {
-    document.getElementById('content').innerHTML = `<iframe src="${url}" style="width:100%; height:90vh; border:none;"></iframe>`;
-} else {
-    document.getElementById('content').innerText = "Haber bulunamadı!";
+async function loadNews(){
+  const res = await fetch("./data/news.json");
+  const data = await res.json();
+
+  let found = null;
+
+  Object.keys(data).forEach(cat => {
+    data[cat].forEach(n => {
+      if(n.link === url){
+        found = n;
+      }
+    });
+  });
+
+  if(found){
+    document.getElementById("title").innerText = found.title;
+    document.getElementById("date").innerText = new Date(found.date).toLocaleString();
+    document.getElementById("summary").innerText = found.summary;
+
+    if(found.image){
+      document.getElementById("image").src = found.image;
+    }
+
+    document.getElementById("source").href = found.link;
+  } else {
+    document.body.innerHTML = "Haber bulunamadı";
+  }
 }
+
+loadNews();
 </script>
+
 </body>
 </html>
