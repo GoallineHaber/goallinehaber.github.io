@@ -4,26 +4,17 @@
 <meta charset="UTF-8">
 <title>GoallineHaber</title>
 
-<!-- ADSENSE (pub-id ekle onay alınca) -->
+<!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(120deg, #f5f5f5, #eaeaea);
-  margin: 20px;
-}
-
-a { color: #0066cc; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.site-header { background-color: #c00; padding: 30px 25px; }
-.site-title { color: white; font-weight: bold; font-size: 26px; }
-
-.navbar { background: #222; padding: 10px; text-align: center; border-radius:5px; margin-bottom:20px;}
+body { font-family: Arial; background: #f5f5f5; margin: 20px; }
+a { color: #0066cc; text-decoration:none; }
+a:hover { text-decoration:underline; }
+.site-header { background:#c00; padding:30px; color:white; font-size:26px; font-weight:bold; }
+.navbar { background:#222; padding:10px; text-align:center; border-radius:5px; margin-bottom:20px;}
 .navbar a { color:white; margin:0 15px; font-weight:bold; cursor:pointer; }
-
-.main-layout { display: grid; grid-template-columns: 3fr 1fr; gap:25px; }
+.main-layout { display:grid; grid-template-columns:3fr 1fr; gap:25px; }
 .manset-slider img { width:100%; max-height:400px; object-fit:cover; border-radius:10px; }
 .manset-title { font-size:28px; font-weight:bold; margin-top:10px; }
 #all-news { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:15px; }
@@ -36,12 +27,9 @@ a:hover { text-decoration: underline; }
 iframe { width:100%; border:none; }
 </style>
 </head>
-
 <body>
 
-<div class="site-header">
-  <span class="site-title">GoallineHaber</span>
-</div>
+<div class="site-header">GoallineHaber</div>
 
 <div class="navbar">
   <a onclick="filterCategory('futbol')">Futbol</a>
@@ -51,28 +39,19 @@ iframe { width:100%; border:none; }
   <a onclick="filterCategory('all')">Tümü</a>
 </div>
 
-<!-- ÜST REKLAM -->
 <div style="margin:20px 0; text-align:center;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-XXXX"
-       data-ad-slot="XXXX"
-       data-ad-format="auto"></ins>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto"></ins>
 </div>
 
-<div class="manset-slider">
-  <div id="manset"></div>
-</div>
+<div class="manset-slider"><div id="manset"></div></div>
 
 <div class="main-layout">
 
-  <!-- Haberler -->
   <div>
     <h1>Son Haberler</h1>
     <div id="all-news"></div>
   </div>
 
-  <!-- Sidebar -->
   <div class="sidebar">
     <h3>⚽ Süper Lig</h3>
     <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
@@ -84,17 +63,16 @@ iframe { width:100%; border:none; }
 let allNews=[], currentIndex=0;
 
 function renderNews(category){
-  const container = document.getElementById("all-news");
-  container.innerHTML = "";
+  const container=document.getElementById("all-news");
+  container.innerHTML="";
   allNews.forEach(n=>{
     if(category!=="all" && n.category!==category) return;
-
-    const div = document.createElement("div");
+    const div=document.createElement("div");
     div.className="news-item";
-    div.innerHTML = `
-      ${n.image? `<img src="${n.image}">` : ""}
+    div.innerHTML=`
+      <img src="${n.image}">
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${n.summary ? n.summary.replace(/\n/g,"<br>") : "İçerik yüklenemedi"}</p>
+      <p>${(n.summary||"İçerik yüklenemedi").replace(/\n/g,"<br>")}</p>
       <small>${new Date(n.date).toLocaleString()}</small>
     `;
     container.appendChild(div);
@@ -107,10 +85,8 @@ function loadManset(){
   setInterval(()=>{
     const n=allNews[currentIndex];
     document.getElementById("manset").innerHTML=`
-      ${n.image? `<img src="${n.image}">` : ""}
-      <div class="manset-title">
-        <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
-      </div>
+      <img src="${n.image}">
+      <div class="manset-title"><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></div>
     `;
     currentIndex++;
     if(currentIndex>=allNews.length) currentIndex=0;
@@ -122,7 +98,6 @@ function filterCategory(cat){ renderNews(cat); }
 async function loadNews(){
   const res=await fetch("./data/news.json");
   const data=await res.json();
-
   allNews=[];
   Object.keys(data).forEach(cat=>{
     (data[cat]||[]).forEach(n=>{
@@ -130,12 +105,10 @@ async function loadNews(){
       allNews.push(n);
     });
   });
-
-  allNews.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  allNews.sort((a,b)=>new Date(b.date)-new Date(a.date));
   renderNews("all");
   loadManset();
 }
-
 loadNews();
 </script>
 
