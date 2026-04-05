@@ -25,19 +25,22 @@ function detectCategory(item) {
 // İçerik çekme ve full paragraf birleştirme
 async function getContent(url) {
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { timeout: 10000 });
     const html = await res.text();
     const $ = cheerio.load(html);
+
     let paragraphs = [];
     $("p").each((i, el) => {
       const text = $(el).text().trim();
       if (text) paragraphs.push(text);
     });
+
     let fullText = paragraphs.join("\n\n");
     if (!fullText) fullText = "İçerik yüklenemedi";
+
     return fullText;
   } catch (err) {
-    console.log("Hata içerik çekme:", err);
+    console.log("Hata içerik çekme:", err.message);
     return "İçerik yüklenemedi";
   }
 }
@@ -46,31 +49,43 @@ async function getContent(url) {
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
   let news = { futbol: [], basketbol: [], voleybol: [], diger: [] };
-  const feed = await parser.parseURL(url);
 
-  for (const item of feed.items.slice(0, 20)) {
-    const date = new Date(item.pubDate);
-    let image = item.enclosure?.url || item.media?.$?.url || "fallback.jpg";
-    const summary = await getContent(item.link);
+  try {
+    const feed = await parser.parseURL(url);
 
-    const obj = {
-      title: item.title || "Başlıksız Haber",
-      link: item.link || "#",
-      date: date.toISOString(),
-      image: image,
-      summary: summary
-    };
+    // 🔥 LIMIT KALDIRILDI (slice yok)
+    for (const item of feed.items) {
+      const date = new Date(item.pubDate || Date.now());
 
-    const category = detectCategory(item);
-    news[category].push(obj);
+      let image =
+        item.enclosure?.url ||
+        item.media?.$?.url ||
+        "fallback.jpg";
+
+      const summary = await getContent(item.link);
+
+      const obj = {
+        title: item.title || "Başlıksız Haber",
+        link: item.link || "#",
+        date: date.toISOString(),
+        image: image,
+        summary: summary
+      };
+
+      const category = detectCategory(item);
+      news[category].push(obj);
+    }
+
+    // Tarihe göre sırala
+    Object.keys(news).forEach(cat => {
+      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+    });
+
+    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+    console.log("✔ Tüm haberler başarıyla çekildi");
+  } catch (err) {
+    console.log("Genel hata:", err.message);
   }
-
-  Object.keys(news).forEach(cat => {
-    news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
-  });
-
-  fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-  console.log("✔ Haberler ve içerik başarıyla çekildi");
 }
 
 fetchNews();
