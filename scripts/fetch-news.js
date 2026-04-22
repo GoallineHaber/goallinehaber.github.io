@@ -13,16 +13,50 @@ const parser = new Parser({
   }
 });
 
-// Kategori algılama
+// 🔥 GELİŞMİŞ KATEGORİ ALGILAMA
 function detectCategory(item) {
-  const text = (item.title + item.link + item.contentSnippet).toLowerCase();
-  if (text.includes("futbol")) return "futbol";
-  if (text.includes("basketbol")) return "basketbol";
-  if (text.includes("voleybol")) return "voleybol";
+  const text = (
+    (item.title || "") +
+    (item.link || "") +
+    (item.contentSnippet || "") +
+    (item.content || "") +
+    (item.category || "")
+  ).toLowerCase();
+
+  // FUTBOL
+  if (
+    text.includes("futbol") ||
+    text.includes("galatasaray") ||
+    text.includes("fenerbahçe") ||
+    text.includes("beşiktaş") ||
+    text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
+    text.includes("uefa")
+  ) return "futbol";
+
+  // BASKETBOL
+  if (
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague") ||
+    text.includes("pot") ||
+    text.includes("ribaund")
+  ) return "basketbol";
+
+  // VOLEYBOL
+  if (
+    text.includes("voleybol") ||
+    text.includes("file") ||
+    text.includes("smaç") ||
+    text.includes("servis")
+  ) return "voleybol";
+
   return "diger";
 }
 
-// İçerik çekme ve full paragraf birleştirme
+// içerik çek
 async function getContent(url) {
   try {
     const res = await fetch(url, { timeout: 10000 });
@@ -32,7 +66,7 @@ async function getContent(url) {
     let paragraphs = [];
     $("p").each((i, el) => {
       const text = $(el).text().trim();
-      if (text) paragraphs.push(text);
+      if (text.length > 50) paragraphs.push(text);
     });
 
     let fullText = paragraphs.join("\n\n");
@@ -40,20 +74,19 @@ async function getContent(url) {
 
     return fullText;
   } catch (err) {
-    console.log("Hata içerik çekme:", err.message);
+    console.log("Hata içerik:", err.message);
     return "İçerik yüklenemedi";
   }
 }
 
-// Haberleri çek ve JSON'a yaz
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
+
   let news = { futbol: [], basketbol: [], voleybol: [], diger: [] };
 
   try {
     const feed = await parser.parseURL(url);
 
-    // 🔥 LIMIT KALDIRILDI (slice yok)
     for (const item of feed.items) {
       const date = new Date(item.pubDate || Date.now());
 
@@ -76,13 +109,12 @@ async function fetchNews() {
       news[category].push(obj);
     }
 
-    // Tarihe göre sırala
     Object.keys(news).forEach(cat => {
       news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
     });
 
     fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-    console.log("✔ Tüm haberler başarıyla çekildi");
+    console.log("✔ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
   } catch (err) {
     console.log("Genel hata:", err.message);
   }
