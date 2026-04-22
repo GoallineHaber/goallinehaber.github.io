@@ -95,7 +95,7 @@ async function fetchNews() {
         item.media?.$?.url ||
         "fallback.jpg";
 
-      const summary = await getContent(item.link);
+     const summary = item.contentSnippet || "Özet yok";
 
       const obj = {
         title: item.title || "Başlıksız Haber",
