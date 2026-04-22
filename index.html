@@ -62,6 +62,26 @@ body {
   cursor:pointer;
 }
 
+/* PAGINATION */
+#pagination {
+  text-align:center;
+  padding:15px;
+}
+
+#pagination button {
+  margin:5px;
+  padding:8px 12px;
+  border:none;
+  background:#111;
+  color:white;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+#pagination button:hover {
+  background:#c00;
+}
+
 /* LAYOUT */
 .container {
   padding:20px;
@@ -90,7 +110,7 @@ body {
 /* NEWS GRID */
 #all-news { 
   display:grid; 
-  grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); 
+  grid-template-columns:repeat(3,1fr); 
   gap:18px; 
 }
 
@@ -121,7 +141,7 @@ body {
   font-size:14px;
   color:#444;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -142,22 +162,22 @@ iframe { width:100%; border:none; }
 
 <div class="site-header">GoallineHaber</div>
 
-<!-- 🔥 TAKIM LOGOLARI -->
+<!-- TAKIM LOGOLARI -->
 <div class="team-bar">
   <div class="team" onclick="filterTeam('galatasaray')">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Galatasaray_Sports_Club_Logo.svg/120px-Galatasaray_Sports_Club_Logo.svg.png">
     <div>GS</div>
   </div>
   <div class="team" onclick="filterTeam('fenerbahce')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Fenerbah%C3%A7e_SK.svg/120px-Fenerbah%C3%A7e_SK.svg.png">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/120px-Fenerbah%C3%A7e_SK.png">
     <div>FB</div>
   </div>
   <div class="team" onclick="filterTeam('besiktas')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK_logo.svg/120px-Be%C5%9Fikta%C5%9F_JK_logo.svg.png">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK.png/120px-Be%C5%9Fikta%C5%9F_JK.png">
     <div>BJK</div>
   </div>
   <div class="team" onclick="filterTeam('trabzonspor')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Trabzonspor_Logo.svg/120px-Trabzonspor_Logo.svg.png">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/0/0c/Trabzonspor.png/120px-Trabzonspor.png">
     <div>TS</div>
   </div>
 </div>
@@ -170,6 +190,8 @@ iframe { width:100%; border:none; }
   <a onclick="filterCategory('diger')">Diğer</a>
   <a onclick="filterCategory('all')">Tümü</a>
 </div>
+
+<div id="pagination"></div>
 
 <div class="container">
 
@@ -193,14 +215,27 @@ iframe { width:100%; border:none; }
 
 <script>
 let allNews = [], currentIndex = 0;
+let currentPage = 1;
+const perPage = 12;
 
-// 🔥 TEAM FILTER
+// TEXT NORMALIZE
+function normalize(text){
+  return text.toLowerCase()
+    .replace(/ç/g,"c")
+    .replace(/ğ/g,"g")
+    .replace(/ı/g,"i")
+    .replace(/ö/g,"o")
+    .replace(/ş/g,"s")
+    .replace(/ü/g,"u");
+}
+
+// TEAM FILTER
 function filterTeam(team){
   const container = document.getElementById("all-news");
   container.innerHTML = "";
 
   allNews.forEach(n=>{
-    const text = (n.title + n.summary).toLowerCase();
+    const text = normalize(n.title + n.summary);
 
     if(!text.includes(team)) return;
 
@@ -217,27 +252,56 @@ function filterTeam(team){
   });
 }
 
+// RENDER NEWS (PRO GRID)
 function renderNews(category){
   const container=document.getElementById("all-news");
   container.innerHTML="";
 
-  allNews.forEach(n=>{
-    if(category!=="all" && n.category!==category) return;
+  let filtered = allNews.filter(n=>{
+    return category==="all" || n.category===category;
+  });
 
+  const start = (currentPage-1)*perPage;
+  const news = filtered.slice(start, start+perPage);
+
+  news.forEach((n,i)=>{
     const div=document.createElement("div");
     div.className="news-item";
+
+    if(i === 6) div.style.gridColumn="span 2";
 
     div.innerHTML=`
       <img src="${n.image}">
       <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
-      <small>${new Date(n.date).toLocaleString()}</small>
+      <p>${n.summary.split("\n").slice(0,2).join(" ")}</p>
     `;
 
     container.appendChild(div);
   });
+
+  renderPagination(filtered.length, category);
 }
 
+// PAGINATION
+function renderPagination(total, category){
+  const pageCount = Math.ceil(total / perPage);
+  const pag = document.getElementById("pagination");
+  pag.innerHTML="";
+
+  for(let i=1;i<=pageCount;i++){
+    const btn = document.createElement("button");
+    btn.innerText=i;
+
+    btn.onclick=()=>{
+      currentPage=i;
+      renderNews(category);
+    };
+
+    pag.appendChild(btn);
+  }
+}
+
+// MANSET
 function loadManset(){
   setInterval(()=>{
     const n=allNews[currentIndex];
@@ -251,8 +315,12 @@ function loadManset(){
   },4000);
 }
 
-function filterCategory(cat){ renderNews(cat); }
+function filterCategory(cat){ 
+  currentPage=1;
+  renderNews(cat); 
+}
 
+// LOAD
 async function loadNews(){
   const res=await fetch("./data/news.json");
   const data=await res.json();
