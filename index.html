@@ -7,134 +7,84 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 <style>
-body { 
-  font-family: Arial; 
-  background: #eef1f5; 
-  margin: 0;
-}
+body { font-family: Arial; background:#eef1f5; margin:0; }
 
-/* HEADER */
-.site-header { 
-  background: linear-gradient(90deg,#c00,#900); 
-  padding:25px; 
-  color:white; 
-  font-size:30px; 
-  font-weight:bold; 
+.site-header {
+  background:linear-gradient(90deg,#c00,#900);
+  padding:25px;
+  color:#fff;
+  font-size:28px;
   text-align:center;
 }
 
-/* TAKIM BAR */
+/* TEAM BAR */
 .team-bar {
   display:flex;
   justify-content:center;
   gap:25px;
   padding:15px;
+  background:#fff;
+}
+
+.team img { width:50px; cursor:pointer; transition:.3s; }
+.team img:hover { transform:scale(1.15); }
+
+/* NAV */
+.navbar { background:#111; padding:12px; text-align:center; }
+.navbar a { color:white; margin:0 15px; cursor:pointer; }
+
+/* CONTENT */
+.container { padding:20px; }
+
+.manset img {
+  width:100%;
+  height:350px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.manset h2 { margin:10px 0; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card {
   background:white;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  padding:10px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.team {
+.card img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+/* PAGINATION */
+.pagination {
   text-align:center;
-  cursor:pointer;
-  transition:0.3s;
+  margin:20px 0;
 }
 
-.team img {
-  width:55px;
-  height:55px;
-}
-
-.team:hover {
-  transform:scale(1.1);
-}
-
-/* NAVBAR */
-.navbar { 
-  background:#111; 
-  padding:12px; 
-  text-align:center;
-}
-
-.navbar a { 
-  color:white; 
-  margin:0 15px; 
-  font-weight:bold; 
+.pagination button {
+  padding:8px 12px;
+  margin:3px;
+  border:none;
+  background:#222;
+  color:white;
   cursor:pointer;
 }
 
-/* LAYOUT */
-.container {
-  padding:20px;
+.sidebar {
+  background:white;
+  padding:10px;
+  border-radius:10px;
 }
-
-.main-layout { 
-  display:grid; 
-  grid-template-columns:3fr 1fr; 
-  gap:25px; 
-}
-
-/* MANSET */
-.manset-slider img { 
-  width:100%; 
-  max-height:400px; 
-  object-fit:cover; 
-  border-radius:10px; 
-}
-
-.manset-title { 
-  font-size:26px; 
-  font-weight:bold; 
-  margin-top:10px; 
-}
-
-/* NEWS GRID */
-#all-news { 
-  display:grid; 
-  grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); 
-  gap:18px; 
-}
-
-.news-item { 
-  background:white; 
-  padding:12px; 
-  border-radius:12px; 
-  transition:0.3s; 
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-}
-
-.news-item:hover { 
-  transform:translateY(-5px);
-}
-
-.news-item img { 
-  width:100%; 
-  height:200px; 
-  object-fit:cover; 
-  border-radius:8px;
-}
-
-.news-item h2 { 
-  font-size:18px; 
-}
-
-.news-item p {
-  font-size:14px;
-  color:#444;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* SIDEBAR */
-.sidebar { 
-  background:white; 
-  padding:15px; 
-  border-radius:10px; 
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-iframe { width:100%; border:none; }
 </style>
 </head>
 
@@ -142,27 +92,14 @@ iframe { width:100%; border:none; }
 
 <div class="site-header">GoallineHaber</div>
 
-<!-- 🔥 TAKIM LOGOLARI -->
+<!-- 🔥 LOGOLAR DÜZELTİLDİ -->
 <div class="team-bar">
-  <div class="team" onclick="filterTeam('galatasaray')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Galatasaray_Sports_Club_Logo.svg/120px-Galatasaray_Sports_Club_Logo.svg.png">
-    <div>GS</div>
-  </div>
-  <div class="team" onclick="filterTeam('fenerbahce')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Fenerbah%C3%A7e_SK.svg/120px-Fenerbah%C3%A7e_SK.svg.png">
-    <div>FB</div>
-  </div>
-  <div class="team" onclick="filterTeam('besiktas')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK_logo.svg/120px-Be%C5%9Fikta%C5%9F_JK_logo.svg.png">
-    <div>BJK</div>
-  </div>
-  <div class="team" onclick="filterTeam('trabzonspor')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Trabzonspor_Logo.svg/120px-Trabzonspor_Logo.svg.png">
-    <div>TS</div>
-  </div>
+  <div class="team"><img src="https://logos-world.net/wp-content/uploads/2020/06/Galatasaray-Logo.png" onclick="filterTeam('galatasaray')"></div>
+  <div class="team"><img src="https://logos-world.net/wp-content/uploads/2020/06/Fenerbahce-Logo.png" onclick="filterTeam('fenerbahce')"></div>
+  <div class="team"><img src="https://logos-world.net/wp-content/uploads/2020/06/Besiktas-Logo.png" onclick="filterTeam('besiktas')"></div>
+  <div class="team"><img src="https://logos-world.net/wp-content/uploads/2020/06/Trabzonspor-Logo.png" onclick="filterTeam('trabzonspor')"></div>
 </div>
 
-<!-- NAV -->
 <div class="navbar">
   <a onclick="filterCategory('futbol')">Futbol</a>
   <a onclick="filterCategory('basketbol')">Basketbol</a>
@@ -173,102 +110,118 @@ iframe { width:100%; border:none; }
 
 <div class="container">
 
-<div class="manset-slider"><div id="manset"></div></div>
+<div id="content"></div>
 
-<div class="main-layout">
-
-  <div>
-    <h1>Son Haberler</h1>
-    <div id="all-news"></div>
-  </div>
-
-  <div class="sidebar">
-    <h3>⚽ Süper Lig</h3>
-    <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
-  </div>
-
-</div>
+<div class="pagination" id="pagination"></div>
 
 </div>
 
 <script>
-let allNews = [], currentIndex = 0;
+let allNews=[], filteredNews=[], page=1;
+const perPage=9;
 
-// 🔥 TEAM FILTER
+/* 🔥 GÜÇLÜ KATEGORİ FIX */
+function normalize(text){
+  return text.toLowerCase()
+    .replace(/ç/g,"c").replace(/ş/g,"s")
+    .replace(/ğ/g,"g").replace(/ü/g,"u")
+    .replace(/ö/g,"o").replace(/ı/g,"i");
+}
+
+function strongCategory(n){
+  const t=normalize(n.title+" "+n.summary);
+
+  if(/galatasaray|fenerbahce|besiktas|trabzonspor|gol|mac|lig/.test(t))
+    return "futbol";
+
+  if(/nba|basket|euroleague/.test(t))
+    return "basketbol";
+
+  if(/voleybol|smaç|file/.test(t))
+    return "voleybol";
+
+  return "diger";
+}
+
+/* TEAM FILTER */
 function filterTeam(team){
-  const container = document.getElementById("all-news");
-  container.innerHTML = "";
-
-  allNews.forEach(n=>{
-    const text = (n.title + n.summary).toLowerCase();
-
-    if(!text.includes(team)) return;
-
-    const div = document.createElement("div");
-    div.className="news-item";
-
-    div.innerHTML=`
-      <img src="${n.image}">
-      <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
-    `;
-
-    container.appendChild(div);
+  filteredNews = allNews.filter(n=>{
+    return normalize(n.title+n.summary).includes(team);
   });
+  page=1;
+  render();
 }
 
-function renderNews(category){
-  const container=document.getElementById("all-news");
-  container.innerHTML="";
-
-  allNews.forEach(n=>{
-    if(category!=="all" && n.category!==category) return;
-
-    const div=document.createElement("div");
-    div.className="news-item";
-
-    div.innerHTML=`
-      <img src="${n.image}">
-      <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-      <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
-      <small>${new Date(n.date).toLocaleString()}</small>
-    `;
-
-    container.appendChild(div);
-  });
+/* CATEGORY FILTER */
+function filterCategory(cat){
+  if(cat==="all") filteredNews=[...allNews];
+  else filteredNews=allNews.filter(n=>strongCategory(n)===cat);
+  page=1;
+  render();
 }
 
-function loadManset(){
-  setInterval(()=>{
-    const n=allNews[currentIndex];
-    document.getElementById("manset").innerHTML=`
-      <img src="${n.image}">
-      <div class="manset-title">
-        <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
-      </div>
-    `;
-    currentIndex=(currentIndex+1)%allNews.length;
-  },4000);
+/* RENDER */
+function render(){
+  const start=(page-1)*perPage;
+  const data=filteredNews.slice(start,start+perPage);
+
+  let html="";
+
+  for(let i=0;i<data.length;i+=4){
+
+    // 3 küçük
+    html+=`<div class="grid">`;
+    for(let j=i;j<i+3 && data[j];j++){
+      const n=data[j];
+      html+=`
+      <div class="card">
+        <img src="${n.image}">
+        <h3>${n.title}</h3>
+      </div>`;
+    }
+    html+=`</div>`;
+
+    // 1 büyük manset
+    if(data[i+3]){
+      const n=data[i+3];
+      html+=`
+      <div class="manset">
+        <img src="${n.image}">
+        <h2>${n.title}</h2>
+      </div>`;
+    }
+  }
+
+  document.getElementById("content").innerHTML=html;
+  renderPagination();
 }
 
-function filterCategory(cat){ renderNews(cat); }
+/* PAGINATION */
+function renderPagination(){
+  const total=Math.ceil(filteredNews.length/perPage);
+  let html="";
+  for(let i=1;i<=total;i++){
+    html+=`<button onclick="goPage(${i})">${i}</button>`;
+  }
+  document.getElementById("pagination").innerHTML=html;
+}
 
+function goPage(p){ page=p; render(); }
+
+/* LOAD */
 async function loadNews(){
   const res=await fetch("./data/news.json");
   const data=await res.json();
 
   allNews=[];
   Object.keys(data).forEach(cat=>{
-    data[cat].forEach(n=>{
-      n.category=cat;
-      allNews.push(n);
-    });
+    data[cat].forEach(n=>allNews.push(n));
   });
 
   allNews.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-  renderNews("all");
-  loadManset();
+  filteredNews=[...allNews];
+  render();
 }
 
 loadNews();
