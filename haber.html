@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -8,6 +9,17 @@ body { font-family:Arial; max-width:800px; margin:auto; line-height:1.6; }
 img { width:100%; border-radius:8px; margin:10px 0; }
 a { color:#0066cc; text-decoration:none; }
 a:hover { text-decoration:underline; }
+button {
+  padding:10px 15px;
+  background:#111;
+  color:white;
+  border:none;
+  cursor:pointer;
+  border-radius:5px;
+}
+button:hover {
+  background:#c00;
+}
 </style>
 </head>
 <body>
@@ -15,9 +27,15 @@ a:hover { text-decoration:underline; }
 <h1 id="title"></h1>
 <img id="image">
 <p id="date"></p>
+
 <p id="summary"></p>
+
+<p id="content" style="display:none"></p>
+
 <br>
-<a id="source" target="_blank">Haberi Kaynağında Görüntüle</a>
+<button onclick="showFull()">Devamını oku</button>
+
+<br><br> <a id="source" target="_blank">Haberi Kaynağında Görüntüle</a>
 
 <script>
 const params=new URLSearchParams(window.location.search);
@@ -27,6 +45,7 @@ async function loadNews(){
   const res=await fetch("./data/news.json");
   const data=await res.json();
   let found=null;
+
   Object.keys(data).forEach(cat=>{
     data[cat].forEach(n=>{
       if(n.link===url) found=n;
@@ -36,7 +55,11 @@ async function loadNews(){
   if(found){
     document.getElementById("title").innerText=found.title||"Başlıksız Haber";
     document.getElementById("date").innerText=new Date(found.date).toLocaleString()||"";
+    
     document.getElementById("summary").innerHTML=(found.summary||"İçerik yok").replace(/\n/g,"<br>");
+    
+    document.getElementById("content").innerHTML=(found.content||"").replace(/\n/g,"<br>");
+
     document.getElementById("image").src=found.image||"fallback.jpg";
     document.getElementById("source").href=found.link||"#";
     document.getElementById("source").innerText=found.link?"Haberi Kaynağında Görüntüle":"";
@@ -44,6 +67,12 @@ async function loadNews(){
     document.body.innerHTML="Haber bulunamadı";
   }
 }
+
+function showFull(){
+  document.getElementById("summary").style.display="none";
+  document.getElementById("content").style.display="block";
+}
+
 loadNews();
 </script>
 
