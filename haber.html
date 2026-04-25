@@ -82,8 +82,8 @@ async function loadNews() {
     document.getElementById("date").innerText =
       new Date(found.date).toLocaleString() || "";
 
-    document.getElementById("summary").innerText =
-      found.summary || "İçerik yok"; // 🔥 HTML yerine TEXT
+   document.getElementById("summary").innerText =
+  found.summary.replace("devamını oku", "") || "İçerik yok";
 
     document.getElementById("image").src =
       found.image || "fallback.jpg";
