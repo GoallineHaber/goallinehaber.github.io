@@ -2,6 +2,7 @@ const Parser = require("rss-parser");
 const fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
 
 const parser = new Parser({
   customFields: {
@@ -13,7 +14,7 @@ const parser = new Parser({
   }
 });
 
-// 🔥 KATEGORİ ALGILAMA (AYNI)
+// 🔥 KATEGORİ ALGILAMA
 function detectCategory(item) {
   const text = (
     (item.title || "") +
@@ -53,51 +54,62 @@ function detectCategory(item) {
   return "diger";
 }
 
+// 🔥 FULL İÇERİK (PUPPETEER)
 async function getContent(url) {
+  let browser;
+
   try {
-    const res = await fetch(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0"
-      },
-      timeout: 10000
+    browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox"]
     });
 
-    const html = await res.text();
-    const $ = cheerio.load(html);
+    const page = await browser.newPage();
 
-    let content = "";
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
 
-    // 🔥 A HABER GERÇEK İÇERİK ALANI
-    const article =
-      $(".detay-text") ||
-      $(".news-detail") ||
-      $(".article-body");
+    // 🔥 "Devamını oku" varsa tıkla
+    try {
+      const buttons = await page.$$("button, a");
 
-    article.find("p").each((i, el) => {
-      const text = $(el).text().trim();
+      for (let btn of buttons) {
+        const text = await page.evaluate(el => el.innerText, btn);
 
-      if (
-        text.length > 30 &&
-        !text.toLowerCase().includes("devamını") &&
-        !text.toLowerCase().includes("tıklayınız")
-      ) {
-        content += text + "\n\n";
+        if (text && text.toLowerCase().includes("devamını oku")) {
+          await btn.click();
+          await page.waitForTimeout(2000);
+          break;
+        }
       }
+    } catch (e) {}
+
+    // 🔥 içerik çek
+    const content = await page.evaluate(() => {
+      let article =
+        document.querySelector(".detay-text") ||
+        document.querySelector(".news-detail") ||
+        document.querySelector(".article-body");
+
+      if (!article) return "";
+
+      return Array.from(article.querySelectorAll("p"))
+        .map(p => p.innerText.trim())
+        .filter(t =>
+          t.length > 30 &&
+          !t.toLowerCase().includes("devamını") &&
+          !t.toLowerCase().includes("tıklayınız")
+        )
+        .join("\n\n");
     });
 
-    // fallback (eğer yukarı çalışmazsa)
-    if (!content) {
-      $("p").each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 80) content += text + "\n\n";
-      });
-    }
+    await browser.close();
 
     if (!content) return "İçerik alınamadı";
 
     return content;
 
   } catch (err) {
+    if (browser) await browser.close();
     console.log("İçerik hatası:", err.message);
     return "İçerik alınamadı";
   }
@@ -124,7 +136,6 @@ async function fetchNews() {
         item.media?.$?.url ||
         "fallback.jpg";
 
-      // 🔥 BURASI ÖNEMLİ
       const fullContent = await getContent(item.link);
 
       const obj = {
@@ -132,7 +143,7 @@ async function fetchNews() {
         link: item.link || "#",
         date: date.toISOString(),
         image: image,
-        summary: fullContent // 🔥 ARTIK FULL YAZI
+        summary: fullContent
       };
 
       const category = detectCategory(item);
