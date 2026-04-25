@@ -13,7 +13,7 @@ const parser = new Parser({
   }
 });
 
-// 🔥 GELİŞMİŞ KATEGORİ ALGILAMA
+// 🔥 KATEGORİ ALGILAMA (AYNI)
 function detectCategory(item) {
   const text = (
     (item.title || "") +
@@ -23,7 +23,6 @@ function detectCategory(item) {
     (item.category || "")
   ).toLowerCase();
 
-  // FUTBOL
   if (
     text.includes("futbol") ||
     text.includes("galatasaray") ||
@@ -36,7 +35,6 @@ function detectCategory(item) {
     text.includes("uefa")
   ) return "futbol";
 
-  // BASKETBOL
   if (
     text.includes("basketbol") ||
     text.includes("nba") ||
@@ -45,7 +43,6 @@ function detectCategory(item) {
     text.includes("ribaund")
   ) return "basketbol";
 
-  // VOLEYBOL
   if (
     text.includes("voleybol") ||
     text.includes("file") ||
@@ -56,7 +53,7 @@ function detectCategory(item) {
   return "diger";
 }
 
-// içerik çek
+// 🔥 FULL İÇERİK ÇEKME (GÜÇLENDİRİLDİ)
 async function getContent(url) {
   try {
     const res = await fetch(url, { timeout: 10000 });
@@ -64,15 +61,27 @@ async function getContent(url) {
     const $ = cheerio.load(html);
 
     let paragraphs = [];
-    $("p").each((i, el) => {
+
+    // A Haber için daha doğru seçim
+    $(".newsDetailText p, .detail-content p, article p, p").each((i, el) => {
       const text = $(el).text().trim();
-      if (text.length > 50) paragraphs.push(text);
+
+      // "Devamını oku" vs çöpe
+      if (
+        text.length > 50 &&
+        !text.toLowerCase().includes("devamını") &&
+        !text.toLowerCase().includes("tıklayınız")
+      ) {
+        paragraphs.push(text);
+      }
     });
 
     let fullText = paragraphs.join("\n\n");
+
     if (!fullText) fullText = "İçerik yüklenemedi";
 
     return fullText;
+
   } catch (err) {
     console.log("Hata içerik:", err.message);
     return "İçerik yüklenemedi";
@@ -82,7 +91,12 @@ async function getContent(url) {
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
-  let news = { futbol: [], basketbol: [], voleybol: [], diger: [] };
+  let news = {
+    futbol: [],
+    basketbol: [],
+    voleybol: [],
+    diger: []
+  };
 
   try {
     const feed = await parser.parseURL(url);
@@ -95,17 +109,16 @@ async function fetchNews() {
         item.media?.$?.url ||
         "fallback.jpg";
 
-     const summary = item.contentSnippet || "Özet yok";
+      // 🔥 BURASI ÖNEMLİ
       const fullContent = await getContent(item.link);
 
-     const obj = {
-  title: item.title || "Başlıksız Haber",
-  link: item.link || "#",
-  date: date.toISOString(),
-  image: image,
-  summary: summary,
-  content: fullContent
-};
+      const obj = {
+        title: item.title || "Başlıksız Haber",
+        link: item.link || "#",
+        date: date.toISOString(),
+        image: image,
+        summary: fullContent // 🔥 ARTIK FULL YAZI
+      };
 
       const category = detectCategory(item);
       news[category].push(obj);
@@ -116,7 +129,9 @@ async function fetchNews() {
     });
 
     fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-    console.log("✔ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
+
+    console.log("✔ FULL HABERLER ÇEKİLDİ");
+
   } catch (err) {
     console.log("Genel hata:", err.message);
   }
