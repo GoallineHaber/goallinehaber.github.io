@@ -53,38 +53,53 @@ function detectCategory(item) {
   return "diger";
 }
 
-// 🔥 FULL İÇERİK ÇEKME (GÜÇLENDİRİLDİ)
 async function getContent(url) {
   try {
-    const res = await fetch(url, { timeout: 10000 });
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      },
+      timeout: 10000
+    });
+
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    let paragraphs = [];
+    let content = "";
 
-    // A Haber için daha doğru seçim
-    $(".newsDetailText p, .detail-content p, article p, p").each((i, el) => {
+    // 🔥 A HABER GERÇEK İÇERİK ALANI
+    const article =
+      $(".detay-text") ||
+      $(".news-detail") ||
+      $(".article-body");
+
+    article.find("p").each((i, el) => {
       const text = $(el).text().trim();
 
-      // "Devamını oku" vs çöpe
       if (
-        text.length > 50 &&
+        text.length > 30 &&
         !text.toLowerCase().includes("devamını") &&
         !text.toLowerCase().includes("tıklayınız")
       ) {
-        paragraphs.push(text);
+        content += text + "\n\n";
       }
     });
 
-    let fullText = paragraphs.join("\n\n");
+    // fallback (eğer yukarı çalışmazsa)
+    if (!content) {
+      $("p").each((i, el) => {
+        const text = $(el).text().trim();
+        if (text.length > 80) content += text + "\n\n";
+      });
+    }
 
-    if (!fullText) fullText = "İçerik yüklenemedi";
+    if (!content) return "İçerik alınamadı";
 
-    return fullText;
+    return content;
 
   } catch (err) {
-    console.log("Hata içerik:", err.message);
-    return "İçerik yüklenemedi";
+    console.log("İçerik hatası:", err.message);
+    return "İçerik alınamadı";
   }
 }
 
