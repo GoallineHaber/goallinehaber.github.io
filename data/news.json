@@ -1,8 +1,5 @@
 {
-  "futbol": [],
-  "basketbol": [],
-  "voleybol": [],
-  "diger": [
+  "futbol": [
     {
       "title": "Şampiyonluk yolunda derbi sınavı! Osimhen dönüyor",
       "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/25/sampiyonluk-yolunda-derbi-sinavi-osimhen-donuyor",
@@ -25,25 +22,11 @@
       "summary": "Trendyol Süper Lig’in 31. haftasında şampiyonluk yolundaki en kritik viraj olan Galatasaray-Fenerbahçe derbisi için geri sayım başladı. İstanbul’da dev randevu öncesi heyecan doruğa çıkarken, emniyet...Devamı için tıklayınız"
     },
     {
-      "title": "İstanbul dünya vitrininde! Formula 1 Türkiye’nin gücünü dünyaya ilan edecek",
-      "link": "https://www.ahaber.com.tr/gundem/2026/04/25/istanbul-dunya-vitrininde-formula-1-turkiyenin-gucunu-dunyaya-ilan-edecek",
-      "date": "2026-04-25T08:17:31.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/63e90b/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/25/istanbul-dunya-vitrininde-formula-1-turkiyenin-gucunu-dunyaya-ilan-edecek-1777104954615.jpg",
-      "summary": "Dünya devini yeniden İstanbul’da ağırlamanın heyecanını paylaşan Kültür ve Turizm Bakanı Mehmet Nuri Ersoy, 'İstanbul’u dünyanın tek iki kıtayı birleştiren Formula 1 şehri olarak lanse edeceğiz'...Devamı için tıklayınız"
-    },
-    {
       "title": "Ziraat Türkiye Kupası’nda yarı final programı belli oldu",
       "link": "https://www.ahaber.com.tr/spor/2026/04/24/ziraat-turkiye-kupasinda-yari-final-programi-belli-oldu",
       "date": "2026-04-24T19:55:21.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/d2ed4a/0/0/0/0/2048/1986?u=https://iahbr.tmgrup.com.tr/2026/04/25/ziraat-turkiye-kupasinda-yari-final-programi-belli-oldu-1777066010449.jpg",
       "summary": "Turkuvaz Medya'nın yayıncılığıyla futbolseverleri ekran başına kilitleyen Ziraat Türkiye Kupası'nda çeyrek final maratonu tamamlandı. Fenerbahçe ve Galatasaray'ın dramatik vedalarıyla sarsılan...Devamı için tıklayınız"
-    },
-    {
-      "title": "Beyza Nur Akkuş’tan Avrupa’da bronz zafer",
-      "link": "https://www.ahaber.com.tr/spor/2026/04/24/beyza-nur-akkustan-avrupada-bronz-zafer",
-      "date": "2026-04-24T18:43:38.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/55131f/0/0/0/0/1600/1066?u=https://iahbr.tmgrup.com.tr/2026/04/24/beyza-nur-akkustan-avrupada-bronz-zafer-1777064133374.jpg",
-      "summary": "Avrupa Güreş Şampiyonası’nda milli sporcu Beyza Nur Akkuş, 65 kiloda bronz madalya kazandı. Zor bir mücadele olduğunu vurgulayan Akkuş, “Ülkeme madalya kazandırdığım için mutluyum.” dedi.Devamı için tıklayınız"
     },
     {
       "title": "Tahkim’den Galatasaray kararı! Ceza onandı",
@@ -72,13 +55,6 @@
       "date": "2026-04-24T13:30:03.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/31cb83/0/0/0/0/1752/2048?u=https://iahbr.tmgrup.com.tr/2026/04/24/eski-besiktasli-futbolcu-michael-eneramo-hayatini-kaybetti-nijeryadan-aci-haber-1777037355148.jpg",
       "summary": "Süper Lig’de Beşiktaş ve Sivasspor gibi takımlarda iz bırakan 40 yaşındaki Michael Eneramo, geçirdiği kalp krizi sonucu yaşamını yitirdi. Acı haberi Nijerya Milli Takımı duyurdu.Devamı için tıklayınız"
-    },
-    {
-      "title": "Formula 1 yeniden Türkiye'de! Başkan Erdoğan detayları duyurdu: 5 yıllık imza",
-      "link": "https://www.ahaber.com.tr/gundem/2026/04/24/formula-1-istanbula-geri-donuyor-starti-baskan-erdogan-verecek",
-      "date": "2026-04-24T09:55:48.000Z",
-      "image": "https://iaahbr.tmgrup.com.tr/059c58/0/0/0/0/2048/1366?u=https://iahbr.tmgrup.com.tr/2026/04/24/1777023363352.jpg",
-      "summary": "Başkan Recep Tayyip Erdoğan, Cumhurbaşkanlığı Dolmabahçe Çalışma Ofisi'nde \"Formula 1 Türkiye GP Tanıtım Programı\"nda açıklamalarda bulundu. Erdoğan, \"2027 yılından itibaren Formula 1'in yeniden...Devamı için tıklayınız"
     },
     {
       "title": "Asensio derbide yok mu? Tedesco’dan herkesi ters köşe yapan karar",
@@ -130,6 +106,535 @@
       "summary": "Fenerbahçe Kulübü, 23 Nisan Ulusal Egemenlik ve Çocuk Bayramı'nda down sendromlu çocukları ağırladı.  Fenerbahçe Müzesi, soyunma odaları ve Maraton Fenerium Mağazası'nı gezen çocuklar, stadın...Devamı için tıklayınız"
     },
     {
+      "title": "Süper Lig'de 31. haftanın hakemleri belli oldu!",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/23/super-ligde-31-haftanin-hakemleri-belli-oldu",
+      "date": "2026-04-23T10:41:01.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/91723e/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/23/super-ligde-31-haftanin-hakemleri-belli-oldu-1776940828957.jpeg",
+      "summary": "Trendyol Süper Lig'in 31. haftasında görev yapacak hakem kadroları açıklandı. Merkez Hakem Kurulu (MHK) tarafından yapılan duyuruyla, haftanın kritik karşılaşmalarını yönetecek isimler netleşti.Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray - Fenerbahçe maçının hakemi Yasin Kol oldu ortalık karıştı! Derbi sosyal medyaya taşındı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/23/galatasaray-fenerbahce-macini-yasin-kol-yonetecek",
+      "date": "2026-04-23T09:06:26.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/6e3fe1/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/23/galatasaray-fenerbahce-macini-yasin-kol-yonetecek-1776935621120.jpeg",
+      "summary": "Süper Lig’in 31. haftasında şampiyonluk yarışını doğrudan etkileyecek dev derbi için geri sayım sürüyor. TFF, RAMS Park’ta oynanacak Galatasaray - Fenerbahçe karşılaşmasının hakemini açıkladı. Kritik...Devamı için tıklayınız"
+    },
+    {
+      "title": "Kartal yarı finale uçtu! Beşiktaş Alanyaspor'u mağlup etti",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/23/dolmabahcede-yari-final-heyecani-besiktas-alanyaspor-macinin-muhtemel-11leri",
+      "date": "2026-04-23T08:45:37.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2f1ccf/0/0/0/0/1200/800?u=https://iahbr.tmgrup.com.tr/2026/04/23/kartal-yari-finale-uctu-besiktas-alanyasporu-maglup-etti-1776974045811.jpg",
+      "summary": "Turkuvaz Medya yayıncılığındaki Ziraat Türkiye Kupası’nda çeyrek final heyecanı Dolmabahçe’de oynanan Beşiktaş – Alanyaspor maçıyla sona erdi. Siyah beyazlılar, rakibini mağlup ederek yarı finalde...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray'a evinde soğuk duş | Spor yazarları yorumladı: Laçka oyunla gelen rezalet",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/23/galatasaraya-evinde-soguk-dus-spor-yazarlari-yorumladi-lacka-oyunla-gelen-rezalet",
+      "date": "2026-04-23T08:11:54.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3dcdab/0/0/0/0/2048/1584?u=https://iahbr.tmgrup.com.tr/2026/04/23/1776931665454.jpeg",
+      "summary": "Galatasaray, Ziraat Türkiye Kupası çeyrek finalinde evine konuk ettiği Gençlerbirliği’ne 2-0 yenilerek elendi. Cimbom maç boyu silik bir görüntü sergilerken spor yazarları alınan skoru \"Rezalet\"...Devamı için tıklayınız"
+    },
+    {
+      "title": "Gol sesi çıkmadı penaltılar konuştu! Karadeniz derbisinde gülen taraf Trabzonspor",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/23/gol-sesi-cikmadi-penaltilar-konustu-karadeniz-derbisinde-gulen-taraf-trabzonspor",
+      "date": "2026-04-23T03:50:38.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/03316e/0/0/0/0/1500/1055?u=https://iahbr.tmgrup.com.tr/2026/04/23/1776915873849.jpeg",
+      "summary": "Turkuvaz Medya yayıncılığındaki Ziraat Türkiye Kupası’nda çeyrek final heyecanı devam ediyor. Kupa'daki Karadeniz derbisinde Samsunspor ile Trabzonspor karşı karşıya geldi. Maçın normal ve uzatma...Devamı için tıklayınız"
+    },
+    {
+      "title": "Süper Lig'de Noa Lang bombası: Ezeli rakip çok istiyor",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/22/super-ligde-noa-lang-bombasi-ezeli-rakip-cok-istiyor",
+      "date": "2026-04-22T07:31:00.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/eade37/0/0/0/0/1500/1012?u=https://iahbr.tmgrup.com.tr/2026/04/22/1776842693581.jpeg",
+      "summary": "Kanat hattını yenilemek isteyen Beşiktaş, transferde rotasını Noa Lang’a çevirdi. Devre arasında Galatasaray forması giyen Hollandalı oyuncunun bonservisinin alınmaması üzerine harekete geçen...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray kupaya veda etti! 13 maçlık seri bitti",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/22/cimbom-kupada-yari-final-pesinde-galatasaray-genclerbirligi-muhtemel-11ler",
+      "date": "2026-04-22T06:12:55.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/20c0cc/0/0/0/0/1200/803?u=https://iahbr.tmgrup.com.tr/2026/04/22/galatasaray-kupaya-veda-etti-13-maclik-seri-bitti-1776886837254.jpg",
+      "summary": "Turkuvaz Medya yayıncılığındaki Ziraat Türkiye Kupası’nda çeyrek final heyecanı devam ediyor. Kupanın favorilerinden birisi olan Galatasaray evinde Gençlerbirliği'ni konuk etti. Rams Park'ta 13 maçtır...Devamı için tıklayınız"
+    },
+    {
+      "title": "Her şeyiyle kötü!",
+      "link": "https://www.ahaber.com.tr/yazarlar/gurcan-bilgic/2026/04/22/her-seyiyle-kotu",
+      "date": "2026-04-22T04:01:27.000Z",
+      "image": "fallback.jpg",
+      "summary": "Tek maçlık serilerin klasik stratejisini seyrettik. Konyaspor kendi sahasında olmasına rağmen maçı penaltılara kadar dengede tutmaya niyetli, hiç risk almadan, pozisyon futbolu oynamayı tercih etti....Devamı için tıklayınız"
+    },
+    {
+      "title": "Tedesco’dan Konyaspor mağlubiyeti değerlendirmesi: “Net pozisyonları değerlendiremedik”",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/22/tedescodan-konyaspor-maglubiyeti-degerlendirmesi-net-pozisyonlari-degerlendiremedik",
+      "date": "2026-04-21T22:35:37.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/eefca3/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/22/tedescodan-konyaspor-maglubiyeti-degerlendirmesi-net-pozisyonlari-degerlendiremedik-1776810898735.jpg",
+      "summary": "Ziraat Türkiye Kupası’nda Konyaspor’a 1-0 yenilerek elenen Fenerbahçe’de teknik direktör Domenico Tedesco, mağlubiyetin nedeninin kaçan net gol fırsatları olduğunu söyledi. Tedesco, özellikle...Devamı için tıklayınız"
+    },
+    {
+      "title": "Konyaspor mağlubiyeti sonrası Fenerbahçe’de sinirler gerildi: İki yıldız isim saha ortasında tartıştı",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/22/konyaspor-maglubiyeti-sonrasi-fenerbahcede-sinirler-gerildi-iki-yildiz-isim-saha-ortasinda-tartisti",
+      "date": "2026-04-21T21:32:57.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/455329/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/22/1776805873844.jpg",
+      "summary": "Ziraat Türkiye Kupası’nda Konyaspor’a 1-0 mağlup olan Fenerbahçe’de sinirler gerildi. Geçtiğimiz hafta Çaykur Rizespor karşılaşmasının bitiş düdüğüyle sahayı hızla terk eden Matteo Guendouzi, bu kez...Devamı için tıklayınız"
+    },
+    {
+      "title": "PFDK’dan dikkat çeken kararlar: 12 Süper Lig kulübü listede",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/pfdkdan-dikkat-ceken-kararlar-12-super-lig-kulubu-listede",
+      "date": "2026-04-21T18:03:50.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/e4a301/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/21/1776794485593.jpeg",
+      "summary": "Türkiye Futbol Federasyonu Profesyonel Futbol Disiplin Kurulu, sevk kararı doğrultusunda yapılan incelemeler sonucunda aralarında 12 Süper Lig kulübünün de bulunduğu kararları açıkladı.Devamı için tıklayınız"
+    },
+    {
+      "title": "TFF 30. hafta VAR kayıtlarını açıkladı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/tff-30-hafta-var-kayitlarini-acikladi",
+      "date": "2026-04-21T17:09:26.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/e37841/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/21/tff-30-hafta-var-kayitlarini-acikladi-1776791330606.jpeg",
+      "summary": "Türkiye Futbol Federasyonu, sosyal medya hesabı üzerinden Trendyol Süper Lig’in 30. hafta mücadelelerine ait VAR kayıtlarını paylaştı. Görüntülerde, Fenerbahçe’nin Çaykur Rizespor karşısında kazandığı...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray - Fenerbahçe maçı öncesi dev tahmin: Fark 4 ihtimal yüzde 92.6",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/galatasaray-fenerbahce-maci-oncesi-dev-tahmin-fark-4-ihtimal-yuzde-926",
+      "date": "2026-04-21T08:57:48.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/c61973/0/0/0/0/2048/1541?u=https://iahbr.tmgrup.com.tr/2026/04/21/1776761667920.jpeg",
+      "summary": "Süper Lig'in 31. haftası sezonun en çekişmeli mücadelesine sahne olacak. Şampiyonluk yarışını sürdüren lider Galatasaray evinde en yakın takipçisi Fenerbahçe'yi konuk edecek. Belki de şampiyonu...Devamı için tıklayınız"
+    },
+    {
+      "title": "Kanarya kupaya veda etti! Konyaspor Fenerbahçe'yi tek golle geçti",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/kanarya-kupaya-veda-etti-konyaspor-fenerbahceyi-tek-golle-gecti",
+      "date": "2026-04-21T06:22:51.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3912c2/0/0/0/0/2048/1474?u=https://iahbr.tmgrup.com.tr/2026/04/21/canli-konyaspor-fenerbahce-1776798695835.jpg",
+      "summary": "Yayıncılığını Turkuvaz Medya'nın üstlendiği Ziraat Türkiye Kupası çeyrek finalinde Fenerbahçe, deplasmanda Konyaspor ile karşılaştı. Mücadeleyi hakem Ozan Ergün yönetti. Fenerbahçe, Konyaspor...Devamı için tıklayınız"
+    },
+    {
+      "title": "Trabzonspor’dan hakem yönetimlerine tepki: \"Sabrımızın da bir sınırı var\"",
+      "link": "https://www.ahaber.com.tr/spor/trabzonspor/2026/04/20/trabzonspordan-hakem-yonetimlerine-tepki-sabrimizin-da-bir-siniri-var",
+      "date": "2026-04-20T18:45:31.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/d9d640/0/0/0/0/2048/1432?u=https://iahbr.tmgrup.com.tr/2026/04/20/1776710521070.jpg",
+      "summary": "RAMS Başakşehir mücadelesinin ardından Trabzonspor Kulübü, Türk futbolunda taşları yerinden oynatacak cinsten, çok sert bir bildiri yayımladı. Hakem yönetimlerinden, saha dışı manipülasyonlara kadar...Devamı için tıklayınız"
+    },
+    {
+      "title": "Dev derbi öncesi sarı-kırmızılılarda müjde: Osimhen sahaya dönüyor",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/20/dev-derbi-oncesi-sari-kirmizililarda-mujde-osimhen-sahaya-donuyor",
+      "date": "2026-04-20T15:11:50.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/0fe2fb/0/0/0/0/2048/1424?u=https://iahbr.tmgrup.com.tr/2026/04/20/1776697674355.jpg",
+      "summary": "Ziraat Türkiye Kupası çeyrek finalinde Natura Dünyası Gençlerbirliği ile kozlarını paylaşmaya hazırlanan Galatasaray’da yüzleri güldüren bir gelişme yaşandı. Sarı-kırmızılı camianın büyük bir merakla...Devamı için tıklayınız"
+    },
+    {
+      "title": "Fenerbahçe kupa mesaisi için Konya’da: Tedesco ve öğrencilerine çiçekli karşılama",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/20/fenerbahce-kupa-mesaisi-icin-konyada-tedesco-ve-ogrencilerine-cicekli-karsilama",
+      "date": "2026-04-20T15:05:00.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/57cb38/0/0/0/0/2048/1604?u=https://iahbr.tmgrup.com.tr/2026/04/20/saglik-camiasini-yasa-bogan-kaza-patoloji-asistani-beyzanin-oldugu-kaza-kamerada-1776698596084.jpg",
+      "summary": "Fenerbahçe kafilesi, Türkiye Kupası çeyrek finalinde oynayacağı TÜMOSAN Konyaspor maçı için Konya'ya geldi. Kafileyi kentte az sayıda taraftar karşıladı.Devamı için tıklayınız"
+    },
+    {
+      "title": "PFDK'den Hacettepe AŞ Türk Metal 1963 Spor'a ceza",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/pfdkden-hacettepe-as-turk-metal-1963-spora-ceza",
+      "date": "2026-04-20T14:25:47.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/a4274d/0/0/0/0/2048/1152?u=https://iahbr.tmgrup.com.tr/2026/04/20/1776695017714.jpg",
+      "summary": "Türkiye Futbol Federasyonu (TFF) Profesyonel Futbol Disiplin Kurulu (PFDK), Nesine 3. Lig ekiplerinden Hacettepe AŞ Türk Metal 1963 Spor'a hükmen mağlubiyet ve 3 puan silme cezası verdi.Devamı için tıklayınız"
+    },
+    {
+      "title": "Romanya Milli Takımı’nda Hagi dönemi",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/romanya-milli-takiminda-hagi-donemi",
+      "date": "2026-04-20T13:25:09.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/9e5922/1200/675/0/26/1024/602?u=https://iahbr.tmgrup.com.tr/2026/04/20/romanya-milli-takiminda-hagi-donemi-1776691510562.jpeg",
+      "summary": "Romanya Futbol Federasyonu, Mircea Lucesu’dan boşalan teknik direktörlük görevine Gheorge Hagi’nin getirildiğini açıkladı.Devamı için tıklayınız"
+    },
+    {
+      "title": "Fenerbahçe'nin Konyaspor kadrosu belli oldu",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/fenerbahcenin-konyaspor-kadrosu-belli-oldu",
+      "date": "2026-04-20T13:21:32.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/0f8fbe/1200/675/0/27/800/477?u=https://iahbr.tmgrup.com.tr/2026/04/20/fenerbahcenin-konyaspor-kadrosu-belli-oldu-1776691273245.jpeg",
+      "summary": "Fenerbahçe, Ziraat Türkiye Kupası çeyrek finalinde yarın 20.30’da Konyaspor deplasmanına çıkacak. Sakatlıkları süren Edson Alvarez ve Marco Asensio kadroda yer almazken Dorgeles Nene de listeye...Devamı için tıklayınız"
+    },
+    {
+      "title": "Konyaspor-Fenerbahçe maçınnın hakemi belli oldu",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/konyaspor-fenerbahce-macinnin-hakemi-belli-oldu",
+      "date": "2026-04-20T13:05:20.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ffcb8f/1200/1200/190/0/675/486?u=https://iahbr.tmgrup.com.tr/2026/04/20/konyaspor-fenerbahce-macinnin-hakemi-belli-oldu-1776690284967.jpg",
+      "summary": "Futbolda Ziraat Türkiye Kupası çeyrek finalinde yarın oynanacak TÜMOSAN Konyaspor-Fenerbahçe maçında hakem Ozan Ergün görev yapacak.Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray'dan Noa Lang kararı: Napoli'ye dönecek",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/galatasaraydan-noa-lang-karari-napoliye-donecek",
+      "date": "2026-04-20T11:36:20.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ef1a97/1200/675/0/0/800/450?u=https://iahbr.tmgrup.com.tr/2026/04/20/galatasaraydan-noa-lang-karari-napoliye-donecek-1776684976849.jpeg",
+      "summary": "Galatasaray’ın ara transferde Napoli’den kiraladığı Noa Lang için karar netleşiyor. İddialara göre sarı-kırmızılılar, 26 yaşındaki oyuncunun satın alma opsiyonunu kullanmayacak.Devamı için tıklayınız"
+    },
+    {
+      "title": "ZTK'da çeyrek final heyecanı başlıyor: Dev maçlar ATV ve A Spor ekranlarında",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/ztkda-ceyrek-final-heyecani-basliyor-dev-maclar-atv-ve-a-spor-ekranlarinda",
+      "date": "2026-04-20T06:54:25.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2af6d3/0/0/0/0/2048/1340?u=https://iahbr.tmgrup.com.tr/2026/04/20/1776667657602.jpeg",
+      "summary": "Turkuvaz Medya yayıncılığındaki Ziraat Türkiye Kupası’nda çeyrek final heyecanı başlıyor. Turnuvada maçlar tek maç eleme usulüyle oynanacak ve karşılaşmayı kazanan takımlar adını yarı finale...Devamı için tıklayınız"
+    },
+    {
+      "title": "Sultanlar Ligi’nde Şampiyon VakıfBank oldu! Başkan Erdoğan'dan tebrik",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/19/sultanlar-liginde-sampiyon-vakifbank-oldu",
+      "date": "2026-04-19T18:23:13.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/e4f17e/0/0/0/0/2048/1366?u=https://iahbr.tmgrup.com.tr/2026/04/19/sultanlar-liginde-sampiyon-vakifbank-oldu-baskan-erdogandan-tebrik-1776632165395.jpg",
+      "summary": "Vodafone Sultanlar Ligi play-off final serisinin beşinci maçında VakıfBank, Fenerbahçe Medicana’yı 3-1 mağlup ederek seriyi 3-2 kazandı ve şampiyon oldu. Şampiyon VakıfBank için tebrik mesajı paylaşan...Devamı için tıklayınız"
+    },
+    {
+      "title": "Fenerbahçe Opet EuroLeague Women’da şampiyon oldu! Başkan'dan tebrik mesajı",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/19/canli-galatasaray-cagdas-faktoring-fenerbahce-opet",
+      "date": "2026-04-19T18:11:58.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/163ee5/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/19/fenerbahce-opet-euroleague-womenda-sampiyon-oldu-1776628358210.jpg",
+      "summary": "Fenerbahçe Opet, FIBA Kadınlar Avrupa Ligi final maçında Galatasaray Çağdaş Faktoring'i 68-55 yenerek şampiyon oldu. Sarı-lacivertliler, tarihindeki 3. Avrupa Ligi şampiyonluğunu elde etti. Öte yandan...Devamı için tıklayınız"
+    },
+    {
+      "title": "Erzurumspor 5 yıl aranın ardından yeniden Süper Lig'de! Başkan Erdoğan'dan tebrik",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/19/lider-erzurumspor-super-lig-biletini-aldi",
+      "date": "2026-04-19T15:01:49.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/cafbba/0/0/0/0/1576/2048?u=https://iahbr.tmgrup.com.tr/2026/04/19/1776610808324.jpg",
+      "summary": "Trendyol 1. Lig’in 36. haftasında lider Erzurumspor FK, deplasmanda Sipay Bodrum Futbol Kulübü ile berabere kalarak Trendyol Süper Lig’e yükselmeyi garantiledi. Öte yandan Başkan Erdoğan,...Devamı için tıklayınız"
+    },
+    {
+      "title": "Yeşil-Beyazlılar geri döndü! Bursaspor 1. Lig’e yükseldi! Başkan Erdoğan'dan tebrik",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/19/yesil-beyazlilar-geri-dondu-bursaspor-1-lige-yukseldi",
+      "date": "2026-04-19T14:29:21.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/da0236/0/0/0/0/2048/1535?u=https://iahbr.tmgrup.com.tr/2026/04/19/1776608835224.jpg",
+      "summary": "Bursaspor, 2. Lig Kırmızı Grup 33. haftasında Atatürk Spor Kompleksi Matlı Stadyumu’nda Somaspor’u 5-1 mağlup ederek şampiyonluğunu ilan etti ve Trendyol 1. Lig’e yükselmeyi garantiledi. Bursaspor’un...Devamı için tıklayınız"
+    },
+    {
+      "title": "Napoli kararını verdi! İstanbul devleri pusuya yattı: Lukaku için 10 milyon euro",
+      "link": "https://www.ahaber.com.tr/spor/besiktas/2026/04/19/napoli-kararini-verdi-istanbul-devleri-pusuya-yatti-lukaku-icin-10-milyon-euro",
+      "date": "2026-04-19T10:15:02.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/fa46ea/1200/675/0/0/800/449?u=https://iahbr.tmgrup.com.tr/2026/04/19/napoli-kararini-verdi-istanbul-devleri-pusuya-yatti-lukaku-icin-10-milyon-euro-1776593626024.jpeg",
+      "summary": "Napoli’de kadro dışı kalan ve sezon sonunda 10 milyon euro bonservis bedeliyle ayrılması beklenen Romelu Lukaku için transfer yarışı kızışıyor. Sarı-lacivertlilerin yakından takip ettiği Belçikalı...Devamı için tıklayınız"
+    },
+    {
+      "title": "Spor yazarlarından ofsayt kararına tepki: Galatasaray'ın buz gibi golü badem oldu",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/19/spor-yazarlarindan-ofsayt-kararina-tepki-galatasarayin-buz-gibi-golu-badem-oldu",
+      "date": "2026-04-19T07:10:35.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/199415/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/19/spor-yazarlarindan-ofsayt-kararina-tepki-galatasarayin-buz-gibi-golu-badem-oldu-1776582523417.jpeg",
+      "summary": "Galatasaray, Süper Lig’in 30. haftasında deplasmanda Gençlerbirliği’ni 2-1 yendi. Sarı kırmızılıların golleri 2. dakikada Mauro Icardi ve 35’te Yunus Akgün’den geldi. Spor yazarları sarı...Devamı için tıklayınız"
+    },
+    {
+      "title": "Kartal deplasmanda kayıp! Beşiktaş Samsunspor engeline takıldı",
+      "link": "https://www.ahaber.com.tr/spor/besiktas/2026/04/19/kartal-deplasmanda-kayip-besiktas-samsunspor-engeline-takildi",
+      "date": "2026-04-19T06:43:46.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ed21f3/0/0/0/0/1786/2048?u=https://iahbr.tmgrup.com.tr/2026/04/19/kartal-deplasmanda-kayip-besiktas-samsunspor-engeline-takildi-1776615129210.jpg",
+      "summary": "Trendyol Süper Lig’in 30. haftasında Samsunspor ile Beşiktaş karşı karşıya geldi. 19 Mayıs Stadyumu’nda oynanan mücadeleyi hakem Gürcan Hasova yönetti. Karşılıklı ataklara sahne olan maçta ev sahibi...Devamı için tıklayınız"
+    },
+    {
+      "title": "Kalite farkıyla!",
+      "link": "https://www.ahaber.com.tr/yazarlar/omer-urundul/2026/04/19/kalite-farkiyla",
+      "date": "2026-04-19T04:09:51.000Z",
+      "image": "fallback.jpg",
+      "summary": "Fenerbahçe'nin puan kaybından sonra çok rahatlayan Galatasaray, 2. dakikada İcardi'nin golüyle de tam bir moral buldu. Devre boyunca oyunu kontrolde tuttu. Bölüm bölüm ataklar geliştirdi. Takım...Devamı için tıklayınız"
+    },
+    {
+      "title": "Okan Buruk’tan öz eleştiri: “Daha rahat olabilirdik”",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/18/okan-buruktan-oz-elestiri-daha-rahat-olabilirdik",
+      "date": "2026-04-18T20:12:59.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/0727cd/0/0/0/0/1686/2048?u=https://iahbr.tmgrup.com.tr/2026/04/18/1776543038853.jpg",
+      "summary": "Galatasaray Teknik Direktörü Okan Buruk, Gençlerbirliği galibiyetinin ardından kritik açıklamalarda bulundu. Zor bir deplasmandan 3 puanla döndüklerini vurgulayan Buruk, yedikleri gol sonrası oyunda...Devamı için tıklayınız"
+    },
+    {
+      "title": "Bordo-Mavili camianın eski başkanı Atay Aktuğ vefat etti",
+      "link": "https://www.ahaber.com.tr/spor/trabzonspor/2026/04/18/bordo-mavili-camianin-eski-baskani-atay-aktug-vefat-etti",
+      "date": "2026-04-18T15:02:03.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3af88d/0/0/0/0/2000/1400?u=https://iahbr.tmgrup.com.tr/2026/04/18/bordo-mavili-camianin-eski-baskani-atay-aktug-vefat-etti-1776542137693.jpg",
+      "summary": "Trabzonspor’un eski futbolcusu ve başkanlarından, aynı zamanda Trabzon eski Belediye Başkanı Atay Aktuğ hayatını kaybetti. Bordo-mavili camiada büyük üzüntüye yol açan vefatın ardından kulüp taziye...Devamı için tıklayınız"
+    },
+    {
+      "title": "Sadettin Saran’dan TFF ve MHK'ye çağrı: \"Bu ligin sahibi olduğunuzu gösterin\"",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/18/sadettin-sarandan-tff-ve-mhkye-cagri-bu-ligin-sahibi-oldugunuzu-gosterin",
+      "date": "2026-04-18T14:34:11.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2e3fac/0/0/0/0/1390/2048?u=https://iahbr.tmgrup.com.tr/2026/04/18/sadettin-sarandan-tff-ve-mhkye-cagri-bu-ligin-sahibi-oldugunuzu-gosterin-1776522771406.jpg",
+      "summary": "Fenerbahçe Spor Kulübü Başkanı Sadettin Saran, Yüksek Divan Kurulu Nisan Ayı Olağan Toplantısı’nda gündeme dair çarpıcı açıklamalarda bulundu. Şampiyonluk yarışından hakem kararlarına, TFF...Devamı için tıklayınız"
+    },
+    {
+      "title": "Trabzonspor, Süper Lig'de yarın Başakşehir'i konuk edecek",
+      "link": "https://www.ahaber.com.tr/spor/trabzonspor/2026/04/18/trabzonspor-super-ligde-yarin-basaksehiri-konuk-edecek",
+      "date": "2026-04-18T07:39:09.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/d643da/0/0/0/0/2048/1433?u=https://iahbr.tmgrup.com.tr/2026/04/18/trabzonspor-super-ligde-yarin-basaksehiri-konuk-edecek-1776497939793.jpg",
+      "summary": "Trabzonspor, Trendyol Süper Lig'in 30. haftasında yarın RAMS Başakşehir'i konuk edecek.Devamı için tıklayınız"
+    },
+    {
+      "title": "Samsunspor, Süper Lig'de yarın Beşiktaş'ı konuk edecek",
+      "link": "https://www.ahaber.com.tr/spor/samsunspor/2026/04/18/samsunspor-super-ligde-yarin-besiktasi-konuk-edecek",
+      "date": "2026-04-18T07:27:02.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/0e1ca4/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/18/samsunspor-super-ligde-yarin-besiktasi-konuk-edecek-1776497215295.jpg",
+      "summary": "Samsunspor, Trendyol Süper Lig'in 30. haftasında yarın sahasında Beşiktaş ile karşılaşacak.Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray Ankara’da hata yapmadı! Lider derbi öncesi moral depoladı",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/18/galatasaray-ankarada-hata-yapmadi-lider-derbi-oncesi-moral-depoladi",
+      "date": "2026-04-18T06:31:58.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/448139/0/0/0/0/2048/1404?u=https://iahbr.tmgrup.com.tr/2026/04/18/canli-genclerbirligi-galatasaray-1776535953456.jpg",
+      "summary": "Trendyol Süper Lig’in 30. haftasında Gençlerbirliği ile Galatasaray karşı karşıya geldi. Eryaman Stadyumu’nda oynanan mücadeleyi Batuhan Kolak yönetti. Maça hızlı ve etkili başlayan sarı-kırmızılılar,...Devamı için tıklayınız"
+    },
+    {
+      "title": "Affedilmez!",
+      "link": "https://www.ahaber.com.tr/yazarlar/omer-urundul/2026/04/18/affedilmez",
+      "date": "2026-04-18T04:06:35.000Z",
+      "image": "fallback.jpg",
+      "summary": "Fenerbahçe, 10 kişilik Kasımpaşa karşısında son saniyede yediği beraberlik golünden sonra dün gece de 10 kişilik Rizespor'dan aynı şekilde yine son saniyede gelen beraberlik golüyle makus talihini...Devamı için tıklayınız"
+    },
+    {
+      "title": "Açıklaması yok",
+      "link": "https://www.ahaber.com.tr/yazarlar/ahmet-cakar/2026/04/18/aciklamasi-yok",
+      "date": "2026-04-18T04:06:16.000Z",
+      "image": "fallback.jpg",
+      "summary": "Aptallar mangası desem ayıp etmiş olurum…. Futbol enayiliği desem enayilere hakaret etmiş olurum ama dün gece yaşananları yaşayan bir takım yani Fenerbahçe bundan sonra asla yapı, kapı,...Devamı için tıklayınız"
+    },
+    {
+      "title": "Şanssızlık değil!",
+      "link": "https://www.ahaber.com.tr/yazarlar/gurcan-bilgic/2026/04/18/sanssizlik-degil",
+      "date": "2026-04-18T04:05:58.000Z",
+      "image": "fallback.jpg",
+      "summary": "Takımı şampiyon yapması için alınanların, dün gece veya sezon boyunca yaptıkları hataların bedelini ödüyor Fenerbahçe. Üstelik kendi sahasında öne geçtiği maçlarda kaybettiği puanlarla, son...Devamı için tıklayınız"
+    },
+    {
+      "title": "Zaragoza’da dev derbi! EuroLeague Women’da zirve Türk takımlarının",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/18/zaragozada-dev-derbi-euroleague-womenda-zirve-turk-takimlarinin",
+      "date": "2026-04-17T21:17:30.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/a36cd5/0/0/0/0/2000/1656?u=https://iahbr.tmgrup.com.tr/2026/04/18/1776460511999.jpg",
+      "summary": "EuroLeague Women Final Six’te Türk basketbolu tarihi bir başarıya imza attı. Fenerbahçe Opet ve Galatasaray Çağdaş Faktoring rakiplerini mağlup ederek finale yükseldi. İki temsilci, Zaragoza’da...Devamı için tıklayınız"
+    },
+    {
+      "title": "TFF Tahkim Kurulu’ndan Fink kararı: Samsunspor Teknik Direktörüne verilen ceza onandı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/18/tff-tahkim-kurulundan-fink-karari-samsunspor-teknik-direktorune-verilen-ceza-onandi",
+      "date": "2026-04-17T21:11:50.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/010867/1200/675/0/0/738/416?u=https://iahbr.tmgrup.com.tr/2026/04/18/tff-tahkim-kurulundan-fink-karari-samsunspor-teknik-direktorune-verilen-ceza-onandi-1776460261393.jpeg",
+      "summary": "TFF Tahkim Kurulu, Samsunspor Teknik Direktörü Thorsten Fink’e verilen 3 maç kulübeye giriş yasağı ve 80 bin liralık para cezasını oybirliğiyle onadı.Devamı için tıklayınız"
+    },
+    {
+      "title": "Kanarya zirvede kayıp! Fenerbahçe Rizespor ile berabere kaldı",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/17/kanarya-zirvede-kayip-fenerbahce-rizespor-ile-berabere-kaldi",
+      "date": "2026-04-17T07:12:10.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/c28024/0/0/0/0/2048/2044?u=https://iahbr.tmgrup.com.tr/2026/04/17/kanarya-zirvede-kayip-fenerbahce-rizespor-ile-berabere-kaldi-1776453586484.jpg",
+      "summary": "Trendyol Süper Lig’in 30. hafta mücadelesinde Fenerbahçe, Çaykur Rizespor ile karşı karşıya geldi. Chobani Stadyumu’nda oynanan karşılaşmayı hakem Adnan Deniz Kayatepe yönetti. Sarı-lacivertliler,...Devamı için tıklayınız"
+    },
+    {
+      "title": "PFDK'den 3 kulübe para cezası",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/16/pfdkden-3-kulube-para-cezasi",
+      "date": "2026-04-16T20:36:20.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/4c7c23/1200/1200/238/0/724/486?u=https://iahbr.tmgrup.com.tr/2026/04/16/pfdkden-3-super-lig-kulubune-para-cezasi-1776371380010.jpeg",
+      "summary": "Türkiye Futbol Federasyonu (TFF) Profesyonel Futbol Disiplin Kurulu (PFDK), Trendyol Süper Lig'den 3 kulübe para cezası verdi.Devamı için tıklayınız"
+    },
+    {
+      "title": "Fenerbahçe ile Galatasaray finalde rakip olabilir",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/16/fenerbahce-ile-galatasaray-finalde-rakip-olabilir",
+      "date": "2026-04-16T07:55:20.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/99ea27/1200/675/49/0/752/395?u=https://iahbr.tmgrup.com.tr/2026/04/16/fenerbahce-ile-galatasaray-finalde-rakip-olabilir-1776326115216.jpeg",
+      "summary": "FIBA Kadınlar Avrupa Ligi 6’lı Final’de Türk temsilcileri Fenerbahçe Opet ve Galatasaray Çağdaş Faktoring, yarı final maçlarını kazanmaları halinde finalde karşı karşıya gelecek. Fenerbahçe Opet, Spar...Devamı için tıklayınız"
+    },
+    {
+      "title": "Adem Bona'lı 76ers NBA play-off'larına yükseldi!",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/16/adem-bonali-76ers-nba-play-offlarina-yukseldi",
+      "date": "2026-04-16T07:26:23.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/f79f06/1200/675/0/0/800/449?u=https://iahbr.tmgrup.com.tr/2026/04/16/1776324332423.jpeg",
+      "summary": "NBA’de play-in heyecanı tüm hızıyla sürerken, milli gururumuz Adem Bona'nın takımı Philadelphia 76ers play-off biletini kaptı. Batı’da ise Stephen Curry önderliğindeki Golden State Warriors, Los...Devamı için tıklayınız"
+    },
+    {
+      "title": "Arda Güler gururla sunar: Bayern maçında şov yaptı! Enfes frikik golü",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/16/arda-guler-gururla-sunar-bayern-macinda-sov-yapti-enfes-frikik-golu",
+      "date": "2026-04-16T05:39:51.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/b71a82/1200/675/0/0/800/449?u=https://iahbr.tmgrup.com.tr/2026/04/16/arda-guler-gururla-sunar-bayern-macinda-sov-yapti-enfes-frikik-golu-1776318110911.jpeg",
+      "summary": "Milli yıldızımız Arda Güler Bayern Münih-Real Madrid maçına damga vuran isim oldu. Bayern'in 4-3 kazanarak Şampiyonlar Ligi'nde yarı finale yükseldiği karşılaşmada iki gol atan Arda performansıyla...Devamı için tıklayınız"
+    },
+    {
+      "title": "UEFA Şampiyonlar Ligi’nde ilk yarı finalistler belli oldu",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/15/uefa-sampiyonlar-liginde-ilk-yari-finalistler-belli-oldu",
+      "date": "2026-04-14T21:32:34.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/b62c52/0/0/0/0/2048/1366?u=https://iahbr.tmgrup.com.tr/2026/04/15/uefa-sampiyonlar-liginde-ilk-yari-finalistler-belli-oldu-1776202261593.jpg",
+      "summary": "UEFA Şampiyonlar Ligi çeyrek final rövanş karşılaşmaları bugün oynanan iki mücadeleyle başladı. Rakiplerini eleyen Atletico Madrid ve Paris Saint-Germain yarı finale yükselen ilk takımlar oldu.Devamı için tıklayınız"
+    },
+    {
+      "title": "TFF’den dev sevk dalgası: 7 kulüp PFDK’ya gönderildi",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/15/tffden-dev-sevk-dalgasi-7-kulup-pfdkya-gonderildi",
+      "date": "2026-04-14T21:12:42.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/e7052e/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/15/1776201131108.jpeg",
+      "summary": "Türkiye Futbol Federasyonu Hukuk Müşavirliği, Süper Lig’den Beşiktaş, Galatasaray, Trabzonspor, Alanyaspor, Kayserispor, Kocaelispor ve Çaykur Rizespor’u çeşitli disiplin ihlalleri gerekçesiyle...Devamı için tıklayınız"
+    },
+    {
+      "title": "Ziraat Türkiye Kupası maçları ne zaman? 2026 ZTK çeyrek final maç programı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/14/ziraat-turkiye-kupasi-maclari-ne-zaman-2026-ztk-ceyrek-final-mac-programi",
+      "date": "2026-04-14T14:21:36.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/476860/0/0/0/0/1280/853?u=https://iahbr.tmgrup.com.tr/2026/04/14/ziraat-turkiye-kupasi-maclari-ne-zaman-2026-ztk-ceyrek-final-mac-programi-1776176375651.jpg",
+      "summary": "Ziraat Türkiye Kupası’nda çeyrek final takvimi belli oldu. Türkiye Futbol Federasyonu’nun programına göre tek maç eleme usulüyle oynanacak karşılaşmalar 21 Nisan 2026 tarihinde başlayacak. Fenerbahçe,...Devamı için tıklayınız"
+    },
+    {
+      "title": "Gana'da takım otobüsüne silahlı saldırı! Genç futbolcu Dominic Frimpong hayatını kaybetti",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/14/ganada-takim-otobusune-silahli-saldiri-genc-futbolcu-dominic-frimpong-hayatini-kaybetti",
+      "date": "2026-04-14T08:28:28.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/e664ae/0/0/0/0/892/1200?u=https://iahbr.tmgrup.com.tr/2026/04/14/1776155200056.jpeg",
+      "summary": "Gana Futbol Federasyonu (GFA), Berekum Chelsea takım kafilesine yönelik silahlı saldırıda 20 yaşındaki futbolcu Dominic Frimpong'un hayatını kaybettiğini duyurdu.Devamı için tıklayınız"
+    },
+    {
+      "title": "Gedson Fernandes Türkiye'ye dönüyor: Taraftarın gönlünde taht kurmuştu",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/14/gedson-fernandes-turkiyeye-donuyor-taraftarin-gonlunde-taht-kurmustu",
+      "date": "2026-04-14T07:47:42.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/abddef/0/0/0/0/1500/999?u=https://iahbr.tmgrup.com.tr/2026/04/14/1776152528641.jpeg",
+      "summary": "Süper Lig'de bir dönem Galatasaray ve Beşiktaş forması giyen ve sonrasında Rusya'ya transfer olan Gedson Fernandes Türkiye'ye dönmeye hazırlanıyor. Rus futboluna uyum sağlayamayan Gedson için Beşiktaş...Devamı için tıklayınız"
+    },
+    {
+      "title": "Sakaryaspor 4 sezon sonra 2. Lig’e düştü",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/13/sakaryaspor-4-sezon-sonra-2-lige-dustu",
+      "date": "2026-04-13T19:07:46.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/133020/0/0/0/0/1525/2048?u=https://iahbr.tmgrup.com.tr/2026/04/13/sakaryaspor-4-sezon-sonra-2-lige-dustu-1776107239473.jpg",
+      "summary": "Trendyol 1. Lig'in 35. haftasında sahasında Esenler Erokspor'a 2-1 mağlup olan Sakaryaspor, sezonun bitimine 3 hafta kala alt lige düştü.Devamı için tıklayınız"
+    },
+    {
+      "title": "Yeni Malatyaspor'a 6 puan silme cezası",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/13/yeni-malatyaspora-6-puan-silme-cezasi",
+      "date": "2026-04-13T10:55:33.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3cdcb8/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/13/yeni-malatyaspora-6-puan-silme-cezasi-1776077728102.jpeg",
+      "summary": "Yeni Malatyaspor, FIFA Disiplin Komitesi kararıyla 6 puan silme cezası aldı. Türkiye Futbol Federasyonu açıklamasına göre ceza bir dosya kapsamında verildi.Devamı için tıklayınız"
+    },
+    {
+      "title": "Romelu Lukaku Beşiktaş'a mı geliyor? Transferin perde arkası",
+      "link": "https://www.ahaber.com.tr/spor/besiktas/2026/04/13/romelu-lukaku-besiktasa-mi-geliyor-transferin-perde-arkasi",
+      "date": "2026-04-13T10:21:00.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/a42f31/1200/1200/108/0/708/600?u=https://iahbr.tmgrup.com.tr/2026/04/13/1776075143634.jpeg",
+      "summary": "Gelecek sezonun kadrosunu kurmak için kolları sıvayan Beşiktaş, gol yollarındaki suskunluğu dünya çapında bir isimle bozmaya hazırlanıyor. Siyah-beyazlı yönetimin Belçikalı yıldız Romelu Lukaku için...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray'da Okan Buruk hedef tahtasında: Mayıslar bizimdir futbolu nerede?",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/13/galatasarayda-okan-buruk-hedef-tahtasinda-mayislar-bizimdir-futbolu-nerede",
+      "date": "2026-04-13T06:22:03.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/3f84ac/1200/675/0/20/800/470?u=https://iahbr.tmgrup.com.tr/2026/04/13/galatasarayda-okan-buruk-hedef-tahtasinda-mayislar-bizimdir-futbolu-nerede-1776061308399.jpeg",
+      "summary": "Galatasaray, Trendyol Süper Lig’in 29. haftasında Kocaelispor ile 1-1 berabere kaldı ve şampiyonluk yolunda kritik 2 puan kaybetti. Sarı kırmızılılarda Okan Buruk eleştirilerin hedefi olurken spor...Devamı için tıklayınız"
+    },
+    {
+      "title": "Vurdumduymaz!",
+      "link": "https://www.ahaber.com.tr/yazarlar/ahmet-cakar/2026/04/13/vurdumduymaz",
+      "date": "2026-04-13T04:07:43.000Z",
+      "image": "fallback.jpg",
+      "summary": "Kartlar yeniden mi dağıtılacak! Bu maçtan önce Galatasaray'ın şampiyon olmaması için bir mucize lazım düşüncemiz gerçek mi olacak! Galatasaray hiç ama hiç, hesapta olmayan bir puan kaybı yaşadı. Bütün...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray’dan Lucescu için duygusal anma",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/12/galatasaraydan-lucescu-icin-duygusal-anma",
+      "date": "2026-04-12T17:08:19.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2ce5c6/0/0/0/0/900/1197?u=https://iahbr.tmgrup.com.tr/2026/04/12/galatasaraydan-lucescu-icin-duygusal-anma-1776013678602.jpeg",
+      "summary": "Galatasaray, Kocaelispor maçı öncesinde anlamlı bir anmaya imza attı. Sarı-kırmızılı kulüp, karşılaşma öncesi hazırladığı özel video ile hayatını kaybeden efsane teknik direktörü Mircea Lucescu’yu...Devamı için tıklayınız"
+    },
+    {
+      "title": "Eyüpspor'un rakibi Samsunspor",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/12/eyupsporun-rakibi-samsunspor",
+      "date": "2026-04-12T07:55:25.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/f62afa/1200/675/0/49/800/499?u=https://iahbr.tmgrup.com.tr/2026/04/12/eyupsporun-rakibi-samsunspor-1775980760361.jpeg",
+      "summary": "Eyüpspor, Süper Lig’in 29. haftasında yarın Samsunspor’u saat 20.00’de Recep Tayyip Erdoğan Stadı’nda ağırlayacak. Maçı Yasin Kol yönetecek.Devamı için tıklayınız"
+    },
+    {
+      "title": "Spor yazarları yorumladı:  Makarov kırmızı kart görmeli miydi?",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/12/spor-yazarlari-yorumladi-makarov-kirmizi-kart-gormeli-miydi",
+      "date": "2026-04-12T07:47:58.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/9a1464/1200/1200/174/0/716/542?u=https://iahbr.tmgrup.com.tr/2026/04/12/1775979689232.jpeg",
+      "summary": "Süper Lig’in 29. haftasında Fenerbahçe, deplasmanda Kayserispor karşısına çıktı ve sahadan 4-0 gibi farklı bir galibiyetle ayrıldı. Sarı-lacivertli ekibin gollerini Kante, Talisca (2) ve Nene...Devamı için tıklayınız"
+    },
+    {
+      "title": "Çaykur Rizespor, Süper Lig'de yarın Gaziantep FK'yı konuk edecek",
+      "link": "https://www.ahaber.com.tr/spor/rizespor/2026/04/12/caykur-rizespor-super-ligde-yarin-gaziantep-fkyi-konuk-edecek",
+      "date": "2026-04-12T07:25:52.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/48521c/0/0/0/0/2048/1407?u=https://iahbr.tmgrup.com.tr/2026/04/12/caykur-rizespor-super-ligde-yarin-gaziantep-fkyi-konuk-edecek-1775978749164.jpg",
+      "summary": "Çaykur Rizespor, Trendyol Süper Lig'in 29. haftasında yarın sahasında Gaziantep FK ile mücadele edecek.Devamı için tıklayınız"
+    },
+    {
+      "title": "Sivasspor, yarın İstanbulspor'u konuk edecek",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/12/sivasspor-yarin-istanbulsporu-konuk-edecek",
+      "date": "2026-04-12T06:43:49.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2d0f4d/0/0/0/0/1280/720?u=https://iahbr.tmgrup.com.tr/2026/04/12/sivasspor-yarin-istanbulsporu-konuk-edecek-1775976226042.jpg",
+      "summary": "Özbelsan Sivasspor, Trendyol 1. Lig'in 35. haftasında yarın sahasında İstanbulspor ile karşılaşacak.Devamı için tıklayınız"
+    },
+    {
+      "title": "Seyrantepe'de puanlar paylaşıldı! Galatasaray Körfez engeline takıldı",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/12/seyrantepede-puanlar-paylasildi-galatasaray-korfez-engeline-takildi",
+      "date": "2026-04-12T06:38:25.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/892e3a/0/0/0/0/2048/1367?u=https://iahbr.tmgrup.com.tr/2026/04/12/seyrantepede-puanlar-paylasildi-galatasaray-korfez-engeline-takildi-1776021030997.jpg",
+      "summary": "Trendyol Süper Lig’in 29. hafta mücadelesinde lider Galatasaray ile Kocaelispor karşı karşıya geldi. RAMS Park’ta oynanan karşılaşmayı Oğuzhan Çakır yönetti. Zirve yarışı açısından büyük önem taşıyan...Devamı için tıklayınız"
+    },
+    {
+      "title": "Galatasaray’dan sakatlık açıklaması: Asprilla’nın durumu netleşti",
+      "link": "https://www.ahaber.com.tr/spor/galatasaray/2026/04/11/galatasaraydan-sakatlik-aciklamasi-asprillanin-durumu-netlesti",
+      "date": "2026-04-11T15:19:30.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/70e391/1200/1200/96/0/582/486?u=https://iahbr.tmgrup.com.tr/2026/04/11/1775920645595.jpeg",
+      "summary": "Süper Lig’in 27. haftasında oynanan Göztepe maçında sakatlanan Yáser Asprilla’nın sağlık durumuna ilişkin açıklama geldi. Yapılan kontrollerde dizinde ödem ve eklem kapsülünde kanama tespit edilen...Devamı için tıklayınız"
+    },
+    {
+      "title": "Sarı-lacivertlilerden dört dörtlük galibiyet! Fenerbahçe Kayserispor'u farklı yendi",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/11/sari-lacivertlilerden-dort-dortluk-galibiyet-fenerbahce-kayserisporu-farkli-yendi",
+      "date": "2026-04-11T08:19:53.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/d70f45/0/0/0/0/2048/1446?u=https://iahbr.tmgrup.com.tr/2026/04/11/canli-zecorner-kayserispor-fenerbahce-1775932191154.jpg",
+      "summary": "Trendyol Süper Lig’in 29. hafta mücadelesinde Fenerbahçe, deplasmanda Kayserispor’a konuk oldu. RHG Enertürk Enerji Stadyumu’nda oynanan karşılaşmayı hakem Ali Yılmaz yönetti. Zirve takibinde kalmayı...Devamı için tıklayınız"
+    },
+    {
+      "title": "Zirve takibinde kritik kayıp! Trabzonspor deplasmanda Alanyaspor engeline takıldı",
+      "link": "https://www.ahaber.com.tr/spor/trabzonspor/2026/04/11/zirve-takibinde-kritik-kayip-trabzonspor-deplasmanda-alanyaspor-engeline-takildi",
+      "date": "2026-04-11T07:27:54.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/8e9018/0/0/0/0/1583/2048?u=https://iahbr.tmgrup.com.tr/2026/04/11/zirve-takibinde-kritik-kayip-trabzonspor-deplasmanda-alanyaspor-engeline-takildi-1775923734207.jpg",
+      "summary": "Trendyol Süper Lig’in 29. hafta mücadelesinde Trabzonspor, Corendon Alanyaspor ile deplasmanda karşı karşıya geldi. Alanya Oba Stadı’nda oynanan karşılaşmayı hakem Mehmet Türkmen yönetti....Devamı için tıklayınız"
+    },
+    {
+      "title": "TFF açıkladı: İhlaller sonrası sevk kararları",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/10/tff-acikladi-ihlaller-sonrasi-sevk-kararlari",
+      "date": "2026-04-10T15:44:45.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/472c30/1200/675/0/0/864/486?u=https://iahbr.tmgrup.com.tr/2026/04/10/1775835859959.jpeg",
+      "summary": "Türkiye Futbol Federasyonu (TFF) Hukuk Müşavirliği, Trendyol Süper Lig'den 4 kulübü Profesyonel Futbol Disiplin Kuruluna (PFDK) sevk etti.Devamı için tıklayınız"
+    },
+    {
+      "title": "Fenerbahçe’nin Kayserispor maçı kadrosu açıklandı",
+      "link": "https://www.ahaber.com.tr/spor/fenerbahce/2026/04/10/fenerbahcenin-kayserispor-maci-kadrosu-aciklandi",
+      "date": "2026-04-10T15:08:29.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/b8caea/0/0/0/0/2048/1316?u=https://iahbr.tmgrup.com.tr/2026/04/10/1775833665465.jpg",
+      "summary": "Trendyol Süper Lig’in 29’uncu haftasında yarın deplasmanda Zecorner Kayserispor’a konuk olacak Fenerbahçe’nin maç kadrosu açıklandı.Devamı için tıklayınız"
+    },
+    {
+      "title": "Dolmabahçe’de gol yağmuru! Beşiktaş Antalyaspor’u farklı geçti",
+      "link": "https://www.ahaber.com.tr/spor/besiktas/2026/04/10/dolmabahcede-gol-yagmuru-besiktas-antalyasporu-farkli-gecti",
+      "date": "2026-04-10T06:42:30.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/743bb4/0/0/0/0/2048/1633?u=https://iahbr.tmgrup.com.tr/2026/04/10/canli-besiktas-antalyaspor-1775845174338.jpg",
+      "summary": "Trendyol Süper Lig’in 29. hafta açılış maçında Beşiktaş, sahasında Hesap.com Antalyaspor’u konuk etti. Siyah-beyazlılar, taraftarı önünde sergilediği etkili performansla, Güney Koreli yıldızı Oh (2),...Devamı için tıklayınız"
+    },
+    {
+      "title": "Cimbom düştüğü baskıdan kurtuldu | Spor yazarları Göztepe galibiyetini yorumladı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/09/cimbom-dustugu-baskidan-kurtuldu-spor-yazarlari-goztepe-galibiyetini-yorumladi",
+      "date": "2026-04-09T06:51:12.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/a25e50/1200/1200/142/0/800/658?u=https://iahbr.tmgrup.com.tr/2026/04/09/cimbom-dustugu-baskindan-kurtuldu-spor-yazarlari-goztepe-galibiyetini-yorumladi-1775717458031.jpg",
+      "summary": "Galatasaray, Süper Lig erteleme maçında deplasmanda Göztepe’yi 3-1 yenerek ligdeki en yakın rakipleriyle puan farkını 4’e çıkardı. Sarı kırmızılılar ilk yarıda oynadığı baskılı oyunla dikkat çekerken...Devamı için tıklayınız"
+    },
+    {
+      "title": "Mucize gerek!",
+      "link": "https://www.ahaber.com.tr/yazarlar/ahmet-cakar/2026/04/09/mucize-gerek",
+      "date": "2026-04-09T04:02:41.000Z",
+      "image": "fallback.jpg",
+      "summary": "Galatasaray dün gece işi büyük oranda bitirdi… Göztepe kağıt üzerinde korkulan bir deplasmandı ama ilk yarıya baktığımızda korku, tempo ve rekabet adına dağ fare doğurdu. İlk devre Galatasaray...Devamı için tıklayınız"
+    },
+    {
+      "title": "G.Saray baskıyı kırdı",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/04/09/gsaray-baskiyi-kirdi",
+      "date": "2026-04-09T04:02:18.000Z",
+      "image": "fallback.jpg",
+      "summary": "Galatasaray ikinci yarının ilk 15 dakikasında öyle bir Göztepe baskısı yedi ki maçı izleyenler, 'Eyvah! Kaybediyoruz' hissine kapıldı. Uğurcan eğer kritik kurtarışlar yapmasaydı ve G.Saray, 2-0 öne...Devamı için tıklayınız"
+    }
+  ],
+  "basketbol": [],
+  "voleybol": [],
+  "diger": [
+    {
+      "title": "İstanbul dünya vitrininde! Formula 1 Türkiye’nin gücünü dünyaya ilan edecek",
+      "link": "https://www.ahaber.com.tr/gundem/2026/04/25/istanbul-dunya-vitrininde-formula-1-turkiyenin-gucunu-dunyaya-ilan-edecek",
+      "date": "2026-04-25T08:17:31.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/63e90b/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/25/istanbul-dunya-vitrininde-formula-1-turkiyenin-gucunu-dunyaya-ilan-edecek-1777104954615.jpg",
+      "summary": "Dünya devini yeniden İstanbul’da ağırlamanın heyecanını paylaşan Kültür ve Turizm Bakanı Mehmet Nuri Ersoy, 'İstanbul’u dünyanın tek iki kıtayı birleştiren Formula 1 şehri olarak lanse edeceğiz'...Devamı için tıklayınız"
+    },
+    {
+      "title": "Beyza Nur Akkuş’tan Avrupa’da bronz zafer",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/24/beyza-nur-akkustan-avrupada-bronz-zafer",
+      "date": "2026-04-24T18:43:38.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/55131f/0/0/0/0/1600/1066?u=https://iahbr.tmgrup.com.tr/2026/04/24/beyza-nur-akkustan-avrupada-bronz-zafer-1777064133374.jpg",
+      "summary": "Avrupa Güreş Şampiyonası’nda milli sporcu Beyza Nur Akkuş, 65 kiloda bronz madalya kazandı. Zor bir mücadele olduğunu vurgulayan Akkuş, “Ülkeme madalya kazandırdığım için mutluyum.” dedi.Devamı için tıklayınız"
+    },
+    {
+      "title": "Formula 1 yeniden Türkiye'de! Başkan Erdoğan detayları duyurdu: 5 yıllık imza",
+      "link": "https://www.ahaber.com.tr/gundem/2026/04/24/formula-1-istanbula-geri-donuyor-starti-baskan-erdogan-verecek",
+      "date": "2026-04-24T09:55:48.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/059c58/0/0/0/0/2048/1366?u=https://iahbr.tmgrup.com.tr/2026/04/24/1777023363352.jpg",
+      "summary": "Başkan Recep Tayyip Erdoğan, Cumhurbaşkanlığı Dolmabahçe Çalışma Ofisi'nde \"Formula 1 Türkiye GP Tanıtım Programı\"nda açıklamalarda bulundu. Erdoğan, \"2027 yılından itibaren Formula 1'in yeniden...Devamı için tıklayınız"
+    },
+    {
       "title": "Rekortmen şampiyon Rıza Kayaalp yurda döndü: Ülkem adına bunu başarmak gurur verici",
       "link": "https://www.ahaber.com.tr/spor/2026/04/23/rekortmen-sampiyon-riza-kayaalp-yurda-dondu-ulkem-adina-bunu-basarmak-gurur-verici",
       "date": "2026-04-23T11:07:07.000Z",
@@ -142,6 +647,62 @@
       "date": "2026-04-23T11:06:30.000Z",
       "image": "https://iaahbr.tmgrup.com.tr/7cac1c/1200/675/0/0/1080/607?u=https://iahbr.tmgrup.com.tr/2026/04/23/1776942331741.jpeg",
       "summary": "Real Madrid'den yapılan açıklamada, \"Arda Güler üzerinde yapılan tetkiklerin ardından, oyuncumuzun sağ bacağındaki biseps femoris kasında bir kas yaralanması olduğu tespit edildi\" denildi.Devamı için tıklayınız"
+    },
+    {
+      "title": "Tam bir rezalet",
+      "link": "https://www.ahaber.com.tr/yazarlar/levent-tuzemen/2026/04/23/tam-bir-rezalet",
+      "date": "2026-04-23T04:08:47.000Z",
+      "image": "fallback.jpg",
+      "summary": "'Gülme komşuna gelir başına' sözü G.Saray adına gerçek oldu. Volkan Demirel ve öğrencilerini, ortaya koydukları karakterli oyundan dolayı kutluyorum. Mücadeleleri, coşkuları, inanmışlıkları üst...Devamı için tıklayınız"
+    },
+    {
+      "title": "Türk'ün bükülmez bileği Avrupa'yı titretti! Rıza Kayaalp destan yazdı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/turkun-bukulmez-bilegi-avrupayi-titretti-riza-kayaalp-destan-yazdi",
+      "date": "2026-04-21T18:29:56.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/fca9cc/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/21/turkun-bukulmez-bilegi-avrupayi-titretti-riza-kayaalp-destan-yazdi-1776797591425.jpg",
+      "summary": "Arnavutluk'un başkenti Tiran'da düzenlenen 2026 Avrupa Güreş Şampiyonası'nda fırtına gibi esen milli gururumuz Rıza Kayaalp, minderden bir kez daha zaferle ayrıldı. Grekoromen stil 130 kiloda Macar...Devamı için tıklayınız"
+    },
+    {
+      "title": "16 yaşındaki yıldız adayı Arsenal'de",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/21/16-yasindaki-yildiz-adayi-arsenalde",
+      "date": "2026-04-21T11:46:31.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/2c53da/0/0/0/0/2048/1350?u=https://iahbr.tmgrup.com.tr/2026/04/21/16-yasindaki-yildiz-adayi-arsenalde-1776771986535.jpeg",
+      "summary": "Arsenal, 16 yaşındaki İngiliz stoper Marli Salmon ile ön sözleşme imzaladı. Kulüp, oyuncunun ağustosta 17 yaşına girince profesyonel sözleşme yapacağını açıkladı.Devamı için tıklayınız"
+    },
+    {
+      "title": "Halterde gurur günü! Özbek’ten çifte altın: Bakan Bak'tan tebrik mesajı",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/20/halterde-gurur-gunu-ozbekten-cifte-altin-bakan-baktan-tebrik-mesaji",
+      "date": "2026-04-20T16:16:27.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/47f45f/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/20/1776701634541.jpg",
+      "summary": "Batum’da düzenlenen Avrupa Halter Şampiyonası’nda Furkan Özbek, 65 kiloda silkmede Avrupa rekorunu geliştirerek altın madalyaya uzandı. Gençlik ve Spor Bakanı Osman Aşkın Bak, altın madalya kazanan...Devamı için tıklayınız"
+    },
+    {
+      "title": "2026 Dünya Kupası’nda dev heyecan! İşte en değerli 24 takım...",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/19/2026-dunya-kupasinda-dev-heyecan-iste-en-degerli-24-takim",
+      "date": "2026-04-19T15:10:58.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/aebf49/0/0/0/0/2048/1366?u=https://iahbr.tmgrup.com.tr/2026/04/19/2026-dunya-kupasinda-dev-heyecan-iste-en-degerli-24-takim-1776611450476.jpg",
+      "summary": "ABD, Kanada ve Meksika’nın ortaklaşa düzenleyeceği 2026 Dünya Kupası için geri sayım sürerken, turnuvada boy gösterecek 48 takım netlik kazandı. Play-off turunda Romanya ve Kosova engellerini kayıpsız...Devamı için tıklayınız"
+    },
+    {
+      "title": "Real Sociedad’dan tarihi zafer! Kupa penaltılarla geldi",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/19/real-sociedaddan-tarihi-zafer-kupa-penaltilarla-geldi",
+      "date": "2026-04-18T22:25:29.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ea7060/0/0/0/0/2048/1365?u=https://iahbr.tmgrup.com.tr/2026/04/19/1776550971707.jpg",
+      "summary": "İspanya Kral Kupası (Copa del Rey) finalinde Real Sociedad ile Atletico Madrid karşı karşıya geldi. Normal süresi 2-2 biten ve uzatmalarda da eşitliğin bozulmadığı mücadelede, seri penaltı atışlarına...Devamı için tıklayınız"
+    },
+    {
+      "title": "Çin'de Türklerin destanı: 2 altın 1 bronz madalya",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/12/cinde-turklerin-destani-2-altin-1-bronz-madalya",
+      "date": "2026-04-12T11:45:53.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/ca3d2e/0/0/0/0/1597/800?u=https://iahbr.tmgrup.com.tr/2026/04/12/cinde-turklerin-destani-2-altin-1-bronz-madalya-1775994764968.jpeg",
+      "summary": "Çin’in Leshan kentinde 10-12 Nisan’da düzenlenen Karate One Premier League turnuvasında Türkiye büyük başarı elde etti. 60 ülkeden 333 sporcunun katıldığı organizasyonda millilerimiz 2 altın, 1 bronz...Devamı için tıklayınız"
+    },
+    {
+      "title": "Milli gurur: Mete Gazoz erkekler klasik yayda yarı finalde",
+      "link": "https://www.ahaber.com.tr/spor/2026/04/10/milli-gurur-mete-gazoz-erkekler-klasik-yayda-yari-finalde",
+      "date": "2026-04-10T18:54:13.000Z",
+      "image": "https://iaahbr.tmgrup.com.tr/cc3cbb/1200/1200/217/0/703/486?u=https://iahbr.tmgrup.com.tr/2026/04/10/milli-gurur-mete-gazoz-yari-finalde-1775846993161.jpeg",
+      "summary": "2026 Okçuluk Dünya Kupası'nın 1. ayağında yarışan Mete Gazoz, erkekler klasik yayda yarı finale çıktı. Mete, Tayvanlı bir başka sporcu Tang Chih-Chun ile finale yükselme mücadelesi verecek. Klasik...Devamı için tıklayınız"
     }
   ]
 }
