@@ -69,8 +69,17 @@ async function loadNews(){
 }
 
 function showFull(){
-  document.getElementById("summary").style.display="none";
-  document.getElementById("content").style.display="block";
+  const content = document.getElementById("content");
+  const summary = document.getElementById("summary");
+
+  // 🔥 FIX: içerik boşsa kaybolma bug'ını engeller
+  if(!content.innerHTML.trim()){
+    alert("Tam içerik yüklenemedi.");
+    return;
+  }
+
+  summary.style.display="none";
+  content.style.display="block";
 }
 
 loadNews();
