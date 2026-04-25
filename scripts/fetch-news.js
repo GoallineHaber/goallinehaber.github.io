@@ -56,100 +56,42 @@ function detectCategory(item) {
 
 // 🔥 PUPPETEER FULL CONTENT
 async function getContent(url) {
-  let browser;
-
   try {
-    browser = await puppeteer.launch({
-      headless: "new",
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu"
-      ]
-    });
+    // 🔥 AMP versiyonunu zorla
+    const ampUrl = url.includes("/amp/")
+      ? url
+      : url.replace("https://www.ahaber.com.tr/", "https://www.ahaber.com.tr/amp/");
 
-    const page = await browser.newPage();
-
-    await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 30000
-    });
-
-    // 🔥 DEVAMINI OKU TIKLAMA
-    try {
-      const buttons = await page.$$("button, a");
-
-      for (let btn of buttons) {
-        const text = await page.evaluate(el => el.innerText, btn);
-
-        if (text && text.toLowerCase().includes("devamını oku")) {
-          await btn.click();
-          await page.waitForTimeout(2000);
-          break;
-        }
+    const res = await fetch(ampUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
       }
-    } catch (e) {}
-
-    // 🔥 İÇERİK ÇEK
-    const content = await page.evaluate(() => {
-      let article = null;
-
-      if (document.querySelector(".detay-text")) {
-        article = document.querySelector(".detay-text");
-      } else if (document.querySelector(".news-detail")) {
-        article = document.querySelector(".news-detail");
-      } else if (document.querySelector(".article-body")) {
-        article = document.querySelector(".article-body");
-      }
-
-      if (!article) return "";
-
-      const paragraphs = Array.from(article.querySelectorAll("p"))
-        .map(p => p.innerText.trim())
-        .filter(text =>
-          text.length > 30 &&
-          !text.toLowerCase().includes("devamını") &&
-          !text.toLowerCase().includes("tıklayınız")
-        );
-
-      return paragraphs.join("\n\n");
     });
 
-    await browser.close();
+    const html = await res.text();
+    const $ = cheerio.load(html);
 
-    if (!content || content.length < 100) {
-      return "İçerik alınamadı";
-    }
+    let content = "";
+
+    $(".detay-text p, article p").each((i, el) => {
+      const text = $(el).text().trim();
+
+      if (
+        text.length > 30 &&
+        !text.toLowerCase().includes("devamını") &&
+        !text.toLowerCase().includes("tıklayınız")
+      ) {
+        content += text + "\n\n";
+      }
+    });
+
+    if (!content) return "İçerik alınamadı";
 
     return content;
 
   } catch (err) {
-    if (browser) await browser.close();
-    console.log("Puppeteer hata:", err.message);
-
-    // 🔥 FALLBACK (cheerio)
-    try {
-      const res = await fetch(url, {
-        headers: { "User-Agent": "Mozilla/5.0" },
-        timeout: 10000
-      });
-
-      const html = await res.text();
-      const $ = cheerio.load(html);
-
-      let content = "";
-
-      $("p").each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 80) content += text + "\n\n";
-      });
-
-      return content || "İçerik alınamadı";
-
-    } catch {
-      return "İçerik alınamadı";
-    }
+    console.log("AMP içerik hatası:", err.message);
+    return "İçerik alınamadı";
   }
 }
 
