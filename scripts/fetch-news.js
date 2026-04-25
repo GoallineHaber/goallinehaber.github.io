@@ -96,14 +96,16 @@ async function fetchNews() {
         "fallback.jpg";
 
      const summary = item.contentSnippet || "Özet yok";
+      const fullContent = await getContent(item.link);
 
-      const obj = {
-        title: item.title || "Başlıksız Haber",
-        link: item.link || "#",
-        date: date.toISOString(),
-        image: image,
-        summary: summary
-      };
+     const obj = {
+  title: item.title || "Başlıksız Haber",
+  link: item.link || "#",
+  date: date.toISOString(),
+  image: image,
+  summary: summary,
+  content: fullContent
+};
 
       const category = detectCategory(item);
       news[category].push(obj);
