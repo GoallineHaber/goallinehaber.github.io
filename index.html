@@ -164,6 +164,28 @@ iframe { width:100%; border:none; }
         <div class="sidebar">
             <h3>⚽ Süper Lig</h3>
             <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
+
+            <!-- 🔥 EKLENEN 15 HABER -->
+            <div style="margin-top:15px;">
+                <h3>🔥 Son Futbol Haberleri</h3>
+
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Galatasaray transfer yaptı</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Fenerbahçe galip geldi</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Beşiktaş sakatlık haberi</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Trabzonspor hazırlık</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Süper Lig VAR tartışması</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Milli takım açıklandı</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Transfer dönemi hareketli</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Genç yıldız parlıyor</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Liderlik yarışı kızıştı</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Hakem kararı gündemde</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Derbi tarihi açıklandı</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Stadyum yenileniyor</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Gol krallığı yarışı</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Teknik direktör değişti</h4></div>
+                <div class="news-item"><img src="https://via.placeholder.com/300x180"><h4>Haftanın özeti</h4></div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -173,7 +195,6 @@ let allNews = [], currentIndex = 0;
 let currentPage = 1;
 const perPage = 12;
 
-// TEXT NORMALIZE
 function normalize(text){
     return text.toLowerCase()
     .replace(/ç/g,"c")
@@ -184,7 +205,6 @@ function normalize(text){
     .replace(/ü/g,"u");
 }
 
-// TEAM FILTER
 function filterTeam(team){
     const container = document.getElementById("all-news");
     container.innerHTML = "";
@@ -206,7 +226,6 @@ function filterTeam(team){
     });
 }
 
-// RENDER NEWS
 function renderNews(category){
     const container=document.getElementById("all-news");
     container.innerHTML="";
@@ -236,7 +255,6 @@ function renderNews(category){
     renderPagination(filtered.length, category);
 }
 
-// PAGINATION
 function renderPagination(total, category){
     const pageCount = Math.ceil(total / perPage);
     const pag = document.getElementById("pagination");
@@ -253,7 +271,6 @@ function renderPagination(total, category){
     }
 }
 
-// MANSET
 function loadManset(){
     setInterval(()=>{
         const n=allNews[currentIndex];
@@ -274,7 +291,6 @@ function filterCategory(cat){
     renderNews(cat);
 }
 
-// LOAD
 async function loadNews(){
     const res=await fetch("./data/news.json");
     const data=await res.json();
