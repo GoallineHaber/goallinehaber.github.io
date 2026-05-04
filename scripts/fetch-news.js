@@ -53,7 +53,7 @@ function detectCategory(item) {
   return "diger";
 }
 
-// CONTENT
+// 🔥 GERÇEK İÇERİK ÇEKME
 async function getContent(url) {
   try {
     const res = await fetch(url, { timeout: 10000 });
@@ -62,12 +62,29 @@ async function getContent(url) {
 
     let paragraphs = [];
 
-    $("p").each((i, el) => {
+    // 🔥 A Haber içerik alanı (daha temiz çekmek için)
+    $(".detay p, .news-detail p, article p").each((i, el) => {
       const text = $(el).text().trim();
-      if (text.length > 50) paragraphs.push(text);
+
+      if (
+        text.length > 50 &&
+        !text.toLowerCase().includes("devamını") &&
+        !text.toLowerCase().includes("tıklayın")
+      ) {
+        paragraphs.push(text);
+      }
     });
 
+    // fallback (eğer yukarıda bulamazsa)
+    if (paragraphs.length === 0) {
+      $("p").each((i, el) => {
+        const text = $(el).text().trim();
+        if (text.length > 50) paragraphs.push(text);
+      });
+    }
+
     let fullText = paragraphs.join("\n\n");
+
     if (!fullText) fullText = "İçerik yüklenemedi";
 
     return fullText;
@@ -99,14 +116,15 @@ async function fetchNews() {
         item.media?.$?.url ||
         "fallback.jpg";
 
-      const summary = item.contentSnippet || "Özet yok";
+      // 🔥 BURASI KRİTİK (ARTIK FULL İÇERİK)
+      const fullContent = await getContent(item.link);
 
       const obj = {
         title: item.title || "Başlıksız Haber",
         link: item.link || "#",
         date: date.toISOString(),
         image: image,
-        summary: summary
+        summary: fullContent // 🔥 FULL HABER
       };
 
       const category = detectCategory(item);
@@ -119,7 +137,7 @@ async function fetchNews() {
 
     fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
-    console.log("✔ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
+    console.log("✔ TÜM HABERLER FULL ÇEKİLDİ");
 
   } catch (err) {
     console.log("Genel hata:", err.message);
