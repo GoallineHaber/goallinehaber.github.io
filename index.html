@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 <title>GoallineHaber</title>
 
-<!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2722371260942185" crossorigin="anonymous"></script>
 
 <style>
 body { font-family: Arial; background: #eef1f5; margin: 0; }
 
-/* HEADER */
 .site-header {
     background: linear-gradient(90deg,#c00,#900);
     padding:25px;
@@ -20,7 +18,6 @@ body { font-family: Arial; background: #eef1f5; margin: 0; }
     text-align:center;
 }
 
-/* TAKIM BAR */
 .team-bar {
     display:flex;
     justify-content:center;
@@ -34,11 +31,9 @@ body { font-family: Arial; background: #eef1f5; margin: 0; }
 .team img { width:55px; height:55px; }
 .team:hover { transform:scale(1.1); }
 
-/* NAVBAR */
 .navbar { background:#111; padding:12px; text-align:center; }
 .navbar a { color:white; margin:0 15px; font-weight:bold; cursor:pointer; }
 
-/* PAGINATION */
 #pagination { text-align:center; padding:15px; }
 #pagination button {
     margin:5px;
@@ -49,68 +44,57 @@ body { font-family: Arial; background: #eef1f5; margin: 0; }
     cursor:pointer;
     border-radius:5px;
 }
-#pagination button:hover { background:#c00; }
 
-/* LAYOUT */
 .container { padding:20px; }
+
 .main-layout {
     display:grid;
     grid-template-columns:3fr 1fr;
     gap:25px;
 }
 
-/* MANSET */
 .manset-slider img {
     width:100%;
     max-height:400px;
     object-fit:cover;
     border-radius:10px;
 }
+
 .manset-title {
     font-size:26px;
     font-weight:bold;
     margin-top:10px;
 }
 
-/* NEWS GRID */
 #all-news {
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
+
 .news-item {
     background:white;
     padding:12px;
     border-radius:12px;
-    transition:0.3s;
     box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    transition:0.3s;
 }
+
 .news-item:hover { transform:translateY(-5px); }
+
 .news-item img {
     width:100%;
     height:200px;
     object-fit:cover;
     border-radius:8px;
 }
+
 .news-item h2 { font-size:18px; }
+
 .news-item p {
     font-size:14px;
     color:#444;
-    display:-webkit-box;
-    -webkit-line-clamp:4;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
 }
-
-/* SIDEBAR */
-.sidebar {
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-iframe { width:100%; border:none; }
 </style>
 </head>
 
@@ -118,30 +102,25 @@ iframe { width:100%; border:none; }
 
 <div class="site-header">GoallineHaber</div>
 
-<!-- TAKIM LOGOLARI -->
 <div class="team-bar">
     <div class="team" onclick="filterTeam('galatasaray')">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Galatasaray_Sports_Club_Logo.svg/120px-Galatasaray_Sports_Club_Logo.svg.png">
         <div>GS</div>
     </div>
-
     <div class="team" onclick="filterTeam('fenerbahce')">
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/120px-Fenerbah%C3%A7e_SK.png">
         <div>FB</div>
     </div>
-
     <div class="team" onclick="filterTeam('besiktas')">
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK.png/120px-Be%C5%9Fikta%C5%9F_JK.png">
         <div>BJK</div>
     </div>
-
     <div class="team" onclick="filterTeam('trabzonspor')">
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/0/0c/Trabzonspor.png/120px-Trabzonspor.png">
         <div>TS</div>
     </div>
 </div>
 
-<!-- NAV -->
 <div class="navbar">
     <a onclick="filterCategory('futbol')">Futbol</a>
     <a onclick="filterCategory('basketbol')">Basketbol</a>
@@ -164,38 +143,13 @@ iframe { width:100%; border:none; }
         <div class="sidebar">
             <h3>⚽ Süper Lig</h3>
             <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
-
-            <!-- 🔥 15 HABER -->
-            <div style="margin-top:15px;">
-                <h3>🔥 Son Futbol Haberleri</h3>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Galatasaray_SK_Logo.png">
-                    <h4><a href="haber.html?url=galatasaray-transfer">Galatasaray yeni transferini açıkladı</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png">
-                    <h4><a href="haber.html?url=fenerbahce-mac">Fenerbahçe maçı kazandı</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/3/3f/Be%C5%9Fikta%C5%9F_JK.png">
-                    <h4><a href="haber.html?url=besiktas-sakatlik">Beşiktaş sakatlık şoku</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/0/0c/Trabzonspor.png">
-                    <h4><a href="haber.html?url=trabzonspor-avrupa">Trabzonspor Avrupa hedefi</a></h4>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
 
 <script>
-let allNews = [], currentIndex = 0;
+let allNews = [];
+let currentIndex = 0;
 let currentPage = 1;
 const perPage = 12;
 
@@ -222,8 +176,8 @@ function filterTeam(team){
 
         div.innerHTML = `
             <img src="${n.image}">
-            <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-            <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
+            <h2><a href="${n.link}" target="_blank">${n.title}</a></h2>
+            <p>${n.summary}</p>
         `;
 
         container.appendChild(div);
@@ -241,53 +195,18 @@ function renderNews(category){
     const start = (currentPage-1)*perPage;
     const news = filtered.slice(start, start+perPage);
 
-    news.forEach((n,i)=>{
+    news.forEach(n=>{
         const div=document.createElement("div");
         div.className="news-item";
 
-        if(i === 6) div.style.gridColumn="span 2";
-
         div.innerHTML = `
             <img src="${n.image}">
-            <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-            <p>${n.summary.split("\n").slice(0,2).join(" ")}</p>
+            <h2><a href="${n.link}" target="_blank">${n.title}</a></h2>
+            <p>${n.summary}</p>
         `;
 
         container.appendChild(div);
     });
-
-    renderPagination(filtered.length, category);
-}
-
-function renderPagination(total, category){
-    const pageCount = Math.ceil(total / perPage);
-    const pag = document.getElementById("pagination");
-    pag.innerHTML="";
-
-    for(let i=1;i<=pageCount;i++){
-        const btn = document.createElement("button");
-        btn.innerText=i;
-        btn.onclick=()=>{
-            currentPage=i;
-            renderNews(category);
-        };
-        pag.appendChild(btn);
-    }
-}
-
-function loadManset(){
-    setInterval(()=>{
-        const n=allNews[currentIndex];
-
-        document.getElementById("manset").innerHTML = `
-            <img src="${n.image}">
-            <div class="manset-title">
-                <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
-            </div>
-        `;
-
-        currentIndex=(currentIndex+1)%allNews.length;
-    },4000);
 }
 
 function filterCategory(cat){
@@ -308,10 +227,7 @@ async function loadNews(){
         });
     });
 
-    allNews.sort((a,b)=>new Date(b.date)-new Date(a.date));
-
     renderNews("all");
-    loadManset();
 }
 
 loadNews();
