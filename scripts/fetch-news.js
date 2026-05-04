@@ -1,114 +1,88 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
-const fetch = require("node-fetch");
-const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
+const OpenAI = require("openai");
 
-const parser = new Parser({
-  customFields: {
-    item: [
-      ["media:content", "media"],
-      ["enclosure", "enclosure"],
-      ["category", "category"]
-    ]
-  }
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
 
-// 🔥 KATEGORİ
+const parser = new Parser();
+
+// KATEGORİ
 function detectCategory(item) {
-  const text = (
-    (item.title || "") +
-    (item.link || "") +
-    (item.contentSnippet || "") +
-    (item.content || "") +
-    (item.category || "")
-  ).toLowerCase();
+  const text = (item.title || "").toLowerCase();
 
-  if (
-    text.includes("futbol") ||
-    text.includes("galatasaray") ||
-    text.includes("fenerbahçe") ||
-    text.includes("beşiktaş") ||
-    text.includes("trabzonspor") ||
-    text.includes("gol") ||
-    text.includes("lig") ||
-    text.includes("maç") ||
-    text.includes("uefa")
-  ) return "futbol";
-
-  if (
-    text.includes("basketbol") ||
-    text.includes("nba") ||
-    text.includes("euroleague") ||
-    text.includes("pot") ||
-    text.includes("ribaund")
-  ) return "basketbol";
-
-  if (
-    text.includes("voleybol") ||
-    text.includes("file") ||
-    text.includes("smaç") ||
-    text.includes("servis")
-  ) return "voleybol";
-
+  if (text.includes("galatasaray") || text.includes("fenerbahçe") || text.includes("beşiktaş")) return "futbol";
+  if (text.includes("basketbol") || text.includes("nba")) return "basketbol";
+  if (text.includes("voleybol")) return "voleybol";
   return "diger";
 }
 
-// 🔥 FULL İÇERİK ÇEKME (ASIL DÜZELTME)
-async function getContent(url) {
+// 🔥 AI ÖZET
+async function aiSummary(text) {
   try {
-    const res = await fetch(url, { timeout: 10000 });
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    let paragraphs = [];
-
-    // 🔥 A HABER GERÇEK İÇERİK ALANI
-    let contentArea =
-      $(".articleBody").length
-        ? $(".articleBody")
-        : $(".newsDetailText").length
-        ? $(".newsDetailText")
-        : $(".detay").length
-        ? $(".detay")
-        : $("body");
-
-    contentArea.find("p").each((i, el) => {
-      const text = $(el).text().trim();
-
-      if (
-        text.length > 30 &&
-        !text.toLowerCase().includes("devamı için") &&
-        !text.toLowerCase().includes("tıklayınız")
-      ) {
-        paragraphs.push(text);
-      }
+    const res = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: "Aşağıdaki spor haberini 2 kısa cümle ile özetle:\n\n" + text
+        }
+      ]
     });
 
-    let fullText = paragraphs.join("\n\n");
-
-    // 🔥 FALLBACK (eğer yukarıdan gelmezse)
-    if (!fullText) {
-      paragraphs = [];
-      $("p").each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 50) paragraphs.push(text);
-      });
-      fullText = paragraphs.join("\n\n");
-    }
-
-    if (!fullText) fullText = "İçerik yüklenemedi";
-
-    return fullText;
+    return res.choices[0].message.content;
 
   } catch (err) {
-    console.log("Hata içerik:", err.message);
-    return "İçerik yüklenemedi";
+    console.log("AI hata:", err.message);
+    return text.split("\n\n").slice(0, 2).join(" "); // fallback
   }
 }
 
-// 🔥 ANA FONKSİYON
+// 🔥 FULL CONTENT
+async function getContent(page, url) {
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 0 });
+    await page.waitForSelector("p");
+
+    const content = await page.evaluate(() => {
+      let texts = [];
+
+      document.querySelectorAll("p").forEach(p => {
+        const t = p.innerText.trim();
+
+        if (
+          t.length > 40 &&
+          !t.toLowerCase().includes("devamı için") &&
+          !t.toLowerCase().includes("tıklayınız")
+        ) {
+          texts.push(t);
+        }
+      });
+
+      return texts.join("\n\n");
+    });
+
+    return content || "İçerik alınamadı";
+
+  } catch (err) {
+    console.log("Hata:", err.message);
+    return "İçerik alınamadı";
+  }
+}
+
+// ANA
 async function fetchNews() {
-  const url = "https://www.ahaber.com.tr/rss/spor.xml";
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: "/usr/bin/chromium-browser",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
+
+  const page = await browser.newPage();
+
+  const feed = await parser.parseURL("https://www.ahaber.com.tr/rss/spor.xml");
 
   let news = {
     futbol: [],
@@ -117,43 +91,32 @@ async function fetchNews() {
     diger: []
   };
 
-  try {
-    const feed = await parser.parseURL(url);
+  for (const item of feed.items.slice(0, 8)) { // ⚠️ AI olduğu için limit düşük
+    const fullContent = await getContent(page, item.link);
 
-    for (const item of feed.items) {
-      const date = new Date(item.pubDate || Date.now());
+    // 🔥 AI ÖZET
+    const shortSummary = await aiSummary(fullContent);
 
-      let image =
-        item.enclosure?.url ||
-        item.media?.$?.url ||
-        "fallback.jpg";
+    const obj = {
+      title: item.title,
+      link: item.link,
+      date: new Date(item.pubDate || Date.now()).toISOString(),
+      image: item.enclosure?.url || "",
+      summary: fullContent,
+      short: shortSummary
+    };
 
-      // 🔥 ARTIK FULL HABER ÇEKİYOR
-      const fullContent = await getContent(item.link);
+    const cat = detectCategory(item);
+    news[cat].push(obj);
 
-      const obj = {
-        title: item.title || "Başlıksız Haber",
-        link: item.link || "#",
-        date: date.toISOString(),
-        image: image,
-        summary: fullContent
-      };
-
-      const category = detectCategory(item);
-      news[category].push(obj);
-    }
-
-    Object.keys(news).forEach(cat => {
-      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
-    });
-
-    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-
-    console.log("✔ TÜM HABERLER FULL ÇEKİLDİ");
-
-  } catch (err) {
-    console.log("Genel hata:", err.message);
+    console.log("✔ çekildi:", item.title);
   }
+
+  fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+
+  await browser.close();
+
+  console.log("🔥 AI + FULL HABER TAMAMLANDI");
 }
 
 fetchNews();
