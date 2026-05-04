@@ -164,32 +164,6 @@ iframe { width:100%; border:none; }
         <div class="sidebar">
             <h3>⚽ Süper Lig</h3>
             <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
-
-            <!-- 🔥 15 HABER -->
-            <div style="margin-top:15px;">
-                <h3>🔥 Son Futbol Haberleri</h3>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Galatasaray_SK_Logo.png">
-                    <h4><a href="haber.html?url=galatasaray-transfer">Galatasaray yeni transferini açıkladı</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png">
-                    <h4><a href="haber.html?url=fenerbahce-mac">Fenerbahçe maçı kazandı</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/3/3f/Be%C5%9Fikta%C5%9F_JK.png">
-                    <h4><a href="haber.html?url=besiktas-sakatlik">Beşiktaş sakatlık şoku</a></h4>
-                </div>
-
-                <div class="news-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/tr/0/0c/Trabzonspor.png">
-                    <h4><a href="haber.html?url=trabzonspor-avrupa">Trabzonspor Avrupa hedefi</a></h4>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
@@ -199,6 +173,7 @@ let allNews = [], currentIndex = 0;
 let currentPage = 1;
 const perPage = 12;
 
+// TEXT NORMALIZE
 function normalize(text){
     return text.toLowerCase()
     .replace(/ç/g,"c")
@@ -209,6 +184,7 @@ function normalize(text){
     .replace(/ü/g,"u");
 }
 
+// TEAM FILTER
 function filterTeam(team){
     const container = document.getElementById("all-news");
     container.innerHTML = "";
@@ -230,6 +206,7 @@ function filterTeam(team){
     });
 }
 
+// RENDER NEWS
 function renderNews(category){
     const container=document.getElementById("all-news");
     container.innerHTML="";
@@ -259,6 +236,7 @@ function renderNews(category){
     renderPagination(filtered.length, category);
 }
 
+// PAGINATION
 function renderPagination(total, category){
     const pageCount = Math.ceil(total / perPage);
     const pag = document.getElementById("pagination");
@@ -275,6 +253,7 @@ function renderPagination(total, category){
     }
 }
 
+// MANSET
 function loadManset(){
     setInterval(()=>{
         const n=allNews[currentIndex];
@@ -295,6 +274,7 @@ function filterCategory(cat){
     renderNews(cat);
 }
 
+// LOAD
 async function loadNews(){
     const res=await fetch("./data/news.json");
     const data=await res.json();
