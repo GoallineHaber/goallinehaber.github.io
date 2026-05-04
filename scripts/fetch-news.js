@@ -29,80 +29,52 @@ function detectCategory(item) {
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
     text.includes("trabzonspor") ||
+    text.includes("gol") ||
     text.includes("lig") ||
-    text.includes("maç")
+    text.includes("maç") ||
+    text.includes("uefa")
   ) return "futbol";
 
   if (
     text.includes("basketbol") ||
     text.includes("nba") ||
-    text.includes("euroleague")
+    text.includes("euroleague") ||
+    text.includes("pot") ||
+    text.includes("ribaund")
   ) return "basketbol";
 
   if (
     text.includes("voleybol") ||
-    text.includes("smaç")
+    text.includes("file") ||
+    text.includes("smaç") ||
+    text.includes("servis")
   ) return "voleybol";
 
   return "diger";
 }
 
-// 🚀 FULL CONTENT (BOT ENGELİ FIX + FALLBACK)
+// CONTENT
 async function getContent(url) {
   try {
-    const res = await fetch(url, {
-      timeout: 15000,
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-        "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.8"
-      }
-    });
-
+    const res = await fetch(url, { timeout: 10000 });
     const html = await res.text();
-
-    // DEBUG
-    if (!html || html.length < 1000) {
-      console.log("❌ BOŞ HTML:", url);
-      return "İçerik alınamadı (bot engeli)";
-    }
-
     const $ = cheerio.load(html);
 
     let paragraphs = [];
 
-    // 1️⃣ ANA SELECTOR
-    $(".detay-icerik p").each((i, el) => {
+    $("p").each((i, el) => {
       const text = $(el).text().trim();
-      if (text.length > 30) paragraphs.push(text);
+      if (text.length > 50) paragraphs.push(text);
     });
 
-    // 2️⃣ YEDEK
-    if (paragraphs.length === 0) {
-      $(".article-body p").each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 30) paragraphs.push(text);
-      });
-    }
+    let fullText = paragraphs.join("\n\n");
+    if (!fullText) fullText = "İçerik yüklenemedi";
 
-    // 3️⃣ SON ÇARE
-    if (paragraphs.length === 0) {
-      $("p").each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 80) paragraphs.push(text);
-      });
-    }
-
-    if (paragraphs.length === 0) {
-      console.log("❌ İÇERİK BULUNAMADI:", url);
-      return "İçerik bulunamadı";
-    }
-
-    return paragraphs.join("\n\n");
+    return fullText;
 
   } catch (err) {
-    console.log("🔥 HATA:", err.message);
-    return "İçerik çekilemedi";
+    console.log("Hata içerik:", err.message);
+    return "İçerik yüklenemedi";
   }
 }
 
@@ -119,10 +91,7 @@ async function fetchNews() {
   try {
     const feed = await parser.parseURL(url);
 
-    // ⚠️ LIMIT (çok önemli)
-    const items = feed.items.slice(0, 8);
-
-    for (const item of items) {
+    for (const item of feed.items) {
       const date = new Date(item.pubDate || Date.now());
 
       let image =
@@ -132,17 +101,12 @@ async function fetchNews() {
 
       const summary = item.contentSnippet || "Özet yok";
 
-      console.log("⏳ Çekiliyor:", item.link);
-
-      const content = await getContent(item.link);
-
       const obj = {
         title: item.title || "Başlıksız Haber",
         link: item.link || "#",
         date: date.toISOString(),
         image: image,
-        summary: summary,
-        content: content
+        summary: summary
       };
 
       const category = detectCategory(item);
@@ -155,10 +119,10 @@ async function fetchNews() {
 
     fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
 
-    console.log("✅ FULL HABERLER BAŞARIYLA ÇEKİLDİ");
+    console.log("✔️ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
 
   } catch (err) {
-    console.log("❌ GENEL HATA:", err.message);
+    console.log("Genel hata:", err.message);
   }
 }
 
