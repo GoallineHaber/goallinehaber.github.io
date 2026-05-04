@@ -1,88 +1,86 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
-const puppeteer = require("puppeteer");
-const OpenAI = require("openai");
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+const parser = new Parser({
+  customFields: {
+    item: [
+      ["media:content", "media"],
+      ["enclosure", "enclosure"],
+      ["category", "category"]
+    ]
+  }
 });
-
-const parser = new Parser();
 
 // KATEGORİ
 function detectCategory(item) {
-  const text = (item.title || "").toLowerCase();
+  const text = (
+    (item.title || "") +
+    (item.link || "") +
+    (item.contentSnippet || "") +
+    (item.content || "") +
+    (item.category || "")
+  ).toLowerCase();
 
-  if (text.includes("galatasaray") || text.includes("fenerbahçe") || text.includes("beşiktaş")) return "futbol";
-  if (text.includes("basketbol") || text.includes("nba")) return "basketbol";
-  if (text.includes("voleybol")) return "voleybol";
+  if (
+    text.includes("futbol") ||
+    text.includes("galatasaray") ||
+    text.includes("fenerbahçe") ||
+    text.includes("beşiktaş") ||
+    text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
+    text.includes("uefa")
+  ) return "futbol";
+
+  if (
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague") ||
+    text.includes("pot") ||
+    text.includes("ribaund")
+  ) return "basketbol";
+
+  if (
+    text.includes("voleybol") ||
+    text.includes("file") ||
+    text.includes("smaç") ||
+    text.includes("servis")
+  ) return "voleybol";
+
   return "diger";
 }
 
-// 🔥 AI ÖZET
-async function aiSummary(text) {
+// CONTENT
+async function getContent(url) {
   try {
-    const res = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "user",
-          content: "Aşağıdaki spor haberini 2 kısa cümle ile özetle:\n\n" + text
-        }
-      ]
+    const res = await fetch(url, { timeout: 10000 });
+    const html = await res.text();
+    const $ = cheerio.load(html);
+
+    let paragraphs = [];
+
+    $("p").each((i, el) => {
+      const text = $(el).text().trim();
+      if (text.length > 50) paragraphs.push(text);
     });
 
-    return res.choices[0].message.content;
+    let fullText = paragraphs.join("\n\n");
+    if (!fullText) fullText = "İçerik yüklenemedi";
+
+    return fullText;
 
   } catch (err) {
-    console.log("AI hata:", err.message);
-    return text.split("\n\n").slice(0, 2).join(" "); // fallback
+    console.log("Hata içerik:", err.message);
+    return "İçerik yüklenemedi";
   }
 }
 
-// 🔥 FULL CONTENT
-async function getContent(page, url) {
-  try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 0 });
-    await page.waitForSelector("p");
-
-    const content = await page.evaluate(() => {
-      let texts = [];
-
-      document.querySelectorAll("p").forEach(p => {
-        const t = p.innerText.trim();
-
-        if (
-          t.length > 40 &&
-          !t.toLowerCase().includes("devamı için") &&
-          !t.toLowerCase().includes("tıklayınız")
-        ) {
-          texts.push(t);
-        }
-      });
-
-      return texts.join("\n\n");
-    });
-
-    return content || "İçerik alınamadı";
-
-  } catch (err) {
-    console.log("Hata:", err.message);
-    return "İçerik alınamadı";
-  }
-}
-
-// ANA
 async function fetchNews() {
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: "/usr/bin/chromium-browser",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"]
-  });
+  const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
-  const page = await browser.newPage();
-
-  const url = "https://feeds.bbci.co.uk/sport/rss.xml";
   let news = {
     futbol: [],
     basketbol: [],
@@ -90,31 +88,42 @@ async function fetchNews() {
     diger: []
   };
 
-  for (const item of feed.items.slice(0, 8)) { // ⚠️ AI olduğu için limit düşük
-    const fullContent = await getContent(page, item.link);
+  try {
+    const feed = await parser.parseURL(url);
 
-    // 🔥 AI ÖZET
-    const summary = await getContent(item.link);
+    for (const item of feed.items) {
+      const date = new Date(item.pubDate || Date.now());
 
-    const obj = {
-  title: item.title,
-  link: item.link,
-  date: date.toISOString(),
-  image: image,
-  summary: summary // 🔥 FULL İÇERİK BURADA
-};
+      let image =
+        item.enclosure?.url ||
+        item.media?.$?.url ||
+        "fallback.jpg";
 
-    const cat = detectCategory(item);
-    news[cat].push(obj);
+      const summary = item.contentSnippet || "Özet yok";
 
-    console.log("✔ çekildi:", item.title);
+      const obj = {
+        title: item.title || "Başlıksız Haber",
+        link: item.link || "#",
+        date: date.toISOString(),
+        image: image,
+        summary: summary
+      };
+
+      const category = detectCategory(item);
+      news[category].push(obj);
+    }
+
+    Object.keys(news).forEach(cat => {
+      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+    });
+
+    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+
+    console.log("✔️ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
+
+  } catch (err) {
+    console.log("Genel hata:", err.message);
   }
-
-  fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
-
-  await browser.close();
-
-  console.log("🔥 AI + FULL HABER TAMAMLANDI");
 }
 
 fetchNews();
