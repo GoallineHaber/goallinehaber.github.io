@@ -82,8 +82,7 @@ async function fetchNews() {
 
   const page = await browser.newPage();
 
-  const feed = await parser.parseURL("https://www.ahaber.com.tr/rss/spor.xml");
-
+  const url = "https://feeds.bbci.co.uk/sport/rss.xml";
   let news = {
     futbol: [],
     basketbol: [],
