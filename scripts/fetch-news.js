@@ -95,16 +95,15 @@ async function fetchNews() {
     const fullContent = await getContent(page, item.link);
 
     // 🔥 AI ÖZET
-    const shortSummary = await aiSummary(fullContent);
+    const summary = await getContent(item.link);
 
     const obj = {
-      title: item.title,
-      link: item.link,
-      date: new Date(item.pubDate || Date.now()).toISOString(),
-      image: item.enclosure?.url || "",
-      summary: fullContent,
-      short: shortSummary
-    };
+  title: item.title,
+  link: item.link,
+  date: date.toISOString(),
+  image: image,
+  summary: summary // 🔥 FULL İÇERİK BURADA
+};
 
     const cat = detectCategory(item);
     news[cat].push(obj);
