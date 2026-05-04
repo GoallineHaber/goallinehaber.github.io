@@ -223,7 +223,7 @@ function filterTeam(team){
         div.innerHTML = `
             <img src="${n.image}">
             <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-            <p>${n.summary}</p>
+            <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
         `;
 
         container.appendChild(div);
@@ -247,10 +247,10 @@ function renderNews(category){
 
         if(i === 6) div.style.gridColumn="span 2";
 
-        div.innerHTML= `
-        <img src="${n.image}">
-        <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-        <p>${n.summary}</p>
+        div.innerHTML = `
+            <img src="${n.image}">
+            <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
+            <p>${n.summary.split("\n").slice(0,2).join(" ")}</p>
         `;
 
         container.appendChild(div);
@@ -296,7 +296,7 @@ function filterCategory(cat){
 }
 
 async function loadNews(){
-    const res=await fetch("./data/news.json?v=" + Date.now());
+    const res=await fetch("./data/news.json");
     const data=await res.json();
 
     allNews=[];
