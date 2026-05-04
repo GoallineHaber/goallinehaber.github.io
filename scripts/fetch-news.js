@@ -13,7 +13,7 @@ const parser = new Parser({
   }
 });
 
-// KATEGORİ
+// 🔥 KATEGORİ
 function detectCategory(item) {
   const text = (
     (item.title || "") +
@@ -53,7 +53,7 @@ function detectCategory(item) {
   return "diger";
 }
 
-// 🔥 GERÇEK İÇERİK ÇEKME
+// 🔥 FULL İÇERİK ÇEKME (ASIL DÜZELTME)
 async function getContent(url) {
   try {
     const res = await fetch(url, { timeout: 10000 });
@@ -62,28 +62,39 @@ async function getContent(url) {
 
     let paragraphs = [];
 
-    // 🔥 A Haber içerik alanı (daha temiz çekmek için)
-    $(".detay p, .news-detail p, article p").each((i, el) => {
+    // 🔥 A HABER GERÇEK İÇERİK ALANI
+    let contentArea =
+      $(".articleBody").length
+        ? $(".articleBody")
+        : $(".newsDetailText").length
+        ? $(".newsDetailText")
+        : $(".detay").length
+        ? $(".detay")
+        : $("body");
+
+    contentArea.find("p").each((i, el) => {
       const text = $(el).text().trim();
 
       if (
-        text.length > 50 &&
-        !text.toLowerCase().includes("devamını") &&
-        !text.toLowerCase().includes("tıklayın")
+        text.length > 30 &&
+        !text.toLowerCase().includes("devamı için") &&
+        !text.toLowerCase().includes("tıklayınız")
       ) {
         paragraphs.push(text);
       }
     });
 
-    // fallback (eğer yukarıda bulamazsa)
-    if (paragraphs.length === 0) {
+    let fullText = paragraphs.join("\n\n");
+
+    // 🔥 FALLBACK (eğer yukarıdan gelmezse)
+    if (!fullText) {
+      paragraphs = [];
       $("p").each((i, el) => {
         const text = $(el).text().trim();
         if (text.length > 50) paragraphs.push(text);
       });
+      fullText = paragraphs.join("\n\n");
     }
-
-    let fullText = paragraphs.join("\n\n");
 
     if (!fullText) fullText = "İçerik yüklenemedi";
 
@@ -95,6 +106,7 @@ async function getContent(url) {
   }
 }
 
+// 🔥 ANA FONKSİYON
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
@@ -116,7 +128,7 @@ async function fetchNews() {
         item.media?.$?.url ||
         "fallback.jpg";
 
-      // 🔥 BURASI KRİTİK (ARTIK FULL İÇERİK)
+      // 🔥 ARTIK FULL HABER ÇEKİYOR
       const fullContent = await getContent(item.link);
 
       const obj = {
@@ -124,7 +136,7 @@ async function fetchNews() {
         link: item.link || "#",
         date: date.toISOString(),
         image: image,
-        summary: fullContent // 🔥 FULL HABER
+        summary: fullContent
       };
 
       const category = detectCategory(item);
