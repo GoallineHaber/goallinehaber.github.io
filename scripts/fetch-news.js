@@ -11,25 +11,30 @@ const sources = [
 
 async function getFullContent(link){
   try{
-    const res = await fetch(link);
+    const res = await fetch(link, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
+    });
+
     const html = await res.text();
     const $ = cheerio.load(html);
 
     let content = "";
 
-    $(".detail-content p").each((i, el)=>{
-      content += `<p>${$(el).text()}</p>`;
-    });
+    // 🔥 TÜM PARAGRAFLARI AL (EN SAĞLAM YÖNTEM)
+    $("p").each((i, el)=>{
+      const text = $(el).text().trim();
 
-    if(!content){
-      $("article p").each((i, el)=>{
-        content += `<p>${$(el).text()}</p>`;
-      });
-    }
+      if(text.length > 50){ // çöp filtre
+        content += `<p>${text}</p>`;
+      }
+    });
 
     return content || "İçerik çekilemedi";
 
   }catch(err){
+    console.log("HATA:", err.message);
     return "İçerik alınamadı";
   }
 }
@@ -44,12 +49,10 @@ async function scrape(){
 
     result[src.name] = [];
 
-    const articles = $("a").slice(0, 10);
+    const links = $("a");
 
-    for(let i=0;i<articles.length;i++){
-      const el = articles[i];
-
-      let link = $(el).attr("href");
+    for(let i=0;i<links.length;i++){
+      let link = $(links[i]).attr("href");
 
       if(!link || !link.includes("/haber/")) continue;
 
@@ -57,9 +60,9 @@ async function scrape(){
         link = "https://www.ahaber.com.tr" + link;
       }
 
-      const title = $(el).text().trim();
+      const title = $(links[i]).text().trim();
 
-      if(!title) continue;
+      if(!title || title.length < 10) continue;
 
       const content = await getFullContent(link);
 
@@ -71,7 +74,7 @@ async function scrape(){
         content
       });
 
-      console.log("✔ çekildi:", title);
+      console.log("✔:", title);
     }
   }
 
