@@ -56,28 +56,33 @@ function detectCategory(item) {
 // CONTENT
 async function getContent(url) {
   try {
-    const res = await fetch(url, { timeout: 10000 });
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
+    });
+
     const html = await res.text();
     const $ = cheerio.load(html);
 
     let paragraphs = [];
 
-    $("p").each((i, el) => {
+    $(".detay-text p").each((i, el) => {
       const text = $(el).text().trim();
-      if (text.length > 50) paragraphs.push(text);
+      if (text.length > 30) paragraphs.push(text);
     });
 
     let fullText = paragraphs.join("\n\n");
-    if (!fullText) fullText = "İçerik yüklenemedi";
+
+    if (!fullText) fullText = "İçerik çekilemedi";
 
     return fullText;
 
   } catch (err) {
     console.log("Hata içerik:", err.message);
-    return "İçerik yüklenemedi";
+    return "İçerik çekilemedi";
   }
 }
-
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
