@@ -34,39 +34,53 @@ a:hover {
 <h1 id="title"></h1>
 <img id="image">
 <p id="date"></p>
-<p id="summary"></p>
+
+<!-- 🔥 BURASI FULL CONTENT -->
+<div id="summary"></div>
 
 <br>
 
 <a id="source" target="_blank"></a>
 
 <script>
-const params=new URLSearchParams(window.location.search);
-const url=params.get("url");
+const params = new URLSearchParams(window.location.search);
+const url = params.get("url");
 
 async function loadNews(){
-  const res=await fetch("./data/news.json");
-  const data=await res.json();
+  const res = await fetch("./data/news.json");
+  const data = await res.json();
 
-  let found=null;
+  let found = null;
 
   Object.keys(data).forEach(cat=>{
     data[cat].forEach(n=>{
-      if(n.link===url) found=n;
+      if(n.link === url) found = n;
     });
   });
 
   if(found){
-    document.getElementById("title").innerText = found.title || "Başlıksız Haber";
-    document.getElementById("date").innerText = new Date(found.date).toLocaleString() || "";
-    document.getElementById("summary").innerHTML = (found.summary || "İçerik yok").replace(/\n/g,"<br>");
-    document.getElementById("image").src = found.image || "fallback.jpg";
 
-    document.getElementById("source").href = found.link || "#";
-    document.getElementById("source").innerText = found.link ? "Haberi Kaynağında Görüntüle" : "";
+    document.getElementById("title").innerText =
+      found.title || "Başlıksız Haber";
+
+    document.getElementById("date").innerText =
+      new Date(found.date).toLocaleString() || "";
+
+    // 🔥 EN ÖNEMLİ YER
+    document.getElementById("summary").innerHTML =
+      found.summary || "İçerik yok";
+
+    document.getElementById("image").src =
+      found.image || "fallback.jpg";
+
+    document.getElementById("source").href =
+      found.link || "#";
+
+    document.getElementById("source").innerText =
+      found.link ? "Haberi Kaynağında Görüntüle" : "";
 
   } else {
-    document.body.innerHTML="Haber bulunamadı";
+    document.body.innerHTML = "Haber bulunamadı";
   }
 }
 
