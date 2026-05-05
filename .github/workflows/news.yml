@@ -2,7 +2,7 @@ name: Haber Scraper
 
 on:
   schedule:
-    - cron: "*/30 * * * *" # her 30 dk
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -10,27 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repo çek
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Node kur
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: 18
 
-      - name: Paketleri yükle
-        run: npm install
+      - run: npm install
 
-      - name: Chromium yükle
-        run: npx puppeteer browsers install chrome
+      - name: Chrome kur
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Scraper çalıştır
         run: node scraper.js
 
-      - name: Commit & push
+      - name: Push
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "bot"
+          git config user.email "bot@github.com"
           git add .
-          git commit -m "news update" || echo "no changes"
+          git commit -m "update news" || echo "no change"
           git push
