@@ -8,25 +8,23 @@ function detectCategory(text) {
   text = text.toLowerCase();
 
   if (text.includes("futbol") || text.includes("galatasaray") || text.includes("fenerbah")) return "futbol";
-  if (text.includes("basket"))  return "basketbol";
+  if (text.includes("basket")) return "basketbol";
   if (text.includes("voleybol")) return "voleybol";
 
   return "diger";
 }
 
-// 🔥 FULL CONTENT
+// 🔥 FULL CONTENT ÇEK
 async function getContent(page, url) {
   try {
     await page.goto(url, { waitUntil: "networkidle2", timeout: 0 });
 
-    // önemli bekleme
-    await page.waitForSelector(".detay-text", { timeout: 5000 });
+    await page.waitForSelector(".detay-text", { timeout: 8000 });
 
     const data = await page.evaluate(() => {
-      let content = "";
-
       const container = document.querySelector(".detay-text");
 
+      let content = "";
       if (container) {
         content = container.innerHTML;
       }
@@ -40,7 +38,7 @@ async function getContent(page, url) {
     return data;
 
   } catch (err) {
-    console.log("İçerik hata:", err.message);
+    console.log("İçerik alınamadı:", err.message);
     return null;
   }
 }
@@ -50,7 +48,13 @@ async function fetchNews() {
 
   const browser = await puppeteer.launch({
     headless: "new",
-    args: ["--no-sandbox"]
+    executablePath: "/usr/bin/google-chrome",
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu"
+    ]
   });
 
   const page = await browser.newPage();
@@ -72,8 +76,6 @@ async function fetchNews() {
       link: item.link,
       date: new Date(item.pubDate || Date.now()).toISOString(),
       image: full?.img || "",
-      
-      // 🔥 KRİTİK NOKTA BURASI
       summary: full?.content || item.contentSnippet || ""
     };
 
@@ -85,7 +87,7 @@ async function fetchNews() {
 
   await browser.close();
 
-  console.log("✅ FULL içerik JSON'a yazıldı");
+  console.log("✅ FULL haberler çekildi");
 }
 
 fetchNews();
