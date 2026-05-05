@@ -1,84 +1,129 @@
+const Parser = require("rss-parser");
 const fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
 
-const sources = [
-  {
-    name: "gundem",
-    url: "https://www.ahaber.com.tr/gundem"
+const parser = new Parser({
+  customFields: {
+    item: [
+      ["media:content", "media"],
+      ["enclosure", "enclosure"],
+      ["category", "category"]
+    ]
   }
-];
+});
 
-async function getFullContent(link){
-  try{
-    const res = await fetch(link, {
-      headers: {
-        "User-Agent": "Mozilla/5.0"
-      }
-    });
+// KATEGORİ
+function detectCategory(item) {
+  const text = (
+    (item.title || "") +
+    (item.link || "") +
+    (item.contentSnippet || "") +
+    (item.content || "") +
+    (item.category || "")
+  ).toLowerCase();
 
+  if (
+    text.includes("futbol") ||
+    text.includes("galatasaray") ||
+    text.includes("fenerbahçe") ||
+    text.includes("beşiktaş") ||
+    text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
+    text.includes("uefa")
+  ) return "futbol";
+
+  if (
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague") ||
+    text.includes("pot") ||
+    text.includes("ribaund")
+  ) return "basketbol";
+
+  if (
+    text.includes("voleybol") ||
+    text.includes("file") ||
+    text.includes("smaç") ||
+    text.includes("servis")
+  ) return "voleybol";
+
+  return "diger";
+}
+
+// CONTENT
+async function getContent(url) {
+  try {
+    const res = await fetch(url, { timeout: 10000 });
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    let content = "";
+    let paragraphs = [];
 
-    // 🔥 TÜM PARAGRAFLARI AL (EN SAĞLAM YÖNTEM)
-    $("p").each((i, el)=>{
+    $("p").each((i, el) => {
       const text = $(el).text().trim();
-
-      if(text.length > 50){ // çöp filtre
-        content += `<p>${text}</p>`;
-      }
+      if (text.length > 50) paragraphs.push(text);
     });
 
-    return content || "İçerik çekilemedi";
+    let fullText = paragraphs.join("\n\n");
+    if (!fullText) fullText = "İçerik yüklenemedi";
 
-  }catch(err){
-    console.log("HATA:", err.message);
-    return "İçerik alınamadı";
+    return fullText;
+
+  } catch (err) {
+    console.log("Hata içerik:", err.message);
+    return "İçerik yüklenemedi";
   }
 }
 
-async function scrape(){
-  const result = {};
+async function fetchNews() {
+  const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
-  for(const src of sources){
-    const res = await fetch(src.url);
-    const html = await res.text();
-    const $ = cheerio.load(html);
+  let news = {
+    futbol: [],
+    basketbol: [],
+    voleybol: [],
+    diger: []
+  };
 
-    result[src.name] = [];
+  try {
+    const feed = await parser.parseURL(url);
 
-    const links = $("a");
+    for (const item of feed.items) {
+      const date = new Date(item.pubDate || Date.now());
 
-    for(let i=0;i<links.length;i++){
-      let link = $(links[i]).attr("href");
+      let image =
+        item.enclosure?.url ||
+        item.media?.$?.url ||
+        "fallback.jpg";
 
-      if(!link || !link.includes("/haber/")) continue;
+      const summary = item.contentSnippet || "Özet yok";
 
-      if(!link.startsWith("http")){
-        link = "https://www.ahaber.com.tr" + link;
-      }
+      const obj = {
+        title: item.title || "Başlıksız Haber",
+        link: item.link || "#",
+        date: date.toISOString(),
+        image: image,
+        summary: summary
+      };
 
-      const title = $(links[i]).text().trim();
-
-      if(!title || title.length < 10) continue;
-
-      const content = await getFullContent(link);
-
-      result[src.name].push({
-        title,
-        link,
-        image: "",
-        date: new Date().toISOString(),
-        content
-      });
-
-      console.log("✔:", title);
+      const category = detectCategory(item);
+      news[category].push(obj);
     }
-  }
 
-  fs.writeFileSync("./data/news.json", JSON.stringify(result, null, 2));
+    Object.keys(news).forEach(cat => {
+      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+    });
+
+    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+
+    console.log("✔️ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
+
+  } catch (err) {
+    console.log("Genel hata:", err.message);
+  }
 }
 
-scrape();
+fetchNews();
