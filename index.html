@@ -314,8 +314,8 @@ loadNews();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Haber Merkezi | Güncel ve Özet Haberler</title>
-  <meta name="description" content="Güncel haberler, teknoloji, dünya ve ekonomi gelişmeleri. Kısa, hızlı ve özet haber platformu.">
+  <title>Haber Merkezi | Güncel Haberler</title>
+  <meta name="description" content="Güncel haberler, teknoloji, ekonomi ve dünya gelişmeleri. Kısa ve özet haber platformu.">
 
   <style>
     body {
@@ -328,14 +328,14 @@ loadNews();
     header {
       background: #111;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
     }
 
     nav {
       background: #222;
-      padding: 10px;
       text-align: center;
+      padding: 10px;
     }
 
     nav a {
@@ -346,7 +346,7 @@ loadNews();
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
       padding: 20px;
     }
@@ -356,33 +356,47 @@ loadNews();
       padding: 15px;
       margin-bottom: 15px;
       border-radius: 8px;
+      transition: 0.2s;
     }
 
-    .news-card h2 {
-      margin-top: 0;
-      font-size: 18px;
+    .news-card:hover {
+      transform: scale(1.01);
     }
 
     .category {
       font-size: 12px;
-      color: #777;
+      color: gray;
+    }
+
+    .news-card h2 {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+
+    .news-card p {
+      font-size: 14px;
+    }
+
+    .ads {
+      background: #ddd;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+      border-radius: 8px;
     }
 
     footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
       background: #111;
       color: white;
-      margin-top: 30px;
-    }
-
-    .ads-placeholder {
-      background: #ddd;
       text-align: center;
       padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
+      margin-top: 30px;
+      font-size: 12px;
+    }
+
+    footer a {
+      color: #aaa;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -391,7 +405,7 @@ loadNews();
 
 <header>
   <h1>📰 Haber Merkezi</h1>
-  <p>Güncel, kısa ve özet haberler</p>
+  <p>Güncel, hızlı ve özet haberler</p>
 </header>
 
 <nav>
@@ -405,40 +419,32 @@ loadNews();
 
 <div class="container">
 
-  <!-- Reklam Alanı (AdSense buraya yerleşir) -->
-  <div class="ads-placeholder">
+  <!-- REKLAM ALANI -->
+  <div class="ads">
     Reklam Alanı (AdSense kodu buraya gelecek)
   </div>
 
-  <!-- Haber 1 -->
+  <!-- HABER 1 -->
   <div class="news-card">
     <div class="category">Teknoloji</div>
     <h2>Yapay Zeka Alanında Yeni Gelişmeler</h2>
-    <p>
-      Yapay zeka teknolojileri hızla gelişmeye devam ediyor. Özellikle son günlerde yapılan açıklamalar,
-      sektörde büyük değişimlerin habercisi olarak görülüyor.
-    </p>
+    <p>Yapay zeka sistemleri hızla gelişmeye devam ediyor. Yeni teknolojiler birçok sektörü etkileyecek.</p>
     <a href="news/yapay-zeka.html">Devamını oku →</a>
   </div>
 
-  <!-- Haber 2 -->
+  <!-- HABER 2 -->
   <div class="news-card">
     <div class="category">Dünya</div>
     <h2>Global Ekonomide Son Durum</h2>
-    <p>
-      Dünya ekonomisinde yaşanan dalgalanmalar birçok ülkeyi etkiliyor. Uzmanlar önümüzdeki süreçte
-      yeni düzenlemelerin gelebileceğini belirtiyor.
-    </p>
+    <p>Dünya ekonomisinde dalgalanmalar sürüyor. Uzmanlar yeni dönem uyarılarında bulunuyor.</p>
     <a href="news/ekonomi.html">Devamını oku →</a>
   </div>
 
-  <!-- Haber 3 -->
+  <!-- HABER 3 -->
   <div class="news-card">
     <div class="category">Güncel</div>
     <h2>Son Dakika Gelişmeleri</h2>
-    <p>
-      Gün içerisinde yaşanan önemli gelişmeler haber merkezimiz tarafından derlenmiştir.
-    </p>
+    <p>Gün içerisinde yaşanan önemli gelişmeler derlenmiştir.</p>
     <a href="news/son-dakika.html">Devamını oku →</a>
   </div>
 
@@ -447,8 +453,8 @@ loadNews();
 <footer>
   <p>© 2026 Haber Merkezi</p>
   <p>
-    <a href="privacy-policy.html" style="color:white;">Gizlilik Politikası</a> |
-    <a href="terms.html" style="color:white;">Şartlar</a>
+    <a href="privacy-policy.html">Gizlilik Politikası</a> |
+    <a href="terms.html">Şartlar</a>
   </p>
 </footer>
 
