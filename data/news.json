@@ -706,3 +706,79 @@
     }
   ]
 }
+
+
+
+
+"futbol": [
+  {
+    "title": "Galatasaray transfer çalışmalarını hızlandırdı",
+    "summary": "Galatasaray yeni sezon öncesi kadrosunu güçlendirmek için transfer çalışmalarına devam ediyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Galatasaray_Sports_Club_Logo.svg",
+    "link": "galatasaray-transfer",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Fenerbahçe hazırlık maçında galip geldi",
+    "summary": "Fenerbahçe oynadığı hazırlık maçında rakibini mağlup ederek moral buldu.",
+    "image": "https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png",
+    "link": "fenerbahce-hazirlik",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Beşiktaş'ta sakatlık krizi",
+    "summary": "Beşiktaş'ta önemli oyuncuların sakatlanması teknik heyeti düşündürüyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/tr/3/3f/Be%C5%9Fikta%C5%9F_JK.png",
+    "link": "besiktas-sakatlik",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Trabzonspor Avrupa hedefini büyüttü",
+    "summary": "Trabzonspor yönetimi Avrupa kupalarında daha büyük başarı hedefliyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/tr/0/0c/Trabzonspor.png",
+    "link": "trabzonspor-avrupa",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Süper Lig'de şampiyonluk yarışı kızıştı",
+    "summary": "Ligde üst sıralarda yer alan takımlar arasındaki rekabet artıyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Turkish_Super_Lig_logo.png",
+    "link": "superlig-yaris",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Milli takım hazırlıklarını sürdürüyor",
+    "summary": "A Milli Takım yaklaşan maçlar için kamp çalışmalarına devam ediyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Turkey_national_football_team_logo.png",
+    "link": "milli-takim",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Genç oyuncular ligde dikkat çekiyor",
+    "summary": "Bu sezon genç futbolcular performanslarıyla öne çıkıyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/88/Soccer_ball.svg",
+    "link": "genc-oyuncular",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Hakem kararları tartışılmaya devam ediyor",
+    "summary": "Son haftalarda verilen hakem kararları futbol gündeminde yer alıyor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Referee_card.jpg",
+    "link": "hakem-karar",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Kulüpler yeni sezon planlarını açıkladı",
+    "summary": "Birçok kulüp yeni sezon hedeflerini ve planlarını duyurdu.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Stadium_panorama.jpg",
+    "link": "sezon-plan",
+    "date": "2026-05-09"
+  },
+  {
+    "title": "Transfer piyasasında hareketlilik arttı",
+    "summary": "Yaz transfer dönemine yaklaşırken kulüpler arasında hareketlilik başladı.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Football_transfer.jpg",
+    "link": "transfer-piyasa",
+    "date": "2026-05-09"
+  }
+]
