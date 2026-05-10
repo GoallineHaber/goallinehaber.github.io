@@ -13,17 +13,22 @@ const parser = new Parser({
   }
 });
 
-// KATEGORİ
+// KATEGORİ TESPİT
 function detectCategory(item) {
 
   const text = (
     (item.title || "") +
+    " " +
     (item.link || "") +
+    " " +
     (item.contentSnippet || "") +
+    " " +
     (item.content || "") +
+    " " +
     (item.category || "")
   ).toLowerCase();
 
+  // FUTBOL
   if (
     text.includes("futbol") ||
     text.includes("şampiyon") ||
@@ -31,7 +36,7 @@ function detectCategory(item) {
     text.includes("hakem") ||
     text.includes("kanarya") ||
     text.includes("aslan") ||
-    text.includes("süperlig") ||
+    text.includes("süper lig") ||
     text.includes("trendyol") ||
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
@@ -45,6 +50,7 @@ function detectCategory(item) {
     return "futbol";
   }
 
+  // BASKETBOL
   if (
     text.includes("basketbol") ||
     text.includes("nba") ||
@@ -56,6 +62,7 @@ function detectCategory(item) {
     return "basketbol";
   }
 
+  // VOLEYBOL
   if (
     text.includes("voleybol") ||
     text.includes("file") ||
@@ -68,7 +75,7 @@ function detectCategory(item) {
   return "diger";
 }
 
-// CONTENT
+// HABER İÇERİĞİ ÇEK
 async function getContent(url) {
 
   try {
@@ -103,12 +110,13 @@ async function getContent(url) {
 
   } catch (err) {
 
-    console.log("Hata içerik:", err.message);
+    console.log("İçerik hatası:", err.message);
 
     return "İçerik yüklenemedi";
   }
 }
 
+// HABERLERİ ÇEK
 async function fetchNews() {
 
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
@@ -126,21 +134,28 @@ async function fetchNews() {
 
     for (const item of feed.items) {
 
-      const date = new Date(item.pubDate || Date.now());
+      const date = new Date(
+        item.pubDate || Date.now()
+      );
 
       let image =
         item.enclosure?.url ||
         item.media?.$?.url ||
         "fallback.jpg";
 
-      const summary = item.contentSnippet || "Özet yok";
+      const summary =
+        item.contentSnippet || "Özet yok";
+
+      const content =
+        await getContent(item.link);
 
       const obj = {
         title: item.title || "Başlıksız Haber",
         link: item.link || "#",
         date: date.toISOString(),
         image: image,
-        summary: summary
+        summary: summary,
+        content: content
       };
 
       const category = detectCategory(item);
@@ -148,6 +163,7 @@ async function fetchNews() {
       news[category].push(obj);
     }
 
+    // TARİHE GÖRE SIRALA
     Object.keys(news).forEach(cat => {
 
       news[cat].sort((a, b) => {
@@ -156,18 +172,23 @@ async function fetchNews() {
 
     });
 
+    // JSON YAZ
     fs.writeFileSync(
       "data/news.json",
       JSON.stringify(news, null, 2)
     );
 
-    console.log("✔️ HABERLER ÇEKİLDİ");
+    console.log("✔️ HABERLER BAŞARIYLA ÇEKİLDİ");
 
   } catch (err) {
 
-    console.log("Genel hata:", err.message);
+    console.log(
+      "Genel hata:",
+      err.message
+    );
 
   }
 }
 
+// ÇALIŞTIR
 fetchNews();
