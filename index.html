@@ -2,48 +2,102 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GoallineHaber</title>
 
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2722371260942185"
-     crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 
-    
-    
 <style>
-body { font-family: Arial; background: #eef1f5; margin: 0; }
+
+body{
+    font-family:Arial, sans-serif;
+    background:#eef1f5;
+    margin:0;
+}
 
 /* HEADER */
-.site-header {
-    background: linear-gradient(90deg,#c00,#900);
+.site-header{
+    background:linear-gradient(90deg,#c00,#900);
     padding:25px;
     color:white;
-    font-size:30px;
+    font-size:32px;
     font-weight:bold;
     text-align:center;
 }
 
-/* TAKIM BAR */
-.team-bar {
+/* TEAM BAR */
+.team-bar{
     display:flex;
     justify-content:center;
     gap:25px;
     padding:15px;
     background:white;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    flex-wrap:wrap;
 }
 
-.team { text-align:center; cursor:pointer; transition:0.3s; }
-.team img { width:55px; height:55px; }
-.team:hover { transform:scale(1.1); }
+.team{
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.team:hover{
+    transform:scale(1.08);
+}
+
+.team img{
+    width:55px;
+    height:55px;
+}
 
 /* NAVBAR */
-.navbar { background:#111; padding:12px; text-align:center; }
-.navbar a { color:white; margin:0 15px; font-weight:bold; cursor:pointer; }
+.navbar{
+    background:#111;
+    padding:14px;
+    text-align:center;
+}
+
+.navbar a{
+    color:white;
+    margin:0 15px;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+/* SEARCH */
+.search-box{
+    text-align:center;
+    padding:18px;
+    background:#eef1f5;
+}
+
+.search-box input{
+    width:340px;
+    max-width:90%;
+    padding:13px 18px;
+    border:none;
+    border-radius:30px;
+    outline:none;
+    font-size:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-box input:focus{
+    box-shadow:0 2px 14px rgba(200,0,0,0.25);
+}
 
 /* PAGINATION */
-#pagination { text-align:center; padding:15px; }
-#pagination button {
+#pagination{
+    text-align:center;
+    padding:15px;
+}
+
+#pagination button{
     margin:5px;
     padding:8px 12px;
     border:none;
@@ -52,51 +106,72 @@ body { font-family: Arial; background: #eef1f5; margin: 0; }
     cursor:pointer;
     border-radius:5px;
 }
-#pagination button:hover { background:#c00; }
+
+#pagination button:hover{
+    background:#c00;
+}
 
 /* LAYOUT */
-.container { padding:20px; }
-.main-layout {
+.container{
+    padding:20px;
+}
+
+.main-layout{
     display:grid;
     grid-template-columns:3fr 1fr;
     gap:25px;
 }
 
 /* MANSET */
-.manset-slider img {
+.manset-slider img{
     width:100%;
-    max-height:400px;
+    max-height:420px;
     object-fit:cover;
-    border-radius:10px;
+    border-radius:12px;
 }
-.manset-title {
-    font-size:26px;
+
+.manset-title{
+    font-size:28px;
     font-weight:bold;
-    margin-top:10px;
+    margin-top:12px;
 }
 
 /* NEWS GRID */
-#all-news {
+#all-news{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
-.news-item {
+
+.news-item{
     background:white;
     padding:12px;
     border-radius:12px;
     transition:0.3s;
     box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
-.news-item:hover { transform:translateY(-5px); }
-.news-item img {
+
+.news-item:hover{
+    transform:translateY(-5px);
+}
+
+.news-item img{
     width:100%;
     height:200px;
     object-fit:cover;
     border-radius:8px;
 }
-.news-item h2 { font-size:18px; }
-.news-item p {
+
+.news-item h2{
+    font-size:18px;
+}
+
+.news-item a{
+    text-decoration:none;
+    color:#111;
+}
+
+.news-item p{
     font-size:14px;
     color:#444;
     display:-webkit-box;
@@ -106,34 +181,57 @@ body { font-family: Arial; background: #eef1f5; margin: 0; }
 }
 
 /* SIDEBAR */
-.sidebar {
+.sidebar{
     background:white;
     padding:15px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-iframe { width:100%; border:none; }
+iframe{
+    width:100%;
+    border:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .main-layout{
+        grid-template-columns:1fr;
+    }
+
+    #all-news{
+        grid-template-columns:1fr;
+    }
+
+    .manset-title{
+        font-size:22px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="site-header">GoallineHaber</div>
+<div class="site-header">
+    GoallineHaber
+</div>
 
-<!-- TAKIM LOGOLARI -->
+<!-- TAKIMLAR -->
 <div class="team-bar">
+
     <div class="team" onclick="filterTeam('galatasaray')">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Galatasaray_Sports_Club_Logo.svg/120px-Galatasaray_Sports_Club_Logo.svg.png">
         <div>GS</div>
     </div>
 
-    <div class="team" onclick="filterTeam('fenerbahce')">
+    <div class="team" onclick="filterTeam('fenerbahçe')">
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/120px-Fenerbah%C3%A7e_SK.png">
         <div>FB</div>
     </div>
 
-    <div class="team" onclick="filterTeam('besiktas')">
+    <div class="team" onclick="filterTeam('beşiktaş')">
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK.png/120px-Be%C5%9Fikta%C5%9F_JK.png">
         <div>BJK</div>
     </div>
@@ -142,9 +240,10 @@ iframe { width:100%; border:none; }
         <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/0/0c/Trabzonspor.png/120px-Trabzonspor.png">
         <div>TS</div>
     </div>
+
 </div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <div class="navbar">
     <a onclick="filterCategory('futbol')">Futbol</a>
     <a onclick="filterCategory('basketbol')">Basketbol</a>
@@ -153,35 +252,61 @@ iframe { width:100%; border:none; }
     <a onclick="filterCategory('all')">Tümü</a>
 </div>
 
+<!-- SEARCH -->
+<div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Haber ara..."
+        onkeyup="searchNews()"
+    >
+</div>
+
 <div id="pagination"></div>
 
 <div class="container">
 
-
-    <div class="manset-slider"><div id="manset"></div></div>
+    <!-- MANSET -->
+    <div class="manset-slider">
+        <div id="manset"></div>
+    </div>
 
     <div class="main-layout">
+
+        <!-- HABERLER -->
         <div>
+
             <h1>Son Haberler</h1>
+
             <div id="all-news"></div>
+
         </div>
 
+        <!-- SIDEBAR -->
         <div class="sidebar">
 
-           
-
             <h3>⚽ Süper Lig</h3>
-            <iframe src="https://www.tff.org/default.aspx?pageID=198" height="350"></iframe>
+
+            <iframe
+            src="https://www.tff.org/default.aspx?pageID=198"
+            height="350"></iframe>
+
         </div>
+
     </div>
+
 </div>
 
 <script>
-let allNews = [], currentIndex = 0;
+
+let allNews = [];
+let currentIndex = 0;
 let currentPage = 1;
+
 const perPage = 12;
 
 function normalize(text){
+
     return text.toLowerCase()
     .replace(/ç/g,"c")
     .replace(/ğ/g,"g")
@@ -191,275 +316,235 @@ function normalize(text){
     .replace(/ü/g,"u");
 }
 
+/* SEARCH */
+function searchNews(){
+
+    const value = normalize(
+        document.getElementById("searchInput").value
+    );
+
+    const container =
+    document.getElementById("all-news");
+
+    container.innerHTML = "";
+
+    const filtered = allNews.filter(n=>{
+
+        const text = normalize(
+            n.title + " " + n.summary
+        );
+
+        return text.includes(value);
+    });
+
+    filtered.forEach(n=>{
+
+        const div =
+        document.createElement("div");
+
+        div.className = "news-item";
+
+        div.innerHTML = `
+            <img src="${n.image}">
+            <h2>
+                <a href="${n.link}" target="_blank">
+                    ${n.title}
+                </a>
+            </h2>
+            <p>
+                ${n.summary}
+            </p>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+/* TEAM FILTER */
 function filterTeam(team){
-    const container = document.getElementById("all-news");
+
+    const container =
+    document.getElementById("all-news");
+
     container.innerHTML = "";
 
     allNews.forEach(n=>{
-        const text = normalize(n.title + n.summary);
+
+        const text = normalize(
+            n.title + n.summary
+        );
+
         if(!text.includes(team)) return;
 
-        const div = document.createElement("div");
-        div.className="news-item";
+        const div =
+        document.createElement("div");
+
+        div.className = "news-item";
 
         div.innerHTML = `
             <img src="${n.image}">
-            <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-            <p>${n.summary.split("\n").slice(0,3).join(" ")}</p>
+            <h2>
+                <a href="${n.link}" target="_blank">
+                    ${n.title}
+                </a>
+            </h2>
+            <p>
+                ${n.summary}
+            </p>
         `;
 
         container.appendChild(div);
     });
 }
 
+/* HABER BAS */
 function renderNews(category){
-    const container=document.getElementById("all-news");
-    container.innerHTML="";
+
+    const container =
+    document.getElementById("all-news");
+
+    container.innerHTML = "";
 
     let filtered = allNews.filter(n=>{
-        return category==="all" || n.category===category;
+
+        return (
+            category === "all" ||
+            n.category === category
+        );
     });
 
-    const start = (currentPage-1)*perPage;
-    const news = filtered.slice(start, start+perPage);
+    const start =
+    (currentPage - 1) * perPage;
+
+    const news =
+    filtered.slice(start,start+perPage);
 
     news.forEach((n,i)=>{
-        const div=document.createElement("div");
-        div.className="news-item";
 
-        if(i === 6) div.style.gridColumn="span 2";
+        const div =
+        document.createElement("div");
+
+        div.className = "news-item";
+
+        if(i === 6){
+            div.style.gridColumn = "span 2";
+        }
 
         div.innerHTML = `
             <img src="${n.image}">
-            <h2><a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a></h2>
-            <p>${n.summary.split("\n").slice(0,2).join(" ")}</p>
+            <h2>
+                <a href="${n.link}" target="_blank">
+                    ${n.title}
+                </a>
+            </h2>
+            <p>
+                ${n.summary}
+            </p>
         `;
 
         container.appendChild(div);
     });
 
-    renderPagination(filtered.length, category);
+    renderPagination(filtered.length,category);
 }
 
-function renderPagination(total, category){
-    const pageCount = Math.ceil(total / perPage);
-    const pag = document.getElementById("pagination");
-    pag.innerHTML="";
+/* SAYFALAMA */
+function renderPagination(total,category){
+
+    const pageCount =
+    Math.ceil(total / perPage);
+
+    const pag =
+    document.getElementById("pagination");
+
+    pag.innerHTML = "";
 
     for(let i=1;i<=pageCount;i++){
-        const btn = document.createElement("button");
-        btn.innerText=i;
-        btn.onclick=()=>{
-            currentPage=i;
+
+        const btn =
+        document.createElement("button");
+
+        btn.innerText = i;
+
+        btn.onclick = ()=>{
+
+            currentPage = i;
+
             renderNews(category);
         };
+
         pag.appendChild(btn);
     }
 }
 
+/* MANSET */
 function loadManset(){
+
     setInterval(()=>{
-        const n=allNews[currentIndex];
+
+        const n =
+        allNews[currentIndex];
 
         document.getElementById("manset").innerHTML = `
             <img src="${n.image}">
             <div class="manset-title">
-                <a href="haber.html?url=${encodeURIComponent(n.link)}">${n.title}</a>
+                <a href="${n.link}" target="_blank">
+                    ${n.title}
+                </a>
             </div>
         `;
 
-        currentIndex=(currentIndex+1)%allNews.length;
+        currentIndex =
+        (currentIndex + 1)
+        % allNews.length;
+
     },4000);
 }
 
+/* KATEGORI */
 function filterCategory(cat){
-    currentPage=1;
+
+    currentPage = 1;
+
     renderNews(cat);
 }
 
+/* JSON YUKLE */
 async function loadNews(){
-    const res=await fetch("./data/news.json");
-    const data=await res.json();
 
-    allNews=[];
+    const res =
+    await fetch("./data/news.json");
+
+    const data =
+    await res.json();
+
+    allNews = [];
 
     Object.keys(data).forEach(cat=>{
+
         data[cat].forEach(n=>{
-            n.category=cat;
+
+            n.category = cat;
+
             allNews.push(n);
+
         });
     });
 
-    allNews.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    allNews.sort((a,b)=>{
+
+        return new Date(b.date)
+        - new Date(a.date);
+    });
 
     renderNews("all");
+
     loadManset();
 }
 
 loadNews();
+
 </script>
-
-</body>
-</html>
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Haber Merkezi | Güncel Haberler</title>
-  <meta name="description" content="Güncel haberler, teknoloji, ekonomi ve dünya gelişmeleri. Kısa ve özet haber platformu.">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-      color: #222;
-    }
-
-    header {
-      background: #111;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    nav {
-      background: #222;
-      text-align: center;
-      padding: 10px;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .news-card {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      transition: 0.2s;
-    }
-
-    .news-card:hover {
-      transform: scale(1.01);
-    }
-
-    .category {
-      font-size: 12px;
-      color: gray;
-    }
-
-    .news-card h2 {
-      margin: 5px 0;
-      font-size: 18px;
-    }
-
-    .news-card p {
-      font-size: 14px;
-    }
-
-    .ads {
-      background: #ddd;
-      padding: 20px;
-      text-align: center;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      font-size: 12px;
-    }
-
-    footer a {
-      color: #aaa;
-      text-decoration: none;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>📰 Haber Merkezi</h1>
-  <p>Güncel, hızlı ve özet haberler</p>
-</header>
-
-<nav>
-  <a href="index.html">Ana Sayfa</a>
-
-  <a href="teknoloji.html" target="_blank">Teknoloji</a>
-
-  <a href="dunya.html" target="_blank">Dünya</a>
-
-  <a href="ekonomi.html" target="_blank">Ekonomi</a>
-
-  <a href="about.html" target="_blank">Hakkında</a>
-
-  <a href="contact.html" target="_blank">İletişim</a>
-</nav>
-
-<div class="container">
-
-  <!-- REKLAM ALANI -->
- #<div class="ads">
-   #Reklam Alanı (AdSense kodu buraya gelecek)
- #</div>
-
-  <!-- HABER 1 -->
-  <div class="news-card">
-    <div class="category">Teknoloji</div>
-    <h2>Yapay Zeka Alanında Yeni Gelişmeler</h2>
-    <p>Yapay zeka sistemleri hızla gelişmeye devam ediyor. Yeni teknolojiler birçok sektörü etkileyecek.</p>
-    <a href="news/yapay-zeka.html">Devamını oku →</a>
-  </div>
-
-  <!-- HABER 2 -->
-  <div class="news-card">
-    <div class="category">Dünya</div>
-    <h2>Global Ekonomide Son Durum</h2>
-    <p>Dünya ekonomisinde dalgalanmalar sürüyor. Uzmanlar yeni dönem uyarılarında bulunuyor.</p>
-    <a href="news/ekonomi.html">Devamını oku →</a>
-  </div>
-
-  <!-- HABER 3 -->
-  <div class="news-card">
-    <div class="category">Güncel</div>
-    <h2>Son Dakika Gelişmeleri</h2>
-    <p>Gün içerisinde yaşanan önemli gelişmeler derlenmiştir.</p>
-    <a href="news/son-dakika.html">Devamını oku →</a>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2026 Haber Merkezi</p>
-  <p>
-    <a href="privacy-policy.html">Gizlilik Politikası</a> |
-    <a href="terms.html">Şartlar</a>
-  </p>
-</footer>
 
 </body>
 </html>
