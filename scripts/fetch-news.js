@@ -50,7 +50,6 @@ if (
     text.includes("ribaund") ||
     text.includes("Final Four")
 ) return "basketbol";
-
 if (
     text.includes("voleybol") ||
     text.includes("file") ||
@@ -59,6 +58,10 @@ if (
 ) return "voleybol";
 
 return "diger";
+}
+
+// CONTENT
+async function getContent(url) {
 
 // CONTENT
 async function getContent(url) {
