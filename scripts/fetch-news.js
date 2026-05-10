@@ -25,6 +25,14 @@ function detectCategory(item) {
 
   if (
     text.includes("futbol") ||
+    text.includes("şampiyon") 
+     text.includes("TFF") 
+   text.includes("Hakem") 
+   text.includes("Kanarya")
+   text.includes("Aslan") 
+   text.includes("Süperllg") 
+   text.includes("Trendyol") 
+   text.includes("futbol") 
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
@@ -32,15 +40,16 @@ function detectCategory(item) {
     text.includes("gol") ||
     text.includes("lig") ||
     text.includes("maç") ||
-    text.includes("uefa")
+    text.includes("Uefa")
   ) return "futbol";
 
   if (
-    text.includes("basketbol") ||
-    text.includes("nba") ||
-    text.includes("euroleague") ||
-    text.includes("pot") ||
+    text.includes("Basketbol") ||
+    text.includes("NBA") ||
+    text.includes("Euroleague") ||
+    text.includes("Pot") ||
     text.includes("ribaund")
+     text.includes("Final Four") 
   ) return "basketbol";
 
   if (
