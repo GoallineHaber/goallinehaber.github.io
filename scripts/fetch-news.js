@@ -23,16 +23,15 @@ function detectCategory(item) {
     (item.category || "")
   ).toLowerCase();
 
-  if (
+ if (
     text.includes("futbol") ||
-    text.includes("şampiyon") 
-     text.includes("TFF") 
-   text.includes("Hakem") 
-   text.includes("Kanarya")
-   text.includes("Aslan") 
-   text.includes("Süperllg") 
-   text.includes("Trendyol") 
-   text.includes("futbol") 
+    text.includes("şampiyon") ||
+    text.includes("TFF") ||
+    text.includes("Hakem") ||
+    text.includes("Kanarya") ||
+    text.includes("Aslan") ||
+    text.includes("Süperlig") ||
+    text.includes("Trendyol") ||
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
@@ -41,26 +40,25 @@ function detectCategory(item) {
     text.includes("lig") ||
     text.includes("maç") ||
     text.includes("Uefa")
-  ) return "futbol";
+) return "futbol";
 
-  if (
+if (
     text.includes("Basketbol") ||
     text.includes("NBA") ||
     text.includes("Euroleague") ||
     text.includes("Pot") ||
-    text.includes("ribaund")
-     text.includes("Final Four") 
-  ) return "basketbol";
+    text.includes("ribaund") ||
+    text.includes("Final Four")
+) return "basketbol";
 
-  if (
+if (
     text.includes("voleybol") ||
     text.includes("file") ||
     text.includes("smaç") ||
     text.includes("servis")
-  ) return "voleybol";
+) return "voleybol";
 
-  return "diger";
-}
+return "diger";
 
 // CONTENT
 async function getContent(url) {
