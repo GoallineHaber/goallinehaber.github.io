@@ -15,6 +15,7 @@ const parser = new Parser({
 
 // KATEGORİ
 function detectCategory(item) {
+
   const text = (
     (item.title || "") +
     (item.link || "") +
@@ -23,15 +24,15 @@ function detectCategory(item) {
     (item.category || "")
   ).toLowerCase();
 
- if (
+  if (
     text.includes("futbol") ||
     text.includes("şampiyon") ||
-    text.includes("TFF") ||
-    text.includes("Hakem") ||
-    text.includes("Kanarya") ||
-    text.includes("Aslan") ||
-    text.includes("Süperlig") ||
-    text.includes("Trendyol") ||
+    text.includes("tff") ||
+    text.includes("hakem") ||
+    text.includes("kanarya") ||
+    text.includes("aslan") ||
+    text.includes("süperlig") ||
+    text.includes("trendyol") ||
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
@@ -39,56 +40,77 @@ function detectCategory(item) {
     text.includes("gol") ||
     text.includes("lig") ||
     text.includes("maç") ||
-    text.includes("Uefa")
-) return "futbol";
+    text.includes("uefa")
+  ) {
+    return "futbol";
+  }
 
-if (
-    text.includes("Basketbol") ||
-    text.includes("NBA") ||
-    text.includes("Euroleague") ||
-    text.includes("Pot") ||
+  if (
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague") ||
+    text.includes("pota") ||
     text.includes("ribaund") ||
-    text.includes("Final Four")
-) return "basketbol";
-if (
+    text.includes("final four")
+  ) {
+    return "basketbol";
+  }
+
+  if (
     text.includes("voleybol") ||
     text.includes("file") ||
     text.includes("smaç") ||
     text.includes("servis")
-) return "voleybol";
+  ) {
+    return "voleybol";
+  }
 
-return "diger";
+  return "diger";
 }
 
 // CONTENT
 async function getContent(url) {
 
-// CONTENT
-async function getContent(url) {
   try {
-    const res = await fetch(url, { timeout: 10000 });
+
+    const res = await fetch(url, {
+      timeout: 10000
+    });
+
     const html = await res.text();
+
     const $ = cheerio.load(html);
 
     let paragraphs = [];
 
     $("p").each((i, el) => {
+
       const text = $(el).text().trim();
-      if (text.length > 50) paragraphs.push(text);
+
+      if (text.length > 50) {
+        paragraphs.push(text);
+      }
+
     });
 
     let fullText = paragraphs.join("\n\n");
-    if (!fullText) fullText = "İçerik yüklenemedi";
+
+    if (!fullText) {
+      fullText = "İçerik yüklenemedi";
+    }
 
     return fullText;
 
   } catch (err) {
+
     console.log("Hata içerik:", err.message);
+
     return "İçerik yüklenemedi";
   }
 }
 
 async function fetchNews() {
+
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
   let news = {
@@ -99,9 +121,11 @@ async function fetchNews() {
   };
 
   try {
+
     const feed = await parser.parseURL(url);
 
     for (const item of feed.items) {
+
       const date = new Date(item.pubDate || Date.now());
 
       let image =
@@ -120,19 +144,29 @@ async function fetchNews() {
       };
 
       const category = detectCategory(item);
+
       news[category].push(obj);
     }
 
     Object.keys(news).forEach(cat => {
-      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      news[cat].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
     });
 
-    fs.writeFileSync("data/news.json", JSON.stringify(news, null, 2));
+    fs.writeFileSync(
+      "data/news.json",
+      JSON.stringify(news, null, 2)
+    );
 
-    console.log("✔️ DÜZGÜN KATEGORİLİ HABERLER ÇEKİLDİ");
+    console.log("✔️ HABERLER ÇEKİLDİ");
 
   } catch (err) {
+
     console.log("Genel hata:", err.message);
+
   }
 }
 
