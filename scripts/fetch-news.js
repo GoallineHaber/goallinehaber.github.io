@@ -90,17 +90,22 @@ async function getContent(url) {
 
     let paragraphs = [];
 
-    $("p").each((i, el) => {
+  $("p, .detail-news-text, .newsDetailText").each((i, el) => {
 
-      const text = $(el).text().trim();
+  const text = $(el).text().trim();
 
-      if (text.length > 50) {
-        paragraphs.push(text);
-      }
+  if (
+    text.length > 50 &&
+    !text.includes("Devamı için tıklayın") &&
+    !text.includes("Google News") &&
+    !text.includes("Bizi Takip Edin")
+  ) {
+    paragraphs.push(text);
+  }
 
-    });
+});
 
-    let fullText = paragraphs.join("\n\n");
+   let fullText = [...new Set(paragraphs)].join("\n\n");
 
     if (!fullText) {
       fullText = "İçerik yüklenemedi";
