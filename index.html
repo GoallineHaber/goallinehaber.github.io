@@ -347,7 +347,7 @@ function searchNews(){
         div.innerHTML = `
             <img src="${n.image}">
             <h2>
-                <a href="${n.link}" target="_blank">
+               <a href="haber.html?url=${encodeURIComponent(n.link)}">
                     ${n.title}
                 </a>
             </h2>
@@ -384,7 +384,7 @@ function filterTeam(team){
         div.innerHTML = `
             <img src="${n.image}">
             <h2>
-                <a href="${n.link}" target="_blank">
+              <a href="haber.html?url=${encodeURIComponent(n.link)}">
                     ${n.title}
                 </a>
             </h2>
@@ -433,7 +433,7 @@ function renderNews(category){
         div.innerHTML = `
             <img src="${n.image}">
             <h2>
-                <a href="${n.link}" target="_blank">
+             <a href="haber.html?url=${encodeURIComponent(n.link)}">
                     ${n.title}
                 </a>
             </h2>
@@ -488,7 +488,7 @@ function loadManset(){
         document.getElementById("manset").innerHTML = `
             <img src="${n.image}">
             <div class="manset-title">
-                <a href="${n.link}" target="_blank">
+               <a href="haber.html?url=${encodeURIComponent(n.link)}">
                     ${n.title}
                 </a>
             </div>
