@@ -139,7 +139,9 @@ async function fetchNews() {
 
   try {
 
-    const feed = await parser.parseURL(url);
+  for (const url of urls) {
+  await fetchFromRSS(url, news);
+}
 
     for (const item of feed.items) {
 
