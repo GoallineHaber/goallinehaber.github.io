@@ -1,119 +1,130 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
-const puppeteer = require("puppeteer");
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
 
 const parser = new Parser({
   customFields: {
     item: [
+      ["media:content", "media"],
       ["enclosure", "enclosure"],
       ["category", "category"]
     ]
   }
 });
 
-// -------------------- KATEGORİ --------------------
+// KATEGORİ TESPİT
 function detectCategory(item) {
+
   const text = (
     (item.title || "") +
     " " +
-    (item.contentSnippet || "")
+    (item.link || "") +
+    " " +
+    (item.contentSnippet || "") +
+    " " +
+    (item.content || "") +
+    " " +
+    (item.category || "")
   ).toLowerCase();
 
+  // FUTBOL
   if (
     text.includes("futbol") ||
+    text.includes("şampiyon") ||
+    text.includes("tff") ||
+    text.includes("hakem") ||
+    text.includes("kanarya") ||
+    text.includes("aslan") ||
+    text.includes("süper lig") ||
+    text.includes("trendyol") ||
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
     text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
     text.includes("uefa")
-  ) return "futbol";
+  ) {
+    return "futbol";
+  }
 
+  // BASKETBOL
   if (
     text.includes("basketbol") ||
     text.includes("nba") ||
-    text.includes("euroleague")
-  ) return "basketbol";
+    text.includes("euroleague") ||
+    text.includes("pota") ||
+    text.includes("ribaund") ||
+    text.includes("final four")
+  ) {
+    return "basketbol";
+  }
 
+  // VOLEYBOL
   if (
-    text.includes("voleybol")
-  ) return "voleybol";
+    text.includes("voleybol") ||
+    text.includes("file") ||
+    text.includes("smaç") ||
+    text.includes("servis")
+  ) {
+    return "voleybol";
+  }
 
   return "diger";
 }
 
-// -------------------- FULL İÇERİK (PUPPETEER) --------------------
+// HABER İÇERİĞİ ÇEK
 async function getContent(url) {
-  let browser;
 
   try {
-    browser = await puppeteer.launch({
-      headless: "new",
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+
+    const res = await fetch(url, {
+      timeout: 10000
     });
 
-    const page = await browser.newPage();
+    const html = await res.text();
 
-    await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-    );
+    const $ = cheerio.load(html);
 
-    await page.goto(url, {
-      waitUntil: "domcontentloaded",
-      timeout: 30000
-    });
+    let paragraphs = [];
 
-    const text = await page.evaluate(() => {
-      const paragraphs = document.querySelectorAll("p");
-      let content = "";
+  $("p, .detail-news-text, .newsDetailText").each((i, el) => {
 
-      paragraphs.forEach(p => {
-        const t = p.innerText;
-        if (t && t.length > 30) {
-          content += t + "\n\n";
-        }
-      });
+  const text = $(el).text().trim();
 
-      return content;
-    });
-
-    return text || "İçerik yok";
-
-  } catch (err) {
-    console.log("İçerik hatası:", err.message);
-    return "İçerik yüklenemedi";
-
-  } finally {
-    if (browser) await browser.close();
+  if (
+    text.length > 50 &&
+    !text.includes("Devamı için tıklayın") &&
+    !text.includes("Google News") &&
+    !text.includes("Bizi Takip Edin")
+  ) {
+    paragraphs.push(text);
   }
-}
 
-// -------------------- RSS ÇEK --------------------
-async function fetchFromRSS(rssUrl, news) {
-  try {
-    const feed = await parser.parseURL(rssUrl);
+});
 
-    for (const item of feed.items) {
+   let fullText = [...new Set(paragraphs)].join("\n\n");
 
-      const obj = {
-        title: item.title || "Başlık yok",
-        link: item.link,
-        date: new Date().toISOString(),
-        image: item.enclosure?.url || "",
-        summary: item.contentSnippet || "",
-        content: await getContent(item.link)
-      };
-
-      const cat = detectCategory(item);
-      news[cat].push(obj);
+    if (!fullText) {
+      fullText = "İçerik yüklenemedi";
     }
 
+    return fullText;
+
   } catch (err) {
-    console.log("RSS hata:", err.message);
+
+    console.log("İçerik hatası:", err.message);
+
+    return "İçerik yüklenemedi";
   }
 }
 
-// -------------------- ANA FONKSİYON --------------------
+// HABERLERİ ÇEK
 async function fetchNews() {
+
+  const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
   let news = {
     futbol: [],
@@ -122,23 +133,67 @@ async function fetchNews() {
     diger: []
   };
 
-  console.log("Haber çekiliyor...");
+  try {
 
-  // 🔥 KAYNAKLAR
-  await fetchFromRSS("https://www.ahaber.com.tr/rss/spor.xml", news);
+    const feed = await parser.parseURL(url);
 
-  // İstersen ek kaynak:
-  // await fetchFromRSS("https://www.ntvspor.net/rss", news);
+    for (const item of feed.items) {
 
-  fs.mkdirSync("data", { recursive: true });
+      const date = new Date(
+        item.pubDate || Date.now()
+      );
 
-  fs.writeFileSync(
-    "data/news.json",
-    JSON.stringify(news, null, 2),
-    "utf-8"
-  );
+      let image =
+        item.enclosure?.url ||
+        item.media?.$?.url ||
+        "fallback.jpg";
 
-  console.log("✔ Haberler çekildi ve kaydedildi");
+      const summary =
+        item.contentSnippet || "Özet yok";
+
+      const content =
+        await getContent(item.link);
+
+      const obj = {
+        title: item.title || "Başlıksız Haber",
+        link: item.link || "#",
+        date: date.toISOString(),
+        image: image,
+        summary: summary,
+        content: content
+      };
+
+      const category = detectCategory(item);
+
+      news[category].push(obj);
+    }
+
+    // TARİHE GÖRE SIRALA
+    Object.keys(news).forEach(cat => {
+
+      news[cat].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+    });
+
+    // JSON YAZ
+    fs.writeFileSync(
+      "data/news.json",
+      JSON.stringify(news, null, 2)
+    );
+
+    console.log("✔️ HABERLER BAŞARIYLA ÇEKİLDİ");
+
+  } catch (err) {
+
+    console.log(
+      "Genel hata:",
+      err.message
+    );
+
+  }
 }
 
+// ÇALIŞTIR
 fetchNews();
