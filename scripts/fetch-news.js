@@ -1,7 +1,6 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
-const fetch = global.fetch;
-const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
 
 const parser = new Parser({
   customFields: {
@@ -13,6 +12,7 @@ const parser = new Parser({
   }
 });
 
+// KATEGORİ
 function detectCategory(item) {
   const text = (
     (item.title || "") +
@@ -22,7 +22,13 @@ function detectCategory(item) {
     (item.contentSnippet || "")
   ).toLowerCase();
 
-  if (text.includes("futbol") || text.includes("galatasaray") || text.includes("fenerbahçe")) {
+  if (
+    text.includes("futbol") ||
+    text.includes("galatasaray") ||
+    text.includes("fenerbahçe") ||
+    text.includes("beşiktaş") ||
+    text.includes("trabzonspor")
+  ) {
     return "futbol";
   }
 
@@ -37,24 +43,45 @@ function detectCategory(item) {
   return "diger";
 }
 
+// 🔥 PUPPETEER İLE FULL İÇERİK
 async function getContent(url) {
   try {
-    const res = await fetch(url);
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    let text = "";
-
-    $("p").each((i, el) => {
-      text += $(el).text() + "\n";
+    const browser = await puppeteer.launch({
+      headless: "new"
     });
 
+    const page = await browser.newPage();
+
+    await page.goto(url, {
+      waitUntil: "networkidle2",
+      timeout: 30000
+    });
+
+    const text = await page.evaluate(() => {
+      const paragraphs = document.querySelectorAll("p");
+      let content = "";
+
+      paragraphs.forEach(p => {
+        const t = p.innerText;
+        if (t && t.length > 20) {
+          content += t + "\n\n";
+        }
+      });
+
+      return content;
+    });
+
+    await browser.close();
+
     return text || "İçerik yok";
-  } catch (e) {
+
+  } catch (err) {
+    console.log("İçerik hatası:", err.message);
     return "İçerik yüklenemedi";
   }
 }
 
+// HABER ÇEKME
 async function fetchNews() {
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
@@ -65,29 +92,34 @@ async function fetchNews() {
     diger: []
   };
 
-  const feed = await parser.parseURL(url);
+  try {
+    const feed = await parser.parseURL(url);
 
-  for (const item of feed.items) {
+    for (const item of feed.items) {
 
-    const obj = {
-      title: item.title,
-      link: item.link,
-      date: new Date().toISOString(),
-      image: item.enclosure?.url || "",
-      summary: item.contentSnippet || "",
-      content: await getContent(item.link)
-    };
+      const obj = {
+        title: item.title || "Başlık yok",
+        link: item.link,
+        date: new Date().toISOString(),
+        image: item.enclosure?.url || "",
+        summary: item.contentSnippet || "",
+        content: await getContent(item.link)
+      };
 
-    const cat = detectCategory(item);
-    news[cat].push(obj);
+      const cat = detectCategory(item);
+      news[cat].push(obj);
+    }
+
+    fs.writeFileSync(
+      "data/news.json",
+      JSON.stringify(news, null, 2)
+    );
+
+    console.log("✔ Haberler çekildi");
+
+  } catch (err) {
+    console.log("Genel hata:", err.message);
   }
-
-  fs.writeFileSync(
-    "data/news.json",
-    JSON.stringify(news, null, 2)
-  );
-
-  console.log("Haberler çekildi");
 }
 
 fetchNews();
