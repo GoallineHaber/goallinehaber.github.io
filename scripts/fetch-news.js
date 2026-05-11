@@ -5,25 +5,16 @@ const puppeteer = require("puppeteer");
 const parser = new Parser({
   customFields: {
     item: [
-      ["media:content", "media"],
       ["enclosure", "enclosure"],
       ["category", "category"]
     ]
   }
 });
 
-// 🔥 HABER KAYNAKLARI
-const sources = [
-  "https://www.ahaber.com.tr/rss/spor.xml",
-  "https://www.ntvspor.net/rss"
-];
-
-// 🧠 KATEGORİ TESPİT
+// -------------------- KATEGORİ --------------------
 function detectCategory(item) {
   const text = (
     (item.title || "") +
-    " " +
-    (item.link || "") +
     " " +
     (item.contentSnippet || "")
   ).toLowerCase();
@@ -34,29 +25,23 @@ function detectCategory(item) {
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
     text.includes("trabzonspor") ||
-    text.includes("süper lig") ||
-    text.includes("uefa") ||
-    text.includes("maç")
-  ) {
-    return "futbol";
-  }
+    text.includes("uefa")
+  ) return "futbol";
 
   if (
     text.includes("basketbol") ||
     text.includes("nba") ||
     text.includes("euroleague")
-  ) {
-    return "basketbol";
-  }
+  ) return "basketbol";
 
-  if (text.includes("voleybol")) {
-    return "voleybol";
-  }
+  if (
+    text.includes("voleybol")
+  ) return "voleybol";
 
   return "diger";
 }
 
-// 🔥 FULL CONTENT (PUPPETEER)
+// -------------------- FULL İÇERİK (PUPPETEER) --------------------
 async function getContent(url) {
   let browser;
 
@@ -67,6 +52,10 @@ async function getContent(url) {
     });
 
     const page = await browser.newPage();
+
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+    );
 
     await page.goto(url, {
       waitUntil: "domcontentloaded",
@@ -79,7 +68,7 @@ async function getContent(url) {
 
       paragraphs.forEach(p => {
         const t = p.innerText;
-        if (t && t.length > 20) {
+        if (t && t.length > 30) {
           content += t + "\n\n";
         }
       });
@@ -98,7 +87,32 @@ async function getContent(url) {
   }
 }
 
-// 🚀 HABER ÇEKME
+// -------------------- RSS ÇEK --------------------
+async function fetchFromRSS(rssUrl, news) {
+  try {
+    const feed = await parser.parseURL(rssUrl);
+
+    for (const item of feed.items) {
+
+      const obj = {
+        title: item.title || "Başlık yok",
+        link: item.link,
+        date: new Date().toISOString(),
+        image: item.enclosure?.url || "",
+        summary: item.contentSnippet || "",
+        content: await getContent(item.link)
+      };
+
+      const cat = detectCategory(item);
+      news[cat].push(obj);
+    }
+
+  } catch (err) {
+    console.log("RSS hata:", err.message);
+  }
+}
+
+// -------------------- ANA FONKSİYON --------------------
 async function fetchNews() {
 
   let news = {
@@ -108,48 +122,23 @@ async function fetchNews() {
     diger: []
   };
 
-  try {
+  console.log("Haber çekiliyor...");
 
-    for (const source of sources) {
+  // 🔥 KAYNAKLAR
+  await fetchFromRSS("https://www.ahaber.com.tr/rss/spor.xml", news);
 
-      const feed = await parser.parseURL(source);
+  // İstersen ek kaynak:
+  // await fetchFromRSS("https://www.ntvspor.net/rss", news);
 
-      for (const item of feed.items) {
+  fs.mkdirSync("data", { recursive: true });
 
-        console.log("Çekiliyor:", item.title);
+  fs.writeFileSync(
+    "data/news.json",
+    JSON.stringify(news, null, 2),
+    "utf-8"
+  );
 
-        const obj = {
-          title: item.title || "Başlık yok",
-          link: item.link,
-          date: new Date().toISOString(),
-          image: item.enclosure?.url || "",
-          summary: item.contentSnippet || "",
-          content: await getContent(item.link)
-        };
-
-        const cat = detectCategory(item);
-        news[cat].push(obj);
-      }
-    }
-
-    // SORT (yeniden eskiye)
-    Object.keys(news).forEach(cat => {
-      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
-    });
-
-    // 📁 JSON yaz
-    fs.mkdirSync("data", { recursive: true });
-
-    fs.writeFileSync(
-      "data/news.json",
-      JSON.stringify(news, null, 2)
-    );
-
-    console.log("✔ HABERLER BAŞARIYLA ÇEKİLDİ");
-
-  } catch (err) {
-    console.log("GENEL HATA:", err.message);
-  }
+  console.log("✔ Haberler çekildi ve kaydedildi");
 }
 
 fetchNews();
