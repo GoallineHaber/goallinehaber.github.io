@@ -1,6 +1,6 @@
 const Parser = require("rss-parser");
 const fs = require("fs");
-const fetch = require("node-fetch");
+const fetch = global.fetch;
 const cheerio = require("cheerio");
 
 const parser = new Parser({
@@ -13,117 +13,49 @@ const parser = new Parser({
   }
 });
 
-// KATEGORİ TESPİT
 function detectCategory(item) {
-
   const text = (
     (item.title || "") +
     " " +
     (item.link || "") +
     " " +
-    (item.contentSnippet || "") +
-    " " +
-    (item.content || "") +
-    " " +
-    (item.category || "")
+    (item.contentSnippet || "")
   ).toLowerCase();
 
-  // FUTBOL
-  if (
-    text.includes("futbol") ||
-    text.includes("şampiyon") ||
-    text.includes("tff") ||
-    text.includes("hakem") ||
-    text.includes("kanarya") ||
-    text.includes("aslan") ||
-    text.includes("süper lig") ||
-    text.includes("trendyol") ||
-    text.includes("galatasaray") ||
-    text.includes("fenerbahçe") ||
-    text.includes("beşiktaş") ||
-    text.includes("trabzonspor") ||
-    text.includes("gol") ||
-    text.includes("lig") ||
-    text.includes("maç") ||
-    text.includes("uefa")
-  ) {
+  if (text.includes("futbol") || text.includes("galatasaray") || text.includes("fenerbahçe")) {
     return "futbol";
   }
 
-  // BASKETBOL
-  if (
-    text.includes("basketbol") ||
-    text.includes("nba") ||
-    text.includes("euroleague") ||
-    text.includes("pota") ||
-    text.includes("ribaund") ||
-    text.includes("final four")
-  ) {
+  if (text.includes("basketbol") || text.includes("nba")) {
     return "basketbol";
   }
 
-  // VOLEYBOL
-  if (
-    text.includes("voleybol") ||
-    text.includes("file") ||
-    text.includes("smaç") ||
-    text.includes("servis")
-  ) {
+  if (text.includes("voleybol")) {
     return "voleybol";
   }
 
   return "diger";
 }
 
-// HABER İÇERİĞİ ÇEK
 async function getContent(url) {
-
   try {
-
-    const res = await fetch(url, {
-      timeout: 10000
-    });
-
+    const res = await fetch(url);
     const html = await res.text();
-
     const $ = cheerio.load(html);
 
-    let paragraphs = [];
+    let text = "";
 
-  $("p, .detail-news-text, .newsDetailText").each((i, el) => {
+    $("p").each((i, el) => {
+      text += $(el).text() + "\n";
+    });
 
-  const text = $(el).text().trim();
-
-  if (
-    text.length > 50 &&
-    !text.includes("Devamı için tıklayın") &&
-    !text.includes("Google News") &&
-    !text.includes("Bizi Takip Edin")
-  ) {
-    paragraphs.push(text);
-  }
-
-});
-
-   let fullText = [...new Set(paragraphs)].join("\n\n");
-
-    if (!fullText) {
-      fullText = "İçerik yüklenemedi";
-    }
-
-    return fullText;
-
-  } catch (err) {
-
-    console.log("İçerik hatası:", err.message);
-
+    return text || "İçerik yok";
+  } catch (e) {
     return "İçerik yüklenemedi";
   }
 }
 
-// HABERLERİ ÇEK
 async function fetchNews() {
-
   const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
   let news = {
@@ -133,67 +65,29 @@ async function fetchNews() {
     diger: []
   };
 
-  try {
+  const feed = await parser.parseURL(url);
 
-    const feed = await parser.parseURL(url);
+  for (const item of feed.items) {
 
-    for (const item of feed.items) {
+    const obj = {
+      title: item.title,
+      link: item.link,
+      date: new Date().toISOString(),
+      image: item.enclosure?.url || "",
+      summary: item.contentSnippet || "",
+      content: await getContent(item.link)
+    };
 
-      const date = new Date(
-        item.pubDate || Date.now()
-      );
-
-      let image =
-        item.enclosure?.url ||
-        item.media?.$?.url ||
-        "fallback.jpg";
-
-      const summary =
-        item.contentSnippet || "Özet yok";
-
-      const content =
-        await getContent(item.link);
-
-      const obj = {
-        title: item.title || "Başlıksız Haber",
-        link: item.link || "#",
-        date: date.toISOString(),
-        image: image,
-        summary: summary,
-        content: content
-      };
-
-      const category = detectCategory(item);
-
-      news[category].push(obj);
-    }
-
-    // TARİHE GÖRE SIRALA
-    Object.keys(news).forEach(cat => {
-
-      news[cat].sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-    });
-
-    // JSON YAZ
-    fs.writeFileSync(
-      "data/news.json",
-      JSON.stringify(news, null, 2)
-    );
-
-    console.log("✔️ HABERLER BAŞARIYLA ÇEKİLDİ");
-
-  } catch (err) {
-
-    console.log(
-      "Genel hata:",
-      err.message
-    );
-
+    const cat = detectCategory(item);
+    news[cat].push(obj);
   }
+
+  fs.writeFileSync(
+    "data/news.json",
+    JSON.stringify(news, null, 2)
+  );
+
+  console.log("Haberler çekildi");
 }
 
-// ÇALIŞTIR
 fetchNews();
