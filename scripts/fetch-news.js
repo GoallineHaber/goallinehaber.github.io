@@ -124,7 +124,11 @@ async function getContent(url) {
 // HABERLERİ ÇEK
 async function fetchNews() {
 
-  const url = "https://www.ahaber.com.tr/rss/spor.xml";
+  const urls = [
+  "https://www.ahaber.com.tr/rss/spor.xml",
+  "https://www.trtspor.com.tr/rss.xml",
+  "https://www.ntvspor.net/rss"
+];
 
   let news = {
     futbol: [],
