@@ -12,7 +12,13 @@ const parser = new Parser({
   }
 });
 
-// KATEGORİ
+// 🔥 HABER KAYNAKLARI
+const sources = [
+  "https://www.ahaber.com.tr/rss/spor.xml",
+  "https://www.ntvspor.net/rss"
+];
+
+// 🧠 KATEGORİ TESPİT
 function detectCategory(item) {
   const text = (
     (item.title || "") +
@@ -27,12 +33,19 @@ function detectCategory(item) {
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
-    text.includes("trabzonspor")
+    text.includes("trabzonspor") ||
+    text.includes("süper lig") ||
+    text.includes("uefa") ||
+    text.includes("maç")
   ) {
     return "futbol";
   }
 
-  if (text.includes("basketbol") || text.includes("nba")) {
+  if (
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague")
+  ) {
     return "basketbol";
   }
 
@@ -43,17 +56,20 @@ function detectCategory(item) {
   return "diger";
 }
 
-// 🔥 PUPPETEER İLE FULL İÇERİK
+// 🔥 FULL CONTENT (PUPPETEER)
 async function getContent(url) {
+  let browser;
+
   try {
-    const browser = await puppeteer.launch({
-      headless: "new"
+    browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
     const page = await browser.newPage();
 
     await page.goto(url, {
-      waitUntil: "networkidle2",
+      waitUntil: "domcontentloaded",
       timeout: 30000
     });
 
@@ -71,19 +87,19 @@ async function getContent(url) {
       return content;
     });
 
-    await browser.close();
-
     return text || "İçerik yok";
 
   } catch (err) {
     console.log("İçerik hatası:", err.message);
     return "İçerik yüklenemedi";
+
+  } finally {
+    if (browser) await browser.close();
   }
 }
 
-// HABER ÇEKME
+// 🚀 HABER ÇEKME
 async function fetchNews() {
-  const url = "https://www.ahaber.com.tr/rss/spor.xml";
 
   let news = {
     futbol: [],
@@ -93,32 +109,46 @@ async function fetchNews() {
   };
 
   try {
-    const feed = await parser.parseURL(url);
 
-    for (const item of feed.items) {
+    for (const source of sources) {
 
-      const obj = {
-        title: item.title || "Başlık yok",
-        link: item.link,
-        date: new Date().toISOString(),
-        image: item.enclosure?.url || "",
-        summary: item.contentSnippet || "",
-        content: await getContent(item.link)
-      };
+      const feed = await parser.parseURL(source);
 
-      const cat = detectCategory(item);
-      news[cat].push(obj);
+      for (const item of feed.items) {
+
+        console.log("Çekiliyor:", item.title);
+
+        const obj = {
+          title: item.title || "Başlık yok",
+          link: item.link,
+          date: new Date().toISOString(),
+          image: item.enclosure?.url || "",
+          summary: item.contentSnippet || "",
+          content: await getContent(item.link)
+        };
+
+        const cat = detectCategory(item);
+        news[cat].push(obj);
+      }
     }
+
+    // SORT (yeniden eskiye)
+    Object.keys(news).forEach(cat => {
+      news[cat].sort((a, b) => new Date(b.date) - new Date(a.date));
+    });
+
+    // 📁 JSON yaz
+    fs.mkdirSync("data", { recursive: true });
 
     fs.writeFileSync(
       "data/news.json",
       JSON.stringify(news, null, 2)
     );
 
-    console.log("✔ Haberler çekildi");
+    console.log("✔ HABERLER BAŞARIYLA ÇEKİLDİ");
 
   } catch (err) {
-    console.log("Genel hata:", err.message);
+    console.log("GENEL HATA:", err.message);
   }
 }
 
