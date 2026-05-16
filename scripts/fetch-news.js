@@ -8,6 +8,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_KEY
 });
 
+
 const parser = new Parser({
   customFields: {
     item: [
