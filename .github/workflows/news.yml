@@ -17,10 +17,12 @@ jobs:
           node-version: '20'
 
       - name: Paketleri kur
-        run: npm install rss-parser node-fetch@2 cheerio
+        run: npm install rss-parser node-fetch@2 cheerio openai
 
       - name: Haberleri çek
         run: node scripts/fetch-news.js
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
 
       - name: Commit & push
         run: |
