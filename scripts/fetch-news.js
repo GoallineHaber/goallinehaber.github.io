@@ -2,6 +2,11 @@ const Parser = require("rss-parser");
 const fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
+const OpenAI = require("openai");
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_KEY
+});
 
 const parser = new Parser({
   customFields: {
@@ -90,22 +95,23 @@ async function getContent(url) {
 
     let paragraphs = [];
 
-  $("p, .detail-news-text, .newsDetailText").each((i, el) => {
+    $("p, .detail-news-text, .newsDetailText").each((i, el) => {
 
-  const text = $(el).text().trim();
+      const text = $(el).text().trim();
 
-  if (
-    text.length > 50 &&
-    !text.includes("Devamı için tıklayın") &&
-    !text.includes("Google News") &&
-    !text.includes("Bizi Takip Edin")
-  ) {
-    paragraphs.push(text);
-  }
+      if (
+        text.length > 50 &&
+        !text.includes("Devamı için tıklayın") &&
+        !text.includes("Google News") &&
+        !text.includes("Bizi Takip Edin")
+      ) {
+        paragraphs.push(text);
+      }
 
-});
+    });
 
-   let fullText = [...new Set(paragraphs)].join("\n\n");
+    let fullText =
+      [...new Set(paragraphs)].join("\n\n");
 
     if (!fullText) {
       fullText = "İçerik yüklenemedi";
@@ -115,35 +121,97 @@ async function getContent(url) {
 
   } catch (err) {
 
-    console.log("İçerik hatası:", err.message);
+    console.log(
+      "İçerik hatası:",
+      err.message
+    );
 
     return "İçerik yüklenemedi";
   }
 }
 
-// HABERLERİ ÇEK
-async function fetchNews() {
-
-  const urls = [
-  "https://www.ahaber.com.tr/rss/spor.xml",
-  "https://www.trtspor.com.tr/rss.xml",
-  "https://www.ntvspor.net/rss"
-];
-
-  let news = {
-    futbol: [],
-    basketbol: [],
-    voleybol: [],
-    diger: []
-  };
+// AI İLE HABER YAZ
+async function aiRewrite(title, summary, content) {
 
   try {
 
-  for (const url of urls) {
-  await fetchFromRSS(url, news);
+    const prompt = `
+Başlık:
+${title}
+
+Özet:
+${summary}
+
+İçerik:
+${content}
+
+Bu spor haberini özgün şekilde yeniden yaz.
+
+Kurallar:
+- Kopya olmasın
+- SEO uyumlu olsun
+- Profesyonel spor haber dili kullan
+- Akıcı olsun
+- 3-4 kısa paragraf olsun
+`;
+
+    const response =
+      await client.chat.completions.create({
+        model: "gpt-4.1-mini",
+        messages: [
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        temperature: 0.7
+      });
+
+    return response
+      .choices[0]
+      .message
+      .content;
+
+  } catch (err) {
+
+    console.log(
+      "AI hata:",
+      err.message
+    );
+
+    return content;
+  }
 }
 
-    for (const item of feed.items) {
+// RSS ÇEK
+async function fetchFromRSS(url, news, existingLinks) {
+
+  try {
+
+    const feed =
+      await parser.parseURL(url);
+
+    for (const item of feed.items.slice(0, 5)) {
+
+      // daha önce varsa geç
+      if (
+        existingLinks.includes(
+          item.link
+        )
+      ) {
+
+        console.log(
+          "Zaten var:",
+          item.title
+        );
+
+        continue;
+      }
+
+      console.log(
+        "Yeni haber:",
+        item.title
+      );
 
       const date = new Date(
         item.pubDate || Date.now()
@@ -160,45 +228,145 @@ async function fetchNews() {
       const content =
         await getContent(item.link);
 
+      // AI rewrite
+      const aiContent =
+        await aiRewrite(
+          item.title,
+          summary,
+          content
+        );
+
       const obj = {
-        title: item.title || "Başlıksız Haber",
-        link: item.link || "#",
-        date: date.toISOString(),
+        title:
+          item.title ||
+          "Başlıksız Haber",
+
+        link:
+          item.link || "#",
+
+        date:
+          date.toISOString(),
+
         image: image,
+
         summary: summary,
-        content: content
+
+        content: content,
+
+        ai_content: aiContent
       };
 
-      const category = detectCategory(item);
+      const category =
+        detectCategory(item);
 
       news[category].push(obj);
+
+      existingLinks.push(item.link);
     }
-
-    // TARİHE GÖRE SIRALA
-    Object.keys(news).forEach(cat => {
-
-      news[cat].sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-    });
-
-    // JSON YAZ
-    fs.writeFileSync(
-      "data/news.json",
-      JSON.stringify(news, null, 2)
-    );
-
-    console.log("✔️ HABERLER BAŞARIYLA ÇEKİLDİ");
 
   } catch (err) {
 
     console.log(
-      "Genel hata:",
+      "RSS hata:",
       err.message
     );
-
   }
+}
+
+// HABERLERİ ÇEK
+async function fetchNews() {
+
+  const urls = [
+    "https://www.ahaber.com.tr/rss/spor.xml",
+    "https://www.trtspor.com.tr/rss.xml",
+    "https://www.ntvspor.net/rss"
+  ];
+
+  let news = {
+    futbol: [],
+    basketbol: [],
+    voleybol: [],
+    diger: []
+  };
+
+  // eski haberleri oku
+  if (
+    fs.existsSync("data/news.json")
+  ) {
+
+    try {
+
+      const oldNews =
+        JSON.parse(
+          fs.readFileSync(
+            "data/news.json",
+            "utf8"
+          )
+        );
+
+      news = oldNews;
+
+    } catch (err) {
+
+      console.log(
+        "JSON okuma hatası:",
+        err.message
+      );
+    }
+  }
+
+  // eski linkler
+  const existingLinks = [];
+
+  Object.keys(news).forEach(cat => {
+
+    news[cat].forEach(item => {
+
+      existingLinks.push(item.link);
+
+    });
+
+  });
+
+  // rss çek
+  for (const url of urls) {
+
+    await fetchFromRSS(
+      url,
+      news,
+      existingLinks
+    );
+  }
+
+  // TARİHE GÖRE SIRALA
+  Object.keys(news).forEach(cat => {
+
+    news[cat].sort((a, b) => {
+      return (
+        new Date(b.date) -
+        new Date(a.date)
+      );
+    });
+
+  });
+
+  // klasör yoksa oluştur
+  if (
+    !fs.existsSync("data")
+  ) {
+
+    fs.mkdirSync("data");
+  }
+
+  // JSON YAZ
+  fs.writeFileSync(
+    "data/news.json",
+    JSON.stringify(news, null, 2)
+  );
+
+  console.log(
+    "✔️ HABERLER BAŞARIYLA ÇEKİLDİ"
+  );
 }
 
 // ÇALIŞTIR
