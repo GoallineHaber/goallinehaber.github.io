@@ -145,14 +145,16 @@ ${summary}
 İçerik:
 ${content}
 
-Bu spor haberini özgün şekilde yeniden yaz.
+Verilen başlık ve özet bilgilerine göre profesyonel spor haberi yaz.
 
 Kurallar:
-- Kopya olmasın
+- Kopya içerik olmasın
 - SEO uyumlu olsun
-- Profesyonel spor haber dili kullan
-- Akıcı olsun
-- 3-4 kısa paragraf olsun
+- Gerçek spor sitesi dili kullan
+- Akıcı yaz
+- 3-4 paragraf yaz
+- Haberi detaylandır
+- "Devamı için tıklayın" gibi ifadeleri kullanma
 `;
 
     const response =
