@@ -59,7 +59,8 @@ async function loadNews(){
   if(found){
     document.getElementById("title").innerText = found.title || "Başlıksız Haber";
     document.getElementById("date").innerText = new Date(found.date).toLocaleString() || "";
-    document.getElementById("summary").innerHTML = (found.summary || "İçerik yok").replace(/\n/g,"<br>");
+   document.getElementById("summary").innerHTML =
+(found.content || "İçerik yok").replace(/\n/g,"<br>");
     document.getElementById("image").src = found.image || "fallback.jpg";
 
     document.getElementById("source").href = found.link || "#";
