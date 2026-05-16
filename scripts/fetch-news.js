@@ -236,25 +236,25 @@ async function fetchFromRSS(url, news, existingLinks) {
           content
         );
 
-      const obj = {
-        title:
-          item.title ||
-          "Başlıksız Haber",
+     const obj = {
+  title:
+    item.title ||
+    "Başlıksız Haber",
 
-        link:
-          item.link || "#",
+  link:
+    item.link || "#",
 
-        date:
-          date.toISOString(),
+  date:
+    date.toISOString(),
 
-        image: image,
+  image: image,
 
-        summary: summary,
+  summary: summary,
 
-        content: content,
+  content: aiContent,
 
-        ai_content: aiContent
-      };
+  original_content: content
+};
 
       const category =
         detectCategory(item);
