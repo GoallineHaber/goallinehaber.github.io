@@ -255,13 +255,25 @@ if (!image) {
       const content =
         await getContent(item.link);
 
-      // AI rewrite
-      const aiContent =
-        await aiRewrite(
-          item.title,
-          summary,
-          content
-        );
+     let aiSource = content;
+
+// kötü içerik kontrolü
+if (
+  !aiSource ||
+  aiSource.includes("Devamı için tıklayın") ||
+  aiSource.includes("İçerik yüklenemedi") ||
+  aiSource.length < 100
+) {
+
+  aiSource = summary;
+}
+
+const aiContent =
+  await aiRewrite(
+    item.title,
+    summary,
+    aiSource
+  );
 
      const obj = {
   title:
