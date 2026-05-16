@@ -217,10 +217,37 @@ async function fetchFromRSS(url, news, existingLinks) {
         item.pubDate || Date.now()
       );
 
-      let image =
-        item.enclosure?.url ||
-        item.media?.$?.url ||
-        "fallback.jpg";
+    let image =
+  item.enclosure?.url ||
+  item.enclosure?.link ||
+  item.media?.$?.url ||
+  item.media?.url ||
+  item["media:content"]?.url ||
+  item["media:thumbnail"]?.url ||
+  null;
+
+// foto yoksa sayfadan çek
+if (!image) {
+
+  try {
+
+    const res = await fetch(item.link);
+
+    const html = await res.text();
+
+    const $ = cheerio.load(html);
+
+    image =
+      $('meta[property="og:image"]').attr("content") ||
+      $('meta[name="twitter:image"]').attr("content") ||
+      $("img").first().attr("src") ||
+      "fallback.jpg";
+
+  } catch (err) {
+
+    image = "fallback.jpg";
+  }
+}
 
       const summary =
         item.contentSnippet || "Özet yok";
