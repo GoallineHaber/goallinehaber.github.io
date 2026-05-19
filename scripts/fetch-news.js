@@ -220,69 +220,37 @@ async function fetchFromRSS(url, news, existingLinks) {
         item.pubDate || Date.now()
       );
 
-   let imageList = [];
+    let image =
+  item.enclosure?.url ||
+  item.enclosure?.link ||
+  item.media?.$?.url ||
+  item.media?.url ||
+  item["media:content"]?.url ||
+  item["media:thumbnail"]?.url ||
+  null;
 
-try {
+// foto yoksa sayfadan çek
+if (!image) {
 
-  const res = await fetch(item.link);
+  try {
 
-  const html = await res.text();
+    const res = await fetch(item.link);
 
-  const $ = cheerio.load(html);
+    const html = await res.text();
 
-  // og:image
-  const ogImage =
-    $('meta[property="og:image"]').attr("content");
+    const $ = cheerio.load(html);
 
-  if (
-    ogImage &&
-    !imageList.includes(ogImage)
-  ) {
+    image =
+      $('meta[property="og:image"]').attr("content") ||
+      $('meta[name="twitter:image"]').attr("content") ||
+      $("img").first().attr("src") ||
+      "fallback.jpg";
 
-    imageList.push(ogImage);
+  } catch (err) {
+
+    image = "fallback.jpg";
   }
-
-  // twitter:image
-  const twitterImage =
-    $('meta[name="twitter:image"]').attr("content");
-
-  if (
-    twitterImage &&
-    !imageList.includes(twitterImage)
-  ) {
-
-    imageList.push(twitterImage);
-  }
-
-  // tüm img tagleri
-  $("img").each((i, el) => {
-
-    let src =
-      $(el).attr("src");
-
-    if (
-      src &&
-      src.startsWith("http") &&
-      !imageList.includes(src)
-    ) {
-
-      imageList.push(src);
-    }
-
-  });
-
-} catch (err) {
-
-  console.log(
-    "Foto hata:",
-    err.message
-  );
 }
-
-// ilk foto
-const image =
-  imageList[0] || "fallback.jpg";
-      
 
       const summary =
         item.contentSnippet || "Özet yok";
@@ -323,7 +291,7 @@ const aiContent =
 
   image: image,
 
- images: imageList,
+  summary: summary,
 
   content: aiContent,
 
