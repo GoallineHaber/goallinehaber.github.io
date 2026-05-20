@@ -226,23 +226,23 @@ iframe{
         <div>GS</div>
     </div>
 
-    <div class="team" onclick="filterTeam('fenerbahçe')">
-        <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/120px-Fenerbah%C3%A7e_SK.png">
+    <div class="team" onclick="filterTeam('fenerbahce')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Fenerbah%C3%A7e_SK.png">
         <div>FB</div>
     </div>
 
-    <div class="team" onclick="filterTeam('beşiktaş')">
-        <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/3/3f/Be%C5%9Fikta%C5%9F_JK.png/120px-Be%C5%9Fikta%C5%9F_JK.png">
+    <div class="team" onclick="filterTeam('besiktas')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Be%C5%9Fikta%C5%9F_JK_logo.svg/120px-Be%C5%9Fikta%C5%9F_JK_logo.svg.png">
         <div>BJK</div>
     </div>
 
     <div class="team" onclick="filterTeam('trabzonspor')">
-        <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/0/0c/Trabzonspor.png/120px-Trabzonspor.png">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Trabzonspor_Logo.png/120px-Trabzonspor_Logo.png">
         <div>TS</div>
     </div>
 
 </div>
-
+    
 <!-- NAVBAR -->
 <div class="navbar">
     <a onclick="filterCategory('futbol')">Futbol</a>
@@ -368,13 +368,67 @@ function filterTeam(team){
 
     container.innerHTML = "";
 
+    const searchTeam =
+    normalize(team);
+
     allNews.forEach(n=>{
 
         const text = normalize(
-            n.title + n.summary
+            (n.title || "") +
+            " " +
+            (n.summary || "") +
+            " " +
+            (n.content || "")
         );
 
-        if(!text.includes(team)) return;
+        let match = false;
+
+        // NORMAL TAKIM İSMİ
+        if(text.includes(searchTeam)){
+            match = true;
+        }
+
+        // TAKMA İSİMLER
+        if(
+            searchTeam === "fenerbahce" &&
+            (
+                text.includes("kanarya") ||
+                text.includes("sari lacivert")
+            )
+        ){
+            match = true;
+        }
+
+        if(
+            searchTeam === "galatasaray" &&
+            (
+                text.includes("aslan") ||
+                text.includes("sari kirmizi")
+            )
+        ){
+            match = true;
+        }
+
+        if(
+            searchTeam === "besiktas" &&
+            (
+                text.includes("kartal") ||
+                text.includes("siyah beyaz")
+            )
+        ){
+            match = true;
+        }
+
+        if(
+            searchTeam === "trabzonspor" &&
+            (
+                text.includes("bordo mavi")
+            )
+        ){
+            match = true;
+        }
+
+        if(!match) return;
 
         const div =
         document.createElement("div");
@@ -384,7 +438,7 @@ function filterTeam(team){
         div.innerHTML = `
             <img src="${n.image}">
             <h2>
-              <a href="haber.html?url=${encodeURIComponent(n.link)}">
+                <a href="haber.html?url=${encodeURIComponent(n.link)}">
                     ${n.title}
                 </a>
             </h2>
@@ -394,9 +448,26 @@ function filterTeam(team){
         `;
 
         container.appendChild(div);
-    });
-}
 
+    });
+
+    // haber yoksa
+    if(container.innerHTML === ""){
+
+        container.innerHTML = `
+            <div style="
+                background:white;
+                padding:30px;
+                border-radius:12px;
+                text-align:center;
+                font-size:20px;
+                font-weight:bold;
+            ">
+                Bu takıma ait haber bulunamadı.
+            </div>
+        `;
+    }
+}
 /* HABER BAS */
 function renderNews(category){
 
