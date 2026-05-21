@@ -193,6 +193,42 @@ body{
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* UZMAN MENU */
+.top-experts{
+    background:white;
+    padding:15px;
+    margin:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.top-experts h2{
+    margin-top:0;
+    margin-bottom:15px;
+}
+
+.top-expert-links{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.top-expert-links a{
+    background:#111;
+    color:white;
+    padding:10px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.top-expert-links a:hover{
+    background:#c00;
+}
+
 /* UZMAN YORUMLARI */
 .expert-box{
     margin-top:25px;
@@ -238,15 +274,6 @@ body{
     border-left:4px solid #c00;
 }
 
-/* VISITOR COMMENTS */
-.visitor-comments{
-    margin-top:40px;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
 iframe{
     width:100%;
     border:none;
@@ -275,6 +302,27 @@ iframe{
 
 <div class="site-header">
     GoallineHaber
+</div>
+
+<!-- UST UZMAN ALANI -->
+<div class="top-experts">
+
+    <h2>🎙 Uzman Yorumları</h2>
+
+    <div class="top-expert-links">
+
+        <a href="uzman-ahmet.html">Ahmet Yılmaz</a>
+
+        <a href="uzman-mehmet.html">Mehmet Kaya</a>
+
+        <a href="uzman-serkan.html">Serkan Demir</a>
+
+        <a href="uzman-emre.html">Emre Aydın</a>
+
+        <a href="uzman-caner.html">Caner Şahin</a>
+
+    </div>
+
 </div>
 
 <!-- TAKIMLAR -->
@@ -372,6 +420,16 @@ iframe{
                         Serkan Demir
                     </div>
 
+                    <div class="expert-btn"
+                    onclick="showExpert('emre')">
+                        Emre Aydın
+                    </div>
+
+                    <div class="expert-btn"
+                    onclick="showExpert('caner')">
+                        Caner Şahin
+                    </div>
+
                 </div>
 
                 <div id="expert-comments">
@@ -385,30 +443,6 @@ iframe{
             </div>
 
         </div>
-
-    </div>
-
-    <!-- ZIYARETCI YORUMLARI -->
-    <div class="visitor-comments">
-
-        <h2>💬 Ziyaretçi Yorumları</h2>
-
-        <!-- GISCUS -->
-        <script src="https://giscus.app/client.js"
-            data-repo="KULLANICI_ADIN/REPO_ADIN"
-            data-repo-id="REPO_ID"
-            data-category="General"
-            data-category-id="CATEGORY_ID"
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="top"
-            data-theme="light"
-            data-lang="tr"
-            crossorigin="anonymous"
-            async>
-        </script>
 
     </div>
 
@@ -658,6 +692,26 @@ const expertData = {
 
         "Derbi atmosferi oyuncuları baskılıyor."
 
+    ],
+
+    emre: [
+
+        "Galatasaray şampiyonluk yarışında avantajlı.",
+
+        "Fenerbahçe taraftarı büyük baskı oluşturuyor.",
+
+        "Transfer bütçeleri bu yıl çok yüksek."
+
+    ],
+
+    caner: [
+
+        "Beşiktaş savunma hattında sorun yaşıyor.",
+
+        "Trabzonspor genç oyunculara yönelmeli.",
+
+        "Hakem performansları eleştirilmeye devam ediyor."
+
     ]
 
 };
@@ -717,6 +771,166 @@ async function loadNews(){
 loadNews();
 
 </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber Merkezi | Güncel Haberler</title>
+    <meta name="description" content="Güncel haberler, teknoloji, ekonomi ve dünya gelişmeleri. Kısa ve özet haber platformu.">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #222;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .news-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .news-card:hover {
+            transform: scale(1.01);
+        }
+
+        .category {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .news-card h2 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .news-card p {
+            font-size: 14px;
+        }
+
+        .ads {
+            background: #ddd;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 12px;
+        }
+
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>📰 Haber Merkezi</h1>
+        <p>Güncel, hızlı ve özet haberler</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="teknoloji.html" target="_blank">Teknoloji</a>
+        <a href="dunya.html" target="_blank">Dünya</a>
+        <a href="ekonomi.html" target="_blank">Ekonomi</a>
+        <a href="about.html" target="_blank">Hakkında</a>
+        <a href="contact.html" target="_blank">İletişim</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- REKLAM ALANI -->
+        <div class="ads">
+            Reklam Alanı (AdSense kodu buraya gelecek)
+        </div>
+
+        <!-- HABER 1 -->
+        <div class="news-card">
+            <div class="category">Teknoloji</div>
+            <h2>Yapay Zeka Alanında Yeni Gelişmeler</h2>
+            <p>Yapay zeka sistemleri hızla gelişmeye devam ediyor. Yeni teknolojiler birçok sektörü etkileyecek.</p>
+            <a href="news/yapay-zeka.html">Devamını oku →</a>
+        </div>
+
+        <!-- HABER 2 -->
+        <div class="news-card">
+            <div class="category">Dünya</div>
+            <h2>Global Ekonomide Son Durum</h2>
+            <p>Dünya ekonomisinde dalgalanmalar sürüyor. Uzmanlar yeni dönem uyarılarında bulunuyor.</p>
+            <a href="news/ekonomi.html">Devamını oku →</a>
+        </div>
+
+        <!-- HABER 3 -->
+        <div class="news-card">
+            <div class="category">Güncel</div>
+            <h2>Son Dakika Gelişmeleri</h2>
+            <p>Gün içerisinde yaşanan önemli gelişmeler derlenmiştir.</p>
+            <a href="news/son-dakika.html">Devamını oku →</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Haber Merkezi</p>
+        <p>
+            <a href="privacy-policy.html">Gizlilik Politikası</a> |
+            <a href="terms.html">Şartlar</a>
+        </p>
+    </footer>
 
 </body>
 </html>
