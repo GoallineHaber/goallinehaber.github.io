@@ -136,6 +136,11 @@ body{
     margin-top:12px;
 }
 
+.manset-title a{
+    text-decoration:none;
+    color:#111;
+}
+
 /* NEWS GRID */
 #all-news{
     display:grid;
@@ -186,6 +191,60 @@ body{
     padding:15px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* UZMAN YORUMLARI */
+.expert-box{
+    margin-top:25px;
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.expert-box h3{
+    margin-top:0;
+}
+
+.expert-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.expert-btn{
+    background:#111;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+    font-weight:bold;
+}
+
+.expert-btn:hover{
+    background:#c00;
+}
+
+.expert-comment{
+    background:#f5f5f5;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:10px;
+    font-size:14px;
+    line-height:1.6;
+    border-left:4px solid #c00;
+}
+
+/* VISITOR COMMENTS */
+.visitor-comments{
+    margin-top:40px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 iframe{
@@ -291,7 +350,65 @@ iframe{
             src="https://www.tff.org/default.aspx?pageID=198"
             height="350"></iframe>
 
+            <!-- UZMAN YORUMLARI -->
+            <div class="expert-box">
+
+                <h3>🎙 Uzman Yorumları</h3>
+
+                <div class="expert-list">
+
+                    <div class="expert-btn"
+                    onclick="showExpert('ahmet')">
+                        Ahmet Yılmaz
+                    </div>
+
+                    <div class="expert-btn"
+                    onclick="showExpert('mehmet')">
+                        Mehmet Kaya
+                    </div>
+
+                    <div class="expert-btn"
+                    onclick="showExpert('serkan')">
+                        Serkan Demir
+                    </div>
+
+                </div>
+
+                <div id="expert-comments">
+
+                    <div class="expert-comment">
+                        Bir uzman seç ve yorumları görüntüle.
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+
+    </div>
+
+    <!-- ZIYARETCI YORUMLARI -->
+    <div class="visitor-comments">
+
+        <h2>💬 Ziyaretçi Yorumları</h2>
+
+        <!-- GISCUS -->
+        <script src="https://giscus.app/client.js"
+            data-repo="KULLANICI_ADIN/REPO_ADIN"
+            data-repo-id="REPO_ID"
+            data-category="General"
+            data-category-id="CATEGORY_ID"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="tr"
+            crossorigin="anonymous"
+            async>
+        </script>
 
     </div>
 
@@ -509,6 +626,61 @@ function filterCategory(cat){
     renderNews(cat);
 }
 
+/* UZMAN YORUMLARI */
+
+const expertData = {
+
+    ahmet: [
+
+        "Galatasaray bu sezon hücumda çok etkili oynuyor.",
+
+        "Fenerbahçe savunmada ciddi açıklar veriyor.",
+
+        "Beşiktaş genç oyuncularla çıkış yakalayabilir."
+
+    ],
+
+    mehmet: [
+
+        "Mourinho sistemi takıma oturmaya başladı.",
+
+        "Trabzonspor orta sahada güç kaybediyor.",
+
+        "Hakem kararları son haftalarda tartışılıyor."
+
+    ],
+
+    serkan: [
+
+        "Transfer dönemi çok hareketli geçecek.",
+
+        "Yeni yabancı kuralı kulüpleri zorlayabilir.",
+
+        "Derbi atmosferi oyuncuları baskılıyor."
+
+    ]
+
+};
+
+function showExpert(name){
+
+    const container =
+    document.getElementById("expert-comments");
+
+    container.innerHTML = "";
+
+    expertData[name].forEach(comment=>{
+
+        container.innerHTML += `
+
+            <div class="expert-comment">
+                ${comment}
+            </div>
+
+        `;
+    });
+}
+
 /* JSON YUKLE */
 async function loadNews(){
 
@@ -545,165 +717,6 @@ async function loadNews(){
 loadNews();
 
 </script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haber Merkezi | Güncel Haberler</title>
-    <meta name="description" content="Güncel haberler, teknoloji, ekonomi ve dünya gelişmeleri. Kısa ve özet haber platformu.">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f5f5;
-            color: #222;
-        }
-
-        header {
-            background: #111;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            background: #222;
-            text-align: center;
-            padding: 10px;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .news-card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
-
-        .news-card:hover {
-            transform: scale(1.01);
-        }
-
-        .category {
-            font-size: 12px;
-            color: gray;
-        }
-
-        .news-card h2 {
-            margin: 5px 0;
-            font-size: 18px;
-        }
-
-        .news-card p {
-            font-size: 14px;
-        }
-
-        .ads {
-            background: #ddd;
-            padding: 20px;
-            text-align: center;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            font-size: 12px;
-        }
-
-        footer a {
-            color: #aaa;
-            text-decoration: none;
-        }
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <h1>📰 Haber Merkezi</h1>
-        <p>Güncel, hızlı ve özet haberler</p>
-    </header>
-
-    <nav>
-        <a href="index.html">Ana Sayfa</a>
-        <a href="teknoloji.html" target="_blank">Teknoloji</a>
-        <a href="dunya.html" target="_blank">Dünya</a>
-        <a href="ekonomi.html" target="_blank">Ekonomi</a>
-        <a href="about.html" target="_blank">Hakkında</a>
-        <a href="contact.html" target="_blank">İletişim</a>
-    </nav>
-
-    <div class="container">
-
-        <!-- REKLAM ALANI -->
-        <div class="ads">
-            Reklam Alanı (AdSense kodu buraya gelecek)
-        </div>
-
-        <!-- HABER 1 -->
-        <div class="news-card">
-            <div class="category">Teknoloji</div>
-            <h2>Yapay Zeka Alanında Yeni Gelişmeler</h2>
-            <p>Yapay zeka sistemleri hızla gelişmeye devam ediyor. Yeni teknolojiler birçok sektörü etkileyecek.</p>
-            <a href="news/yapay-zeka.html">Devamını oku →</a>
-        </div>
-
-        <!-- HABER 2 -->
-        <div class="news-card">
-            <div class="category">Dünya</div>
-            <h2>Global Ekonomide Son Durum</h2>
-            <p>Dünya ekonomisinde dalgalanmalar sürüyor. Uzmanlar yeni dönem uyarılarında bulunuyor.</p>
-            <a href="news/ekonomi.html">Devamını oku →</a>
-        </div>
-
-        <!-- HABER 3 -->
-        <div class="news-card">
-            <div class="category">Güncel</div>
-            <h2>Son Dakika Gelişmeleri</h2>
-            <p>Gün içerisinde yaşanan önemli gelişmeler derlenmiştir.</p>
-            <a href="news/son-dakika.html">Devamını oku →</a>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>© 2026 Haber Merkezi</p>
-        <p>
-            <a href="privacy-policy.html">Gizlilik Politikası</a> |
-            <a href="terms.html">Şartlar</a>
-        </p>
-    </footer>
 
 </body>
 </html>
