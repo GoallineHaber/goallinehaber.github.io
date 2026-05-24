@@ -73,6 +73,9 @@ function detectCategory(item) {
     text.includes("voleybol") ||
     text.includes("file") ||
     text.includes("smaç") ||
+      text.includes("filenin sultanları") ||
+      text.includes("sultanlar") ||
+    text.includes("sultan") ||
     text.includes("servis")
   ) {
     return "voleybol";
