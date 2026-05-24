@@ -464,22 +464,28 @@ function searchNews(){
 /* TEAM FILTER */
 function filterTeam(team){
 
-    const container =
-    document.getElementById("all-news");
+    const map = {
+        "galatasaray": ["galatasaray", "aslan"],
+        "fenerbahçe": ["fenerbahçe", "fenerbahce", "fb", "kanarya"],
+        "beşiktaş": ["beşiktaş", "besiktas", "bjk", "kartal"],
+        "trabzonspor": ["trabzonspor", "ts"]
+    };
 
+    const keys = map[team];
+
+    const container = document.getElementById("all-news");
     container.innerHTML = "";
 
-    allNews.forEach(n=>{
+    allNews.forEach(n => {
 
-        const text = normalize(
-            n.title + n.summary
-        );
+        const text = normalize(n.title + " " + n.summary);
 
-        if(!text.includes(team)) return;
+        // EN ÖNEMLİ FIX
+        const match = keys.some(k => normalize(k).includes(text) || text.includes(normalize(k)));
 
-        const div =
-        document.createElement("div");
+        if(!match) return;
 
+        const div = document.createElement("div");
         div.className = "news-item";
 
         div.innerHTML = `
@@ -497,7 +503,6 @@ function filterTeam(team){
         container.appendChild(div);
     });
 }
-
 /* HABER BAS */
 function renderNews(category){
 
