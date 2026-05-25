@@ -36,46 +36,46 @@ function detectCategory(item) {
 
   // FUTBOL
   if (
-    text.includes("futbol") ||
-    text.includes("şampiyon") ||
-    text.includes("tff") ||
+    text.includes("Futbol") ||
+    text.includes("Şampiyon") ||
+    text.includes("TFF") ||
     text.includes("hakem") ||
-    text.includes("kanarya") ||
-    text.includes("aslan") ||
-    text.includes("süper lig") ||
+    text.includes("Kanarya") ||
+    text.includes("Aslan") ||
+    text.includes("Süperlig") ||
     text.includes("trendyol") ||
     text.includes("galatasaray") ||
-    text.includes("fenerbahçe") ||
+    text.includes("Fenerbahçe") ||
     text.includes("beşiktaş") ||
-    text.includes("trabzonspor") ||
+    text.includes("Trabzonspor") ||
     text.includes("gol") ||
     text.includes("lig") ||
     text.includes("maç") ||
-    text.includes("uefa")
+    text.includes("Uefa")
   ) {
     return "futbol";
   }
 
   // BASKETBOL
   if (
-    text.includes("basketbol") ||
-    text.includes("nba") ||
-    text.includes("euroleague") ||
-    text.includes("pota") ||
+    text.includes("Basketbol") ||
+    text.includes("NBA") ||
+    text.includes("EuroLeague") ||
+    text.includes("Pota") ||
     text.includes("ribaund") ||
-    text.includes("final four")
+    text.includes("Final Four")
   ) {
     return "basketbol";
   }
 
   // VOLEYBOL
   if (
-    text.includes("voleybol") ||
-    text.includes("file") ||
-    text.includes("smaç") ||
-      text.includes("filenin sultanları") ||
-      text.includes("sultanlar") ||
-    text.includes("sultan") ||
+    text.includes("Voleybol") ||
+    text.includes("File") ||
+    text.includes("Smaç") ||
+      text.includes("Filenin Sultanları") ||
+      text.includes("Sultanlar") ||
+    text.includes("Sultan") ||
     text.includes("servis")
   ) {
     return "voleybol";
