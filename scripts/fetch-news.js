@@ -34,51 +34,50 @@ function detectCategory(item) {
     (item.category || "")
   ).toLowerCase();
 
-  // FUTBOL
+  // VOLEYBOL
   if (
-    text.includes("Futbol") ||
-    text.includes("Şampiyon") ||
-    text.includes("TFF") ||
-    text.includes("hakem") ||
-    text.includes("Kanarya") ||
-    text.includes("Aslan") ||
-    text.includes("Süperlig") ||
-    text.includes("trendyol") ||
-    text.includes("galatasaray") ||
-    text.includes("Fenerbahçe") ||
-    text.includes("beşiktaş") ||
-    text.includes("Trabzonspor") ||
-    text.includes("gol") ||
-    text.includes("lig") ||
-    text.includes("maç") ||
-    text.includes("Uefa")
+    text.includes("voleybol") ||
+    text.includes("filenin sultanları") ||
+    text.includes("sultanlar") ||
+    text.includes("sultan") ||
+    text.includes("smaç") ||
+    text.includes("servis")
   ) {
-    return "futbol";
+    return "voleybol";
   }
 
   // BASKETBOL
   if (
-    text.includes("Basketbol") ||
-    text.includes("NBA") ||
-    text.includes("EuroLeague") ||
-    text.includes("Pota") ||
+    text.includes("basketbol") ||
+    text.includes("nba") ||
+    text.includes("euroleague") ||
+    text.includes("pota") ||
     text.includes("ribaund") ||
-    text.includes("Final Four")
+    text.includes("final four")
   ) {
     return "basketbol";
   }
 
-  // VOLEYBOL
+  // FUTBOL
   if (
-    text.includes("Voleybol") ||
-    text.includes("File") ||
-    text.includes("Smaç") ||
-      text.includes("Filenin Sultanları") ||
-      text.includes("Sultanlar") ||
-    text.includes("Sultan") ||
-    text.includes("servis")
+    text.includes("futbol") ||
+    text.includes("şampiyon") ||
+    text.includes("tff") ||
+    text.includes("hakem") ||
+    text.includes("kanarya") ||
+    text.includes("aslan") ||
+    text.includes("süper lig") ||
+    text.includes("trendyol") ||
+    text.includes("galatasaray") ||
+    text.includes("fenerbahçe") ||
+    text.includes("beşiktaş") ||
+    text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
+    text.includes("uefa")
   ) {
-    return "voleybol";
+    return "futbol";
   }
 
   return "diger";
