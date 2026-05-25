@@ -8,6 +8,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_KEY
 });
 
+
 const parser = new Parser({
   customFields: {
     item: [
@@ -30,12 +31,20 @@ function detectCategory(item) {
     " " +
     (item.content || "") +
     " " +
-    (
-      Array.isArray(item.category)
-        ? item.category.join(" ")
-        : item.category || ""
-    )
+    (item.category || "")
   ).toLowerCase();
+
+  // VOLEYBOL
+  if (
+    text.includes("voleybol") ||
+    text.includes("filenin sultanları") ||
+    text.includes("sultanlar") ||
+    text.includes("sultan") ||
+    text.includes("smaç") ||
+    text.includes("servis")
+  ) {
+    return "voleybol";
+  }
 
   // BASKETBOL
   if (
@@ -49,28 +58,24 @@ function detectCategory(item) {
     return "basketbol";
   }
 
-  // VOLEYBOL
-  if (
-    text.includes("voleybol") ||
-    text.includes("filenin sultanları") ||
-    text.includes("sultanlar ligi") ||
-    text.includes("smaç") ||
-    text.includes("servis")
-  ) {
-    return "voleybol";
-  }
-
   // FUTBOL
   if (
     text.includes("futbol") ||
+    text.includes("şampiyon") ||
     text.includes("tff") ||
+    text.includes("hakem") ||
+    text.includes("kanarya") ||
+    text.includes("aslan") ||
     text.includes("süper lig") ||
-    text.includes("uefa") ||
-    text.includes("şampiyonlar ligi") ||
+    text.includes("trendyol") ||
     text.includes("galatasaray") ||
     text.includes("fenerbahçe") ||
     text.includes("beşiktaş") ||
-    text.includes("trabzonspor")
+    text.includes("trabzonspor") ||
+    text.includes("gol") ||
+    text.includes("lig") ||
+    text.includes("maç") ||
+    text.includes("uefa")
   ) {
     return "futbol";
   }
@@ -217,37 +222,37 @@ async function fetchFromRSS(url, news, existingLinks) {
         item.pubDate || Date.now()
       );
 
-      let image =
-        item.enclosure?.url ||
-        item.enclosure?.link ||
-        item.media?.$?.url ||
-        item.media?.url ||
-        item["media:content"]?.url ||
-        item["media:thumbnail"]?.url ||
-        null;
+    let image =
+  item.enclosure?.url ||
+  item.enclosure?.link ||
+  item.media?.$?.url ||
+  item.media?.url ||
+  item["media:content"]?.url ||
+  item["media:thumbnail"]?.url ||
+  null;
 
-      // foto yoksa sayfadan çek
-      if (!image) {
+// foto yoksa sayfadan çek
+if (!image) {
 
-        try {
+  try {
 
-          const res = await fetch(item.link);
+    const res = await fetch(item.link);
 
-          const html = await res.text();
+    const html = await res.text();
 
-          const $ = cheerio.load(html);
+    const $ = cheerio.load(html);
 
-          image =
-            $('meta[property="og:image"]').attr("content") ||
-            $('meta[name="twitter:image"]').attr("content") ||
-            $("img").first().attr("src") ||
-            "fallback.jpg";
+    image =
+      $('meta[property="og:image"]').attr("content") ||
+      $('meta[name="twitter:image"]').attr("content") ||
+      $("img").first().attr("src") ||
+      "fallback.jpg";
 
-        } catch (err) {
+  } catch (err) {
 
-          image = "fallback.jpg";
-        }
-      }
+    image = "fallback.jpg";
+  }
+}
 
       const summary =
         item.contentSnippet || "Özet yok";
@@ -255,54 +260,48 @@ async function fetchFromRSS(url, news, existingLinks) {
       const content =
         await getContent(item.link);
 
-      let aiSource = content;
+     let aiSource = content;
 
-      // kötü içerik kontrolü
-      if (
-        !aiSource ||
-        aiSource.includes("Devamı için tıklayın") ||
-        aiSource.includes("İçerik yüklenemedi") ||
-        aiSource.length < 100
-      ) {
+// kötü içerik kontrolü
+if (
+  !aiSource ||
+  aiSource.includes("Devamı için tıklayın") ||
+  aiSource.includes("İçerik yüklenemedi") ||
+  aiSource.length < 100
+) {
 
-        aiSource = summary;
-      }
+  aiSource = summary;
+}
 
-      const aiContent =
-        await aiRewrite(
-          item.title,
-          summary,
-          aiSource
-        );
+const aiContent =
+  await aiRewrite(
+    item.title,
+    summary,
+    aiSource
+  );
 
-      const obj = {
-        title:
-          item.title ||
-          "Başlıksız Haber",
+     const obj = {
+  title:
+    item.title ||
+    "Başlıksız Haber",
 
-        link:
-          item.link || "#",
+  link:
+    item.link || "#",
 
-        date:
-          date.toISOString(),
+  date:
+    date.toISOString(),
 
-        image: image,
+  image: image,
 
-        summary: summary,
+  summary: summary,
 
-        content: aiContent,
+  content: aiContent,
 
-        original_content: content
-      };
+  original_content: content
+};
 
       const category =
         detectCategory(item);
-
-      console.log(
-        item.title,
-        "=>",
-        category
-      );
 
       news[category].push(obj);
 
@@ -339,52 +338,26 @@ async function fetchNews() {
     fs.existsSync("data/news.json")
   ) {
 
-  try {
+    try {
 
-  const oldNews =
-    JSON.parse(
-      fs.readFileSync(
-        "data/news.json",
-        "utf8"
-      )
-    );
+      const oldNews =
+        JSON.parse(
+          fs.readFileSync(
+            "data/news.json",
+            "utf8"
+          )
+        );
 
-  // ESKİ HABERLERİ YENİDEN KATEGORİLE
-  const rebuiltNews = {
-    futbol: [],
-    basketbol: [],
-    voleybol: [],
-    diger: []
-  };
+      news = oldNews;
 
-  Object.keys(oldNews).forEach(cat => {
+    } catch (err) {
 
-    oldNews[cat].forEach(item => {
-
-      const detectedCategory =
-        detectCategory(item);
-
-      rebuiltNews[
-        detectedCategory
-      ].push(item);
-
-    });
-
-  });
-
-  news = rebuiltNews;
-
-  console.log(
-    "✔️ Eski haberler yeniden kategorilendi"
-  );
-
-} catch (err) {
-
-  console.log(
-    "JSON okuma hatası:",
-    err.message
-  );
-}
+      console.log(
+        "JSON okuma hatası:",
+        err.message
+      );
+    }
+  }
 
   // eski linkler
   const existingLinks = [];
