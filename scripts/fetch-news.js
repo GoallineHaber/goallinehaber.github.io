@@ -339,26 +339,52 @@ async function fetchNews() {
     fs.existsSync("data/news.json")
   ) {
 
-    try {
+  try {
 
-      const oldNews =
-        JSON.parse(
-          fs.readFileSync(
-            "data/news.json",
-            "utf8"
-          )
-        );
+  const oldNews =
+    JSON.parse(
+      fs.readFileSync(
+        "data/news.json",
+        "utf8"
+      )
+    );
 
-      news = oldNews;
+  // ESKİ HABERLERİ YENİDEN KATEGORİLE
+  const rebuiltNews = {
+    futbol: [],
+    basketbol: [],
+    voleybol: [],
+    diger: []
+  };
 
-    } catch (err) {
+  Object.keys(oldNews).forEach(cat => {
 
-      console.log(
-        "JSON okuma hatası:",
-        err.message
-      );
-    }
-  }
+    oldNews[cat].forEach(item => {
+
+      const detectedCategory =
+        detectCategory(item);
+
+      rebuiltNews[
+        detectedCategory
+      ].push(item);
+
+    });
+
+  });
+
+  news = rebuiltNews;
+
+  console.log(
+    "✔️ Eski haberler yeniden kategorilendi"
+  );
+
+} catch (err) {
+
+  console.log(
+    "JSON okuma hatası:",
+    err.message
+  );
+}
 
   // eski linkler
   const existingLinks = [];
